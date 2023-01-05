@@ -8,8 +8,20 @@ use BaconQrCode\Encoder\QrCode;
 
 class AppointmentController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->ajax()) {
+            $data = Appointment::select('name', 'purpose'.'frequency','date', 'guest', 'pic', 'dept');
+            return \Yajra\DataTables\Facades\DataTables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('action', function($row){
+                        $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">Edit</a>';
+                        return $btn;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
+
         return view('pages.appointment.index');
     }
 
@@ -70,7 +82,7 @@ class AppointmentController extends Controller
             'status' => 'pending'
         ]);
         
-        return view('pages.appointment.history');
+        return redirect()->route('appointment.history');
     }
     
     public function history()

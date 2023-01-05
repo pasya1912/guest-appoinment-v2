@@ -12,9 +12,15 @@
 */
 
 Route::get('/', function () {
-    return view('dashboard');
-});
+    return view('pages.user-pages.login');
+})->middleware(['guest'])->name('login');
 
-Route::get('/appointment', 'AppointmentController@index')->name('appointment.index');
-Route::post('/appointment-create', 'AppointmentController@create')->name('appointment.create');
-Route::get('/appointment-history', 'AppointmentController@history')->name('appointment.history');
+Route::get('/register', 'Auth\RegisterController@index')->middleware(['guest'])->name('register.index');
+
+Route::middleware(['auth'])->group(function () {
+    
+    Route::get('/appointment', 'AppointmentController@index')->name('appointment.index');
+    Route::post('/appointment-create', 'AppointmentController@create')->name('appointment.create');
+    Route::get('/appointment-history', 'AppointmentController@history')->name('appointment.history');
+
+});

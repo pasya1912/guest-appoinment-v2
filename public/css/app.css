@@ -20142,4 +20142,9 @@ input[type="checkbox"]:checked + label:before {
     border-bottom: none;
 }
 
+.login-title{
+    font-family: Roboto, sans-serif;
+    font-weight: 800;
+    color: #fff;
+}
 /*# sourceMappingURL=app.css.map*/

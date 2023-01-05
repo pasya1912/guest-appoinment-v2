@@ -40,6 +40,11 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+    public function index()
+    {
+        return view('pages.user-pages.register');
+    }
+
     /**
      * Get a validator for an incoming registration request.
      *
