@@ -1,58 +1,64 @@
-@extends('layout.master-mini')
-@section('content')
-
-<div class="content-wrapper d-flex align-items-center justify-content-center auth theme-one" style="background-image: url({{ url('assets/images/auth/bg.png') }}); background-size: cover;">
-  <div class="row w-100 mt-3">
-    <div class="col-lg-4 mx-auto">
-      <h2 class="text-center mb-4 login-title">Login</h2>
-      <div class="auto-form-wrapper">
-        <form action="#">
-          <div class="form-group">
-            <label class="label">Username</label>
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="Username">
-              <div class="input-group-append">
-                <span class="input-group-text">
-                  <i class="mdi mdi-check-circle-outline"></i>
-                </span>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>GUSTA</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="../../vendors/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet" href="../../vendors/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="../../vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet"  href="{{ asset('css/style.css') }}">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="../../css/style.css" <!-- End layout styles -->
+    <link rel="shortcut icon" href="../../images/favicon.png" />
+  </head>
+  <body>
+    <div class="container-scroller">
+      <div class="container-fluid page-body-wrapper full-page-wrapper">
+        <div class="content-wrapper d-flex align-items-center auth">
+          <div class="row flex-grow">
+            <div class="col-lg-4 mx-auto">
+              <div class="auth-form-light text-left p-5">
+                <h4>Hello! let's get started</h4>
+                <h6 class="font-weight-light">Sign in to continue.</h6>
+                <form class="pt-3" action="{{ route('login.auth') }}" method="POST">
+                  {{ csrf_field() }}
+                    <div class="form-group">
+                      <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Email address" name="email">
+                    </div>
+                    <div class="form-group">
+                      <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password" name="password">
+                    </div>
+                    <div class="mt-3">
+                      <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">SIGN IN</button>
+                    </div>
+                    <div class="text-center mt-4 font-weight-light"> Don't have an account? <a href="{{ route('register.index') }}" class="text-primary">Create</a>
+                    </div>
+                </form>
               </div>
             </div>
           </div>
-          <div class="form-group">
-            <label class="label">Password</label>
-            <div class="input-group">
-              <input type="password" class="form-control" placeholder="*********">
-              <div class="input-group-append">
-                <span class="input-group-text">
-                  <i class="mdi mdi-check-circle-outline"></i>
-                </span>
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <button class="btn btn-primary submit-btn btn-block mt-5">Login</button>
-          </div>
-          <div class="form-group d-flex justify-content-between">
-            <div class="text-block text-center">
-              <span class="text-small font-weight-semibold">Don't have account?</span>
-              <a href="{{ route('register.index') }}" class="text-black text-small">Create new account</a>
-            </div>
-          </form>
         </div>
-        <ul class="auth-footer">
-          <li>
-            <a href="#">Conditions</a>
-          </li>
-          <li>
-            <a href="#">Help</a>
-          </li>
-          <li>
-            <a href="#">Terms</a>
-          </li>
-        </ul>
-        <p class="footer-text text-center">copyright © 2023 ITD All rights reserved.</p>
+        <!-- content-wrapper ends -->
       </div>
+      <!-- page-body-wrapper ends -->
     </div>
-  </div>
-  
-  @endsection
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="../../vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="../../js/off-canvas.js"></script>
+    <script src="../../js/misc.js"></script>
+    <!-- endinject -->
+  </body>
+</html>

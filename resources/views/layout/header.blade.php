@@ -17,7 +17,7 @@
         <ul class="navbar-nav navbar-nav-right">
           <li class="nav-item dropdown d-none d-xl-inline-block">
             <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-              <span class="profile-text d-none d-md-inline-flex">Adrian Napitupulu</span>
+              <span class="profile-text d-none d-md-inline-flex">{{ auth()->user()->name }}</span>
               <img class="img-xs rounded-circle" src="{{ url('assets/images/faces/face8.jpg') }}" alt="Profile image"> </a>
               <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
                 <a class="dropdown-item p-0">
@@ -36,7 +36,10 @@
                 <a class="dropdown-item mt-2"> Manage Accounts </a>
                 <a class="dropdown-item"> Change Password </a>
                 <a class="dropdown-item"> Check Inbox </a>
-                <a class="dropdown-item"> Sign Out </a>
+                <form action="{{ route('logout.auth') }}" method="POST">
+                  {{ csrf_field() }}
+                  <button type="submit" class="dropdown-item"> Sign Out </button>
+                </form>
               </div>
             </li>
           </ul>
