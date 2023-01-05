@@ -11,102 +11,105 @@
       <div class="card-body">
         <h4 class="card-title mb-5">Make Appointment</h4>
 
-          <div class="form-group">
-            <label>Tujuan kedatangan Anda?</label>
-            <select class="form-control" id="exampleFormControlSelect1">
-              <option selected>-- pilih opsi --</option>
-              <option>KEPO</option>
-              <option>KEPO</option>
-              <option>KEPO</option>
-              <option>KEPO</option>
-              <option>KEPO</option>
-            </select>
-            <small id="emailHelp" class="form-text text-muted">Pilih sesuai tujuan anda</small>
+         <div class="form-group row">
+            <label for="inputEmail3" class="col-sm-2 col-form-label">Guest Name</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control mt-2" id="inputEmail3" placeholder="Masukkan nama...">
+            </div>
           </div>
 
-          <div class="form-group mt-4">
-            <label>Siapa Nama Anda?</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="masukin nama cyok" required>
-            <small id="emailHelp" class="form-text text-muted">Masukkan nama lengkap</small>
-          </div>
-
-          <div class="form-group mt-4">
-            <label class="mb-4">Apa Agenda Kamu Cyok?</label>
-            <div class="boxes">
-                <input type="checkbox" id="box-1">
-                <label for="box-1">Makan bareng sacho</label>
-                
-                <input type="checkbox" id="box-2">
-                <label for="box-2">Jalan-jalan keliling aisin</label>
-                
-                <input type="checkbox" id="box-3">
-                <label for="box-3">Makan di kantin aisin</label>
+          <div class="form-group row">
+            <label for="inputEmail3" class="col-sm-2 col-form-label mt-4">Visit Purpose</label>
+            <div class="col-sm-10">
+                <div class="boxes">
+                    <input type="checkbox" id="box-1">
+                    <label for="box-1">Makan bareng sacho</label>
+                    
+                    <input type="checkbox" id="box-2">
+                    <label for="box-2">Jalan-jalan keliling aisin</label>
+                    
+                    <input type="checkbox" id="box-3">
+                    <label for="box-3">Makan di kantin aisin</label>
+                </div>
+                <small id="emailHelp" class="form-text text-muted mt-3">Pilih satu atau lebih</small>
             </div>
-            <small id="emailHelp" class="form-text text-muted mt-3">Pilih satu atau lebih</small>
         </div>
 
-        <label class="mt-4">Plan visit</label>
+        <div class="form-group row">
+            <label for="inputEmail3" class="col-sm-2 col-form-label">Plan Visit</label>
+            <div class="col-sm-10">
+                <select class="form-control mt-1" id="exampleFormControlSelect1">
+                    <option value="" selected>-- pilih frekuensi --</option>
+                    <option>Daily</option>
+                    <option>Weekly</option>
+                    <option>Monthly</option>
+                </select>
+                <small id="emailHelp" class="form-text text-muted">Pilih frekuensi kedatangan</small>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="inputEmail3" class="col-sm-2 col-form-label">Select Date</label>
+            <div class="col-sm-10">
+                <input type="date" name="date" id="date" class="form-control"/>
+                <small id="emailHelp" class="form-text text-muted">Pilih tanggal</small>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="inputEmail3" class="col-sm-2 col-form-label">Select Time</label>
+            <div class="col-sm-10">
+                <input type="time" name="time" id="time" class="form-control"/>
+                <small id="emailHelp" class="form-text text-muted">Pilih jam</small>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="inputEmail3" class="col-sm-2 col-form-label">Total Guest</label>
+            <div class="col-sm-10">
+                <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="jumlah orang" required>
+            <small id="emailHelp" class="form-text text-muted">Jumlah tamu yang datang</small>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="inputEmail3" class="col-sm-2 col-form-label">PIC</label>
+            <div class="col-sm-6">
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="masukkan aja cyok" required>
+                <small id="emailHelp" class="form-text text-muted">Nama PIC yang akan ditemui beserta department</small>
+            </div>
+            <div class="col-sm-4">
+                <select class="form-control" id="exampleFormControlSelect1" required>
+                    <option value="" selected>-- pilih Department --</option>
+                    <option>IT Development</option>
+                    <option>KEPO</option>
+                    <option>KEPO</option>
+                    <option>KEPO</option>
+                    <option>KEPO</option>
+                </select>
+            </div>
+        </div>
+
         <div class="row">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <select class="browser-default custom-select mt-3" id="exampleFormControlSelect1" required>
-                        <option value="" selected>-- pilih frekuensi --</option>
-                        <option>Daily</option>
-                        <option>Weekly</option>
-                        <option>Monthly</option>
-                    </select>
-                    <small id="emailHelp" class="form-text text-muted">Pilih frekuensi kedatangan</small>
-                </div>
-            </div>
-        </div>
-        <div class="row mt-3">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <div class="form-group pmd-textfield pmd-textfield-floating-label">
-                        <label class="control-label" for="datetimepicker-1">Select Date</label>
-                        <input type="date" name="date" id="date" class="form-control"/>
-                        <small id="emailHelp" class="form-text text-muted">Pilih tanggal</small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <div class="form-group pmd-textfield pmd-textfield-floating-label">
-                        <label class="control-label" for="datetimepicker-2">Select Time</label>
-                        <input type="time" name="time" id="time" class="form-control"/>
-                        <small id="emailHelp" class="form-text text-muted">Pilih jam</small>
-                    </div>
-                </div>
+            <label for="inputEmail3" class="col-sm-2 col-form-label">Document</label>
+            <div class="col-sm-10">
+                  <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="inputGroupFile03">
+                    <label class="custom-file-label" for="inputGroupFile03">Choose file</label>
+                  </div>
             </div>
         </div>
 
-        <div class="form-group mt-4">
-          <label>Berapa banyak tamu?</label>
-          <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="jumlah orang" required>
-          <small id="emailHelp" class="form-text text-muted">Jumlah tamu yang datang</small>
-        </div>
-
-        <label class="mt-4">Siapa PIC yang ditemui Cyok?</label>
         <div class="row">
-            <div class="col-xl-8 col-lg-8 col-md-6 col-sm-6">
-                <div class="form-group">
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="masukkan aja cyok" required>
-                    <small id="emailHelp" class="form-text text-muted">Nama PIC yang akan ditemui beserta department</small>
-                </div>
-            </div>
-            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                <div class="form-group">
-                    <select class="browser-default custom-select" id="exampleFormControlSelect1" required>
-                        <option value="" selected>-- pilih Department --</option>
-                        <option>IT Development</option>
-                        <option>KEPO</option>
-                        <option>KEPO</option>
-                        <option>KEPO</option>
-                        <option>KEPO</option>
-                    </select>
-                </div>
+            <label for="inputEmail3" class="col-sm-2 col-form-label">Selfie Photo</label>
+            <div class="col-sm-10">
+                  <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="inputGroupFile03">
+                    <label class="custom-file-label" for="inputGroupFile03">Choose file</label>
+                  </div>
             </div>
         </div>
+
 
         {{-- <div class="container mb-5"> --}}
           <div class="row mt-5">
