@@ -69,5 +69,12 @@ class AppointmentController extends Controller
             'selfie' => $doc2Name,
             'status' => 'pending'
         ]);
+        
+        return view('pages.appointment.history');
+    }
+    
+    public function history()
+    {
+        return view('pages.appointment.history');
     }
 }
