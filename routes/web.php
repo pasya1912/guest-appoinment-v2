@@ -16,3 +16,5 @@ Route::get('/', function () {
 });
 
 Route::get('/appointment', 'AppointmentController@index')->name('appointment.index');
+
+Route::get('/appointment-history', 'AppointmentController@history')->name('appointment.history');

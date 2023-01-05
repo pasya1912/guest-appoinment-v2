@@ -18,7 +18,7 @@
             <a class="nav-link" href="{{ route('appointment.index') }}">Create Appointment</a>
           </li>
           <li class="nav-item {{ active_class(['basic-ui/dropdowns']) }}">
-            <a class="nav-link" href="{{ url('/basic-ui/dropdowns') }}">History</a>
+            <a class="nav-link" href="{{ route('appointment.history') }}">History</a>
           </li>
         </ul>
       </div>

@@ -10,4 +10,9 @@ class AppointmentController extends Controller
     {
         return view('pages.appointment.index');
     }
+
+    public function history()
+    {
+        return view('pages.appointment.history');
+    }
 }
