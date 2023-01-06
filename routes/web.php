@@ -37,8 +37,13 @@ Route::middleware(['auth'])->group(function () {
     })->name('dashboard');
     
     Route::get('/appointment', 'AppointmentController@index')->name('appointment.index');
-    Route::post('/appointment-create', 'AppointmentController@create')->name('appointment.create');
-    Route::get('/appointment-history', 'AppointmentController@history')->name('appointment.history');
+    Route::post('/appointment/create', 'AppointmentController@create')->name('appointment.create');
+    Route::get('/appointment/history', 'AppointmentController@history')->name('appointment.history');
     
     Route::post('/logout-auth', 'Auth\LoginController@logout')->name('logout.auth');
+
+    Route::get('/qrcode', function () {
+        return \SimpleSoftwareIO\QrCode\Facades\QrCode::size(300)->generate('cek qrcode');
+    });
+
 });

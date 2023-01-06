@@ -178,6 +178,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         Yajra\DataTables\DataTablesServiceProvider::class,
+        SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class
 
     ],
 
@@ -234,6 +235,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
 
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
+        'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
 
     ],
 

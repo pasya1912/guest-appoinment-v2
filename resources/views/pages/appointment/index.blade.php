@@ -10,7 +10,7 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title mb-5">Make Appointment</h4>
-
+                
                 <form action="{{ route('appointment.create') }}" method="post" enctype="multipart/form-data" id="appointmentForm">
                     {{ csrf_field() }}
                     <div class="form-group row">
@@ -19,29 +19,30 @@
                             <input type="text" class="form-control mt-2" id="nama" name="nama" placeholder="Masukkan nama...">
                         </div>
                     </div>
-
+                    
                     <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-2 col-form-label mt-4">Visit Purpose</label>
                         <div class="col-sm-10">
                             <div class="boxes">
                                 <input type="checkbox" id="purpose-1" name="purpose-1">
                                 <label for="purpose-1">Makan bareng sacho</label>
-
+                                
                                 <input type="checkbox" id="purpose-2" name="purpose-2">
                                 <label for="purpose-2">Jalan-jalan keliling aisin</label>
-
+                                
                                 <input type="checkbox" id="purpose-3" name="purpose-3">
                                 <label for="purpose-3">Makan di kantin aisin</label>
                             </div>
                             <small id="emailHelp" class="form-text text-muted mt-3">Pilih satu atau lebih</small>
                         </div>
                     </div>
-
+                    
                     <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-2 col-form-label">Plan Visit</label>
                         <div class="col-sm-10">
                             <select class="form-control mt-1" id="frekuensi" name="frekuensi">
                                 <option value="0" selected>-- pilih frekuensi --</option>
+                                <option value="once">Once</option>
                                 <option value="daily">Daily</option>
                                 <option value="weekly">Weekly</option>
                                 <option value="monthly">Monthly</option>
@@ -49,7 +50,7 @@
                             <small id="emailHelp" class="form-text text-muted">Pilih frekuensi kedatangan</small>
                         </div>
                     </div>
-
+                    
                     <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-2 col-form-label">Select Date</label>
                         <div class="col-sm-10">
@@ -57,7 +58,7 @@
                             <small id="emailHelp" class="form-text text-muted">Pilih tanggal</small>
                         </div>
                     </div>
-
+                    
                     <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-2 col-form-label">Select Time</label>
                         <div class="col-sm-10">
@@ -65,7 +66,7 @@
                             <small id="emailHelp" class="form-text text-muted">Pilih jam</small>
                         </div>
                     </div>
-
+                    
                     <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-2 col-form-label">Total Guest</label>
                         <div class="col-sm-10">
@@ -73,7 +74,7 @@
                             <small id="emailHelp" class="form-text text-muted">Jumlah tamu yang datang</small>
                         </div>
                     </div>
-
+                    
                     <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-2 col-form-label">PIC</label>
                         <div class="col-sm-6">
@@ -91,7 +92,7 @@
                             </select>
                         </div>
                     </div>
-
+                    
                     <div class="row">
                         <label for="inputEmail3" class="col-sm-2 col-form-label">Document</label>
                         <div class="col-sm-10">
@@ -101,7 +102,7 @@
                             </div>
                         </div>
                     </div>
-
+                    
                     <div class="row">
                         <label for="inputEmail3" class="col-sm-2 col-form-label">Selfie Photo</label>
                         <div class="col-sm-10">
@@ -111,15 +112,15 @@
                             </div>
                         </div>
                     </div>
-
-
+                    
+                    
                     <div class="row mt-5">
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                             <button type="submit" class="btn btn-lg btn-primary"><i class="mdi mdi-cloud-check pr-3"></i></i>Submit</button>
                         </div>
                     </div>
                 </form>
-
+                
             </div>
         </div>
     </div>

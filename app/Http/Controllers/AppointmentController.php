@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Appointment;
 use Illuminate\Http\Request;
-use BaconQrCode\Encoder\QrCode;
+use Illuminate\Support\Facades\Auth;
 
 class AppointmentController extends Controller
 {
@@ -68,7 +68,7 @@ class AppointmentController extends Controller
             $doc2Name = '';
         }
 
-        Appointment::create([
+        $appointment = Appointment::create([
             'name' => $request->nama,
             'purpose' => $purpose,
             'frequency' => $request->frekuensi,
@@ -79,14 +79,21 @@ class AppointmentController extends Controller
             'dept' => $request->dept,
             'doc' => $docName,
             'selfie' => $doc2Name,
-            'status' => 'pending'
+            'status' => 'pending',
+            'user_id' => auth()->user()->id
         ]);
+
+        $qrCode = \SimpleSoftwareIO\QrCode\Facades\QrCode::size(300)->generate($appointment->id);
         
-        return redirect()->route('appointment.history');
+        return redirect()->route('appointment.history')->with('qrcode', $qrCode);
     }
     
     public function history()
     {
-        return view('pages.appointment.history');
+        $appointments = Appointment::where('user_id', auth()->user()->id)->get();
+
+        return view('pages.appointment.history',[
+            'appointments' => $appointments,
+        ]);
     }
 }
