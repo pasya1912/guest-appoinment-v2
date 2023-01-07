@@ -48,6 +48,6 @@ class RegisterController extends Controller
 
         User::create($validatedData);
 
-        return redirect('/login');
+        return redirect()->route('login');
     }
 }

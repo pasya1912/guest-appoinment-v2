@@ -18,6 +18,8 @@ Route::get('/', function () {
     return view('pages.user-pages.login');
 })->middleware(['guest']);
 
+Route::post('/logout-auth', 'Auth\LoginController@logout')->name('logout.auth');
+
 // guest route
 Route::middleware(['guest'])->group(function () {
     
@@ -25,7 +27,7 @@ Route::middleware(['guest'])->group(function () {
     Route::post('/register-store', 'Auth\RegisterController@store')->name('register.store');
 
     
-    Route::get('/login', 'Auth\LoginController@index')->name('login.index');
+    Route::get('/login', 'Auth\LoginController@index')->name('login');
     Route::post('/login-auth', 'Auth\LoginController@authenticate')->name('login.auth');
 });
 
@@ -37,13 +39,16 @@ Route::middleware(['auth'])->group(function () {
     })->name('dashboard');
     
     Route::get('/appointment', 'AppointmentController@index')->name('appointment.index');
-    Route::post('/appointment/create', 'AppointmentController@create')->name('appointment.create');
+    Route::post('/appointment/create-ticket', 'AppointmentController@create')->name('appointment.create');
     Route::get('/appointment/history', 'AppointmentController@history')->name('appointment.history');
+    Route::get('/appointment/appointment-ticket', 'AppointmentController@ticket')->name('ticket.index');
+    Route::post('/appointment/approval/{ticket}', 'AppointmentController@ticketApproval')->name('ticket.approval');
+    Route::post('/appointment/rejection/{ticket}', 'AppointmentController@ticketRejection')->name('ticket.rejection');
     
     Route::post('/logout-auth', 'Auth\LoginController@logout')->name('logout.auth');
 
-    Route::get('/qrcode', function () {
-        return \SimpleSoftwareIO\QrCode\Facades\QrCode::size(300)->generate('cek qrcode');
+    Route::get('/scanQr', function(){
+        return view('pages.admin.qrcode');
     });
 
 });

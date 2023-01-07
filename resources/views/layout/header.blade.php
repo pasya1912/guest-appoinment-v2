@@ -1,11 +1,11 @@
 <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
   <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
-    <a class="navbar-brand brand-logo" href="{{ url('/') }}">
+    <a class="navbar-brand brand-logo" href="{{ url('/dashboard') }}">
       
       {{-- logo --}}
-      {{-- <img src="{{ url('assets/images/logo.svg') }}" alt="logo" /> </a> --}}
+      <img src="{{ url('assets/images/logo.svg') }}" alt="logo" /> </a>
       
-      <a class="navbar-brand brand-logo-mini" href="{{ url('/') }}">
+      <a class="navbar-brand brand-logo-mini" href="{{ url('/dashboard') }}">
         <img src="{{ url('assets/images/logo-mini.svg') }}" alt="logo" /> </a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
@@ -17,7 +17,7 @@
         <ul class="navbar-nav navbar-nav-right">
           <li class="nav-item dropdown d-none d-xl-inline-block">
             <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-              <span class="profile-text d-none d-md-inline-flex">{{ auth()->user()->name }}</span>
+              <span class="profile-text d-none d-md-inline-flex">Welcome, {{ auth()->user()->name }}</span>
               <img class="img-xs rounded-circle" src="{{ url('assets/images/faces/face8.jpg') }}" alt="Profile image"> </a>
               <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
                 <a class="dropdown-item p-0">

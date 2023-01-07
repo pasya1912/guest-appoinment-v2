@@ -45,7 +45,7 @@
                   <div class="mt-3">
                     <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">SIGN UP</button>
                   </div>
-                  <div class="text-center mt-4 font-weight-light"> Already have an account? <a href="{{ route('login.index') }}" class="text-primary">Login</a>
+                  <div class="text-center mt-4 font-weight-light"> Already have an account? <a href="{{ route('login') }}" class="text-primary">Login</a>
                   </div>
                 </form>
               </div>

@@ -9,7 +9,7 @@
     <div class="col-lg-12 grid-margin">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title mb-5">Make Appointment</h4>
+                <h4 class="card-title mb-5">Create Ticket</h4>
                 
                 <form action="{{ route('appointment.create') }}" method="post" enctype="multipart/form-data" id="appointmentForm">
                     {{ csrf_field() }}

@@ -22,7 +22,7 @@ class AppointmentController extends Controller
                     ->make(true);
         }
 
-        return view('pages.appointment.index');
+        return view('pages.visitor.index');
     }
 
     public function create(Request $request)
@@ -68,7 +68,7 @@ class AppointmentController extends Controller
             $doc2Name = '';
         }
 
-        $appointment = Appointment::create([
+        Appointment::create([
             'name' => $request->nama,
             'purpose' => $purpose,
             'frequency' => $request->frekuensi,
@@ -82,18 +82,53 @@ class AppointmentController extends Controller
             'status' => 'pending',
             'user_id' => auth()->user()->id
         ]);
-
-        $qrCode = \SimpleSoftwareIO\QrCode\Facades\QrCode::size(300)->generate($appointment->id);
         
-        return redirect()->route('appointment.history')->with('qrcode', $qrCode);
+        return redirect()->route('appointment.history')->with('success', 'Your ticket has been successfully created!');
     }
     
     public function history()
     {
-        $appointments = Appointment::where('user_id', auth()->user()->id)->get();
+        if(auth()->user()->role === 'visitor')
+        {
+            $appointments = Appointment::where('user_id', auth()->user()->id)->paginate(8);
+    
+            return view('pages.visitor.history',[
+                'appointments' => $appointments,
+            ]);
+        }
 
-        return view('pages.appointment.history',[
+        $appointments = Appointment::paginate(8);
+        
+        return view('pages.admin.history',[
             'appointments' => $appointments,
         ]);
+        
+    }
+
+    public function ticket()
+    {
+        $appointments = Appointment::where('status','pending')->paginate(8);
+        
+        return view('pages.admin.index',[
+            'appointments' => $appointments,
+        ]);
+    }
+    
+    public function ticketApproval(Appointment $ticket)
+    {
+        Appointment::where('id', $ticket->id)->update([
+            'status' => 'approved'
+        ]);
+        
+        return redirect()->back()->with('approved','Ticket has been approved!');
+    }
+    
+    public function ticketRejection(Appointment $ticket)
+    {
+        Appointment::where('id', $ticket->id)->update([
+            'status' => 'rejected'
+        ]);
+        
+        return redirect()->back()->with('reject','Ticket has been rejected!');
     }
 }
