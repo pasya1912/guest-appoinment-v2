@@ -26,6 +26,6 @@ class Appointment extends Model
     // one to many (inverse) relation
     public function user()
     {
-        $this->belongsTo(User::class);
+        return $this->belongsTo(User::class);
     }
 }

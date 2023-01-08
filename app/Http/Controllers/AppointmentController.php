@@ -90,14 +90,14 @@ class AppointmentController extends Controller
     {
         if(auth()->user()->role === 'visitor')
         {
-            $appointments = Appointment::where('user_id', auth()->user()->id)->paginate(8);
+            $appointments = Appointment::latest()->where('user_id', auth()->user()->id)->paginate(8);
     
             return view('pages.visitor.history',[
                 'appointments' => $appointments,
             ]);
         }
 
-        $appointments = Appointment::paginate(8);
+        $appointments = Appointment::latest()->paginate(8);
         
         return view('pages.admin.history',[
             'appointments' => $appointments,
@@ -107,7 +107,9 @@ class AppointmentController extends Controller
 
     public function ticket()
     {
-        $appointments = Appointment::where('status','pending')->paginate(8);
+        $appointments = Appointment::latest()
+                                ->where('status','pending')
+                                ->paginate(8);
         
         return view('pages.admin.index',[
             'appointments' => $appointments,

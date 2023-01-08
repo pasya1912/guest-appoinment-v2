@@ -9,21 +9,19 @@
   <div class="col-lg-12 grid-margin">
 
     @if (session()->has('success'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-      {{ session('success') }}
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    @endif
-
-    @if (session()->has('reject'))
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-      {{ session('reject') }}
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('success') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    @elseif (session()->has('reject'))
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{ session('reject') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
     @endif
 
     <div class="card">
@@ -64,14 +62,14 @@
             @else
               <tr>
                 <td colspan="7">
-                  <h4 class="mt-4">You don't have any ticket</h4>
+                  <h4 class="mt-4">No tickets have been created yet</h4>
                 </td>
               </tr>
             @endif
           </tbody>
         </table>
-        @include('pagination.default')
-        {{-- {{ $appointments->links('view.default') }} --}}
+        {{-- @include('pagination.default') --}}
+        {{ $appointments->links('pagination.default') }}
       </div>
     </div>
   </div>

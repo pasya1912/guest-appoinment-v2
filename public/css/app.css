@@ -8227,6 +8227,7 @@ a.badge-dark.focus {
 
 .list-group-item-light {
     color: #838383;
+    list-style: none;
     background-color: #fefefe;
 }
 
@@ -14437,7 +14438,7 @@ small {
 @media (min-width: 992px) {
     .modal-lg,
     .modal-xl {
-        max-width: 100%;
+        max-width: 80%;
     }
 }
 
@@ -20142,7 +20143,7 @@ input[type="checkbox"]:checked + label:before {
     border-bottom: none;
 }
 
-.login-title{
+.login-title {
     font-family: Roboto, sans-serif;
     font-weight: 800;
     color: #fff;

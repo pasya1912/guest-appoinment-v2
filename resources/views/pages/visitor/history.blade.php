@@ -41,7 +41,7 @@
                 <td class="display-4">{{ $appointment->purpose }}</td>
                 <td class="display-4">{{ $appointment->frequency }}</td>
                 <td class="display-4">{{ $appointment->date }}</td>
-                {{-- <td class="display-4">{{ $appointment->guest }}</td> --}}
+                
                 @if($appointment->status === 'pending')
                   <td><span class="badge badge-pill badge-warning p-2 text-light">{{ $appointment->status }}</span></td>
                   <td>
@@ -52,7 +52,7 @@
                 @elseif($appointment->status === 'approved')
                   <td><span class="badge badge-pill badge-success p-2 text-light">{{ $appointment->status }}</span></td>
                   <td>
-                    <button data-toggle="tooltip" title="QR Code" data-toggle="modal" data-target="#demoModal-{{ $appointment->id }}" type="submit" class="btn btn-icons btn-inverse-info">
+                    <button data-toggle="modal" data-target="#demoModal-{{ $appointment->id }}"data-toggle="tooltip" title="QR Code" type="submit" class="btn btn-icons btn-inverse-info">
                       <i class="mdi mdi-qrcode"></i>
                     </button>
                   </td>
