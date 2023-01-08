@@ -133,4 +133,25 @@ class AppointmentController extends Controller
         
         return redirect()->back()->with('reject','Ticket has been rejected!');
     }
+
+    public function qrScanView()
+    {
+        return view('pages.admin.qrcode', [
+            'appointments' => [],
+        ]);
+    }
+    
+    public function qrScan(Request $request)
+    {
+        $qrId = $request->qrcode;
+
+        $appointments = Appointment::where('id', $qrId)
+                        ->where('status','approved')
+                        ->first();
+        // dd($appointments);
+
+        return view('pages.admin.qrcode',[
+            'appointments' => $appointments,
+        ]);
+    }
 }

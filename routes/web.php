@@ -44,11 +44,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/appointment/appointment-ticket', 'AppointmentController@ticket')->name('ticket.index');
     Route::post('/appointment/approval/{ticket}', 'AppointmentController@ticketApproval')->name('ticket.approval');
     Route::post('/appointment/rejection/{ticket}', 'AppointmentController@ticketRejection')->name('ticket.rejection');
+    Route::get('/qrScanView', 'AppointmentController@qrScanView')->name('qrScanView.index');
+    Route::post('/qrScan', 'AppointmentController@qrScan')->name('qrScan.index');
     
     Route::post('/logout-auth', 'Auth\LoginController@logout')->name('logout.auth');
 
-    Route::get('/scanQr', function(){
-        return view('pages.admin.qrcode');
-    });
 
 });

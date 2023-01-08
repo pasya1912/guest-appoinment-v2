@@ -45,6 +45,12 @@
           </ul>
         </div>
       </li>
+      <li class="nav-item {{ active_class(['qrScan']) }}">
+        <a class="nav-link" href="{{ route('qrScanView.index') }}">
+          <i class="menu-icon mdi mdi-qrcode-scan"></i>
+          <span class="menu-title">Scan QR Code</span>
+        </a>
+      </li>
     @endcan
 
     <li class="nav-item {{ active_class(['tables/basic-table']) }}">

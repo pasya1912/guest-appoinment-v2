@@ -116,7 +116,7 @@
                     
                     <div class="row mt-5">
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                            <button type="submit" class="btn btn-lg btn-primary"><i class="mdi mdi-cloud-check pr-3"></i></i>Submit</button>
+                            <button type="submit" class="btn btn-lg btn-primary"><i class="mdi mdi-near-me pr-3"></i>Submit</button>
                         </div>
                     </div>
                 </form>

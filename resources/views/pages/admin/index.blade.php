@@ -44,22 +44,22 @@
                             {{-- <td class="display-4">{{ $appointment->guest }}</td> --}}
                             <td><span class="badge badge-pill badge-warning p-2 text-light">{{ $appointment->status }}</span></td>
                             <td>
-
+                                
                                 {{-- detail --}}
                                 <button data-toggle="modal" data-target="#detailModal-{{ $appointment->id }}"  class="btn btn-icons btn-inverse-info" data-toggle="tooltip" title="Detail">
                                     <i class="mdi mdi-information"></i>
                                 </button>
-
+                                
                                 {{-- apporval --}}
                                 <button data-toggle="modal" data-target="#approveModal-{{ $appointment->id }}" type="submit" class="btn btn-icons btn-inverse-success" data-toggle="tooltip" title="Approve">
                                     <i class="mdi mdi-check-circle"></i>
                                 </button>
-
+                                
                                 {{-- reject --}}
                                 <button data-toggle="modal" data-target="#rejectModal-{{ $appointment->id }}" type="submit" class="btn btn-icons btn-inverse-danger" data-toggle="tooltip" title="Reject">
                                     <i class="mdi mdi-close-circle"></i>
                                 </button>
-
+                                
                             </td>
                         </tr>
                         
@@ -75,49 +75,89 @@
                 </table>
                 
                 <!-- Modal -->
-                {{-- Approval Modal --}}
+                {{-- Detail Modal --}}
                 @foreach ($appointments as $appointment)   
-                <div class="modal fade auto-off" id="detailModal-{{ $appointment->id }}" tabindex="-1" role="dialog" aria-labelledby="demoModal-{{ $appointment->id }}" aria-hidden="true">
-                    <div class="modal-dialog animated zoomInDown modal-dialog-centered modal-lg" role="document">
+                <div class="modal fade" id="detailModal-{{ $appointment->id }}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
                         <div class="modal-content">
-                            <div class="modal-header">
-                              <h5 class="modal-title">Ticket Detail</h5>
-                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                              </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <img class="rounded" src="{{ asset('uploads/selfie/'. $appointment->selfie) }}" width="300" height="300">
-                                    </div>
-                                    <div class="col-md-8 text-left   pr-5">
-                                        <h4 class="font-weight-bold pb-3">Personal Data</h4>
-                                        <p class="">Visitor Name <span class="pl-5 pb-1">: {{ $appointment->name }}</span></p>
-                                        <p class="">Visitor Company <span class="pl-5 pb-1">: {{ $appointment->user->company }}</span></p>
-                                        
-                                        <h4 class="font-weight-bold pb-3">Visit Plan</h4>
-                                        <p class="">Visit Purpose <span class="pl-5">: {{ $appointment->purpose }}</span></p>
-                                        <p class="">Visit Frequency<span class="pl-5">: {{ $appointment->frequency }}</span></p>
-                                        <p class="">Visit Date <span class="pl-5">: {{ $appointment->date }}</span></p>
-                                        <p class="">Visit Time <span class="pl-5">: {{ $appointment->time }}</span></p>
-                                        <p class="">Total Visitor <span class="pl-5">: {{ $appointment->guest }}</span></p>
-                                    </div>
+                            <div class="modal-body ">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Ticket Detail</h5>
+                                    <button type="button px-4" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
                                 </div>
-                            </div>
-                            <div class="modal-footer">
-                                <form action="/appointment/approval/{{ $appointment->id }}" method="post" class="d-inline">
-                                    {{ csrf_field() }}
-                                    <button type="submit" class="btn btn-primary">Confirm</button>
-                                </form>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                
+                                <div class="px-4 py-1">
+                                    
+                                    <div class="text-center">
+
+                                        <img class="rounded" src="{{ asset('uploads/selfie/'. $appointment->selfie) }}" width="300" height="200">
+                                    </div>
+                                    {{-- <span class="theme-color font-weight-bold">Ticket Detail</span> --}}
+                                    <div class="mb-3">
+                                        <hr class="new1">
+                                    </div>
+                                    
+                                    <div class="d-flex justify-content-between">
+                                        <span class="font-weight-bold h4">Personal Data</span>
+                                    </div>
+                                    
+                                    <div class="d-flex justify-content-between">
+                                        <span class="text-muted">Visitor Name</span>
+                                        <span class="font-weight-bold">{{ $appointment->name }}</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span class="text-muted">Visitor Company</span>
+                                        <span class="font-weight-bold">{{ $appointment->user->company }}</span>
+                                    </div>
+
+                                    <div class="d-flex justify-content-between pt-4">
+                                        <span class="font-weight-bold h4">Plan Visit</span>
+                                    </div>
+
+                                    <div class="d-flex justify-content-between">
+                                        <span class="text-muted">Visitor Purpose</span>
+                                        <span class="font-weight-bold">{{ $appointment->purpose }}</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span class="text-muted">Visit Frequency</span>
+                                        <span class="font-weight-bold">{{ $appointment->frequency}}</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span class="text-muted">Visit Date</span>
+                                        <span class="font-weight-bold">{{ $appointment->date }}</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span class="text-muted">Visit Time</span>
+                                        <span class="font-weight-bold">{{ $appointment->time }}</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span class="text-muted">PIC</span>
+                                        <span class="font-weight-bold">{{ $appointment->pic }}</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span class="text-muted">Total Visitor</span>
+                                        <span class="font-weight-bold">{{ $appointment->guest }}</span>
+                                    </div>
+                                    
+                                    
+                                    <div class="text-center mt-5">
+                                        <a class="btn btn-primary py-3" href="{{ asset('uploads/doc/' . $appointment->doc) }}" download="">
+                                            <i class="mdi mdi-cloud-check pr-2"></i>Download Document
+                                        </a>   
+                                    </div>                   
+                                    
+                                </div>
+                                
+                                
                             </div>
                         </div>
                     </div>
                 </div>
                 @endforeach
                 <!-- Modal Ends -->
-
+                
                 <!-- Modal -->
                 {{-- Approval Modal --}}
                 @foreach ($appointments as $appointment)   
@@ -125,13 +165,13 @@
                     <div class="modal-dialog animated zoomInDown modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                              <h5 class="modal-title">Approval confirmation</h5>
-                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                              </button>
+                                <h5 class="modal-title">Approval confirmation</h5>
+                                <button type="button px-4" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
                             </div>
                             <div class="modal-body">
-                              <p>Are you sure want to <strong>approve</strong> this ticket?</p>
+                                <p>Are you sure want to <strong>approve</strong> this ticket?</p>
                             </div>
                             <div class="modal-footer">
                                 <form action="/appointment/approval/{{ $appointment->id }}" method="post" class="d-inline">
@@ -145,7 +185,7 @@
                 </div>
                 @endforeach
                 <!-- Modal Ends -->
-
+                
                 <!-- Modal -->
                 {{-- rejection Modal --}}
                 @foreach ($appointments as $appointment)   
@@ -153,13 +193,13 @@
                     <div class="modal-dialog animated zoomInDown modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                              <h5 class="modal-title">Rejection confirmation</h5>
-                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                              </button>
+                                <h5 class="modal-title">Rejection confirmation</h5>
+                                <button type="button px-4" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
                             </div>
                             <div class="modal-body">
-                              <p>Are you sure want to <strong>reject</strong> this ticket?</p>
+                                <p>Are you sure want to <strong>reject</strong> this ticket?</p>
                             </div>
                             <div class="modal-footer">
                                 <form action="/appointment/rejection/{{ $appointment->id }}" method="post" class="d-inline">
