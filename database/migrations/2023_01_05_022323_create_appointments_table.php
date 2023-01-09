@@ -20,7 +20,8 @@ class CreateAppointmentsTable extends Migration
             $table->string('name');
             $table->string('purpose');
             $table->string('frequency');
-            $table->date('date');
+            $table->date('start_date');
+            $table->date('end_date');
             $table->time('time');
             $table->string('guest');
             $table->string('pic');

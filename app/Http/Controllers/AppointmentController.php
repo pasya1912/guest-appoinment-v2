@@ -33,7 +33,8 @@ class AppointmentController extends Controller
             'purpose-1' => 'required_without_all:purpose-2,purpose-3',
             'purpose-2' => 'required_without_all:purpose-1,purpose-3',
             'purpose-3' => 'required_without_all:purpose-1,purpose-2',
-            'date' => 'required',
+            'start_date' => 'required',
+            'end_date' => 'required',
             'time' => 'required',
             'jumlahTamu' => 'required',
             'pic' => 'required',
@@ -72,6 +73,8 @@ class AppointmentController extends Controller
             'name' => $request->nama,
             'purpose' => $purpose,
             'frequency' => $request->frekuensi,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
             'date' => $request->date,
             'time' => $request->time,
             'guest' => $request->jumlahTamu,
@@ -145,10 +148,7 @@ class AppointmentController extends Controller
     {
         $qrId = $request->qrcode;
 
-        $appointments = Appointment::where('id', $qrId)
-                        ->where('status','approved')
-                        ->first();
-        // dd($appointments);
+        $appointments = Appointment::where('id', $qrId)->first();
 
         return view('pages.admin.qrcode',[
             'appointments' => $appointments,

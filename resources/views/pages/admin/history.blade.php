@@ -34,7 +34,7 @@
               <th class="text-center">Guest Name</th>
               <th class="text-center">Visit Purpose</th>
               <th class="text-center">Plan Visit</th>
-              <th class="text-center">Dates</th>
+              <th class="text-center">Visit Date</th>
               <th class="text-center">Status</th>
             </tr>
           </thead>
@@ -47,7 +47,7 @@
                 <td class="display-4">{{ $appointment->name }}</td>
                 <td class="display-4">{{ $appointment->purpose }}</td>
                 <td class="display-4">{{ $appointment->frequency }}</td>
-                <td class="display-4">{{ $appointment->date }}</td>
+                <td class="display-4">{{ Carbon\Carbon::parse($appointment->start_date)->toFormattedDateString() }} - {{ Carbon\Carbon::parse($appointment->end_date)->toFormattedDateString() }}</td>
                 {{-- <td class="display-4">{{ $appointment->guest }}</td> --}}
                 @if($appointment->status === "pending")
                   <td><span class="badge badge-pill badge-warning p-2 text-light">{{ $appointment->status }}</span></td>

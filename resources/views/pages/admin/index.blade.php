@@ -15,6 +15,14 @@
             </button>
         </div>
         @endif
+        @if (session('reject'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ session('reject') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        @endif
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title mb-5">Ticket list</h4>
@@ -25,7 +33,7 @@
                             <th class="text-center">Guest Name</th>
                             <th class="text-center">Visit Purpose</th>
                             <th class="text-center">Plan Visit</th>
-                            <th class="text-center">Dates</th>
+                            <th class="text-center">Visit Date</th>
                             {{-- <th class="text-center">Total Guest</th> --}}
                             <th class="text-center">Status</th>
                             <th class="text-center">Action</th>
@@ -40,7 +48,7 @@
                             <td class="display-4">{{ $appointment->name }}</td>
                             <td class="display-4">{{ $appointment->purpose }}</td>
                             <td class="display-4">{{ $appointment->frequency }}</td>
-                            <td class="display-4">{{ $appointment->date }}</td>
+                            <td class="display-4">{{ Carbon\Carbon::parse($appointment->start_date)->toFormattedDateString() }} - {{ Carbon\Carbon::parse($appointment->end_date)->toFormattedDateString() }}</td>
                             {{-- <td class="display-4">{{ $appointment->guest }}</td> --}}
                             <td><span class="badge badge-pill badge-warning p-2 text-light">{{ $appointment->status }}</span></td>
                             <td>
@@ -126,21 +134,25 @@
                                     </div>
                                     <div class="d-flex justify-content-between">
                                         <span class="text-muted">Visit Date</span>
-                                        <span class="font-weight-bold">{{ $appointment->date }}</span>
+                                        <span class="font-weight-bold">{{ Carbon\Carbon::parse($appointment->start_date)->toFormattedDateString() }} - {{ Carbon\Carbon::parse($appointment->end_date)->toFormattedDateString() }}</span>
                                     </div>
                                     <div class="d-flex justify-content-between">
                                         <span class="text-muted">Visit Time</span>
                                         <span class="font-weight-bold">{{ $appointment->time }}</span>
                                     </div>
                                     <div class="d-flex justify-content-between">
-                                        <span class="text-muted">PIC</span>
-                                        <span class="font-weight-bold">{{ $appointment->pic }}</span>
-                                    </div>
-                                    <div class="d-flex justify-content-between">
                                         <span class="text-muted">Total Visitor</span>
                                         <span class="font-weight-bold">{{ $appointment->guest }}</span>
                                     </div>
+
+                                    <div class="mb-3">
+                                        <hr class="new1">
+                                    </div>
                                     
+                                    <div class="d-flex justify-content-between">
+                                        <span class="font-weight-bold">PIC</span>
+                                        <span class="font-weight-bold">{{ $appointment->pic }}</span>
+                                    </div>
                                     
                                     <div class="text-center mt-5">
                                         <a class="btn btn-primary py-3" href="{{ asset('uploads/doc/' . $appointment->doc) }}" download="">

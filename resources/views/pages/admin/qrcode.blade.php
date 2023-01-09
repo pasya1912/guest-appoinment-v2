@@ -33,12 +33,55 @@
                                 <span class="">No barcode has been scanned</span>
                             </div>
                             @else
-                            <div class="item">
-                                <p class="item-name">Personal Data</p>
-                                <span class="price">{{ $appointments->name }}</span>
-                                <p class="item-description">Visitor Name</p>
-                            </div>
-                            <div class="total">PIC<span class="price">{{ $appointments->pic }}</span></div>
+                                @if ($appointments->status === 'approved')
+                                    <div class="alert alert-success" role="alert">
+                                        Ticket valid!
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span class="font-weight-bold">Personal Data</span>
+                                    </div>
+                                    
+                                    <div class="d-flex justify-content-between">
+                                        <span class="text-muted">Visitor Name</span>
+                                        <span class="font-weight-bold">{{ $appointments->name }}</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span class="text-muted">Visitor Company</span>
+                                        <span class="font-weight-bold">{{ $appointments->user->company }}</span>
+                                    </div>
+
+                                    <div class="d-flex justify-content-between mt-4">
+                                        <span class="font-weight-bold">Visit Plan</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span class="text-muted">Visitor Purpose</span>
+                                        <span class="font-weight-bold">{{ $appointments->purpose }}</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span class="text-muted">Visit Frequency</span>
+                                        <span class="font-weight-bold">{{ $appointments->frequency}}</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span class="text-muted">Visit Date</span>
+                                        <span class="font-weight-bold">{{ Carbon\Carbon::parse($appointments->start_date)->toFormattedDateString() }} - {{ Carbon\Carbon::parse($appointments->end_date)->toFormattedDateString() }}</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span class="text-muted">Visit Time</span>
+                                        <span class="font-weight-bold">{{ $appointments->time }}</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span class="text-muted">Total Visitor</span>
+                                        <span class="font-weight-bold">{{ $appointments->guest }}</span>
+                                    </div>
+
+                                    <div class="item mt-0">
+                                    </div>
+                                    <div class="total">PIC<span class="price">{{ $appointments->pic }}</span></div>
+                                @else
+                                    <div class="alert alert-danger" role="alert">
+                                        Ticket Invalid!
+                                    </div>
+                                @endif
                             @endif
                         </div>
                     </form>

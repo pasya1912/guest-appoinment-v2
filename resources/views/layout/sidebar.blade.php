@@ -45,7 +45,7 @@
           </ul>
         </div>
       </li>
-      <li class="nav-item {{ active_class(['qrScan']) }}">
+      <li class="nav-item {{ active_class(['qrScanView','qrScan']) }}">
         <a class="nav-link" href="{{ route('qrScanView.index') }}">
           <i class="menu-icon mdi mdi-qrcode-scan"></i>
           <span class="menu-title">Scan QR Code</span>

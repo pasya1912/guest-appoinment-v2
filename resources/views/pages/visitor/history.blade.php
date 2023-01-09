@@ -25,8 +25,7 @@
               <th class="text-center">Guest Name</th>
               <th class="text-center">Visit Purpose</th>
               <th class="text-center">Plan Visit</th>
-              <th class="text-center">Dates</th>
-              {{-- <th class="text-center">Total Guest</th> --}}
+              <th class="text-center">Visit Date</th>
               <th class="text-center">Status</th>
               <th class="text-center"></th>
             </tr>
@@ -40,22 +39,40 @@
                 <td class="display-4">{{ $appointment->name }}</td>
                 <td class="display-4">{{ $appointment->purpose }}</td>
                 <td class="display-4">{{ $appointment->frequency }}</td>
-                <td class="display-4">{{ $appointment->date }}</td>
+                <td class="display-4">{{ Carbon\Carbon::parse($appointment->start_date)->toFormattedDateString() }} - {{ Carbon\Carbon::parse($appointment->end_date)->toFormattedDateString() }}</td>
                 
                 @if($appointment->status === 'pending')
-                  <td><span class="badge badge-pill badge-warning p-2 text-light">{{ $appointment->status }}</span></td>
+                  <td>
+                    <span class="badge badge-pill badge-warning p-2 text-light">{{ $appointment->status }}</span>
+                  </td>
                   <td>
                     <button class="btn btn-icons btn-inverse-info" data-toggle="tooltip" title="QR disable" disabled>
                       <i class="mdi mdi-qrcode"></i>
                     </button>
                   </td>
                 @elseif($appointment->status === 'approved')
-                  <td><span class="badge badge-pill badge-success p-2 text-light">{{ $appointment->status }}</span></td>
                   <td>
-                    <button data-toggle="modal" data-target="#demoModal-{{ $appointment->id }}"data-toggle="tooltip" title="QR Code" type="submit" class="btn btn-icons btn-inverse-info">
-                      <i class="mdi mdi-qrcode"></i>
-                    </button>
+                    <span class="badge badge-pill badge-success p-2 text-light">{{ $appointment->status }}</span>
                   </td>
+                  @php
+
+                      $current_date = date("Y-m-d");
+                      $end_date = date($appointment->end_date);
+                      
+                  @endphp
+                  @if ($current_date > $end_date)
+                    <td>
+                      <button class="btn btn-icons btn-inverse-info" data-toggle="tooltip" title="QR disable" disabled>
+                        <i class="mdi mdi-qrcode"></i>
+                      </button>
+                    </td>
+                  @else
+                    <td>
+                      <button data-toggle="modal" data-target="#demoModal-{{ $appointment->id }}"data-toggle="tooltip" title="QR Code" type="submit" class="btn btn-icons btn-inverse-info">
+                        <i class="mdi mdi-qrcode"></i>
+                      </button>
+                    </td>
+                  @endif
                 @else
                   <td><span class="badge badge-pill badge-danger p-2 text-light">{{ $appointment->status }}</span></td>
                   <td><button hidden>QR code</button></td>

@@ -53,16 +53,20 @@
                     
                     <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-2 col-form-label">Select Date</label>
-                        <div class="col-sm-10">
-                            <input type="date" name="date" id="date" class="form-control"/>
-                            <small id="emailHelp" class="form-text text-muted">Pilih tanggal</small>
+                        <div class="col-sm-5">
+                            <input type="date" name="start_date" id="date" class="form-control mt-1"/>
+                            <small id="emailHelp" class="form-text text-muted">Pilih tanggal mulai</small>
+                        </div>
+                        <div class="col-sm-5">
+                            <input type="date" name="end_date" id="end_date" class="form-control mt-1"/>
+                            <small id="emailHelp" class="form-text text-muted">Pilih tanggal selesai</small>
                         </div>
                     </div>
                     
                     <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-2 col-form-label">Select Time</label>
                         <div class="col-sm-10">
-                            <input type="time" name="time" id="time" class="form-control"/>
+                            <input type="time" name="time" id="time" class="form-control mt-1"/>
                             <small id="emailHelp" class="form-text text-muted">Pilih jam</small>
                         </div>
                     </div>
@@ -70,7 +74,7 @@
                     <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-2 col-form-label">Total Guest</label>
                         <div class="col-sm-10">
-                            <input type="number" class="form-control" id="jumlahTamu" name="jumlahTamu" aria-describedby="emailHelp" placeholder="jumlah orang" required>
+                            <input type="number" class="form-control mt-1" id="jumlahTamu" name="jumlahTamu" aria-describedby="emailHelp" placeholder="jumlah orang" required>
                             <small id="emailHelp" class="form-text text-muted">Jumlah tamu yang datang</small>
                         </div>
                     </div>
@@ -78,11 +82,11 @@
                     <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-2 col-form-label">PIC</label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" id="pic" name="pic" aria-describedby="emailHelp" placeholder="masukkan aja cyok" required>
+                            <input type="text" class="form-control mt-1" id="pic" name="pic" aria-describedby="emailHelp" placeholder="masukkan aja cyok" required>
                             <small id="emailHelp" class="form-text text-muted">Nama PIC yang akan ditemui beserta department</small>
                         </div>
                         <div class="col-sm-4">
-                            <select class="form-control" id="dept" name="dept" required>
+                            <select class="form-control mt-1" id="dept" name="dept" required>
                                 <option value="0">-- pilih Department --</option>
                                 <option value="ITD">IT Development</option>
                                 <option value="Kepo">KEPO</option>
@@ -141,6 +145,11 @@
             event.preventDefault();
             alert('Please select at least one checkbox');
         }
+    });
+
+    $(".custom-file-input").on("change", function() {
+    var fileName = $(this).val().split("\\").pop();
+    $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
     });
 </script>
 @endpush

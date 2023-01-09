@@ -48,6 +48,4 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/qrScan', 'AppointmentController@qrScan')->name('qrScan.index');
     
     Route::post('/logout-auth', 'Auth\LoginController@logout')->name('logout.auth');
-
-
 });
