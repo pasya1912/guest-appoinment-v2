@@ -62,7 +62,7 @@
                   @endphp
                   @if ($current_date > $end_date)
                     <td>
-                      <button class="btn btn-icons btn-inverse-info" data-toggle="tooltip" title="QR disable" disabled>
+                      <button data-toggle="modal" data-target="#expiredModal-{{ $appointment->id }}"data-toggle="tooltip" title="QR Code" type="submit" class="btn btn-icons btn-inverse-info">
                         <i class="mdi mdi-qrcode"></i>
                       </button>
                     </td>
@@ -106,6 +106,33 @@
                     <h2>Your Barcode is Here!</h2>
                     <p class="text-muted">show this barcode to the security guard</p>
                     <span>{!! \QrCode::size(200)->generate($appointment->id) !!}</span>
+                    <form class="pt-5">
+                      <button type="submit" class="btn btn-primary" data-dismiss="modal" aria-label="Close">close modal</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        @endforeach
+        <!-- Modal Ends -->
+
+        <!-- Modal Expired-->
+        @foreach ($appointments as $appointment)   
+        <div class="modal fade auto-off" id="expiredModal-{{ $appointment->id }}" tabindex="-1" role="dialog" aria-labelledby="demoModal-{{ $appointment->id }}" aria-hidden="true">
+          <div class="modal-dialog animated zoomInDown modal-dialog-centered" role="document">
+            <div class="modal-content">
+              
+              <div class="container-fluid">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="row">
+                  <div class="col-md-12 text-center py-5 px-sm-5 ">
+                    <h2>Im sorry!</h2>
+                    <p class="text-muted pt-2">Your barcode has expired, please make another ticket</p>
+                    <img src="{{ asset('assets/images/expired/expire.png') }}" alt="" width="200">
                     <form class="pt-5">
                       <button type="submit" class="btn btn-primary" data-dismiss="modal" aria-label="Close">close modal</button>
                     </form>

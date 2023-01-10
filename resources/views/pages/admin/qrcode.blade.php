@@ -5,6 +5,18 @@
 @endpush
 
 @section('content')
+<div class="row">
+    <div class="col-md-12">
+        @if (session('scanned'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('scanned') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        @endif
+    </div>
+</div>
 <div class="row justify-content-between">
     <div class="col-lg-6 grid-margin">
         <main class="page payment-page">
@@ -29,14 +41,15 @@
                         <div class="products">
                             <h3 class="title">Ticket Details</h3>
                             @if(empty($appointments))
-                            <div class="text-center pt-3">
-                                <span class="">No barcode has been scanned</span>
-                            </div>
+                                <div class="text-center pt-3">
+                                    <span class="">No barcode has been scanned</span>
+                                </div>
                             @else
                                 @if ($appointments->status === 'approved')
                                     <div class="alert alert-success" role="alert">
                                         Ticket valid!
                                     </div>
+                                    <img class="rounded" src="{{ asset('uploads/selfie/'. $appointments->selfie) }}" width="300" height="200">
                                     <div class="d-flex justify-content-between">
                                         <span class="font-weight-bold">Personal Data</span>
                                     </div>
@@ -77,6 +90,10 @@
                                     <div class="item mt-0">
                                     </div>
                                     <div class="total">PIC<span class="price">{{ $appointments->pic }}</span></div>
+                                @elseif ($appointments === 'null')
+                                    <div class="alert alert-danger" role="alert">
+                                        Ticket Invalid!
+                                    </div>
                                 @else
                                     <div class="alert alert-danger" role="alert">
                                         Ticket Invalid!

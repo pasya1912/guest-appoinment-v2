@@ -147,9 +147,8 @@ class AppointmentController extends Controller
     public function qrScan(Request $request)
     {
         $qrId = $request->qrcode;
-
         $appointments = Appointment::where('id', $qrId)->first();
-
+        // dd(gettype($appointments));
         return view('pages.admin.qrcode',[
             'appointments' => $appointments,
         ]);

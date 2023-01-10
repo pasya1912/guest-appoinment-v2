@@ -9,7 +9,7 @@
   <div class="col-lg-12 grid-margin">
     <div class="card">
       <div class="card-body">
-        <h2>Hallo kawan</h2>
+        <h2>Welcome to GUSTA</h2>
       </div>
     </div>
   </div>

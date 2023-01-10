@@ -28,6 +28,12 @@
     @endcan
 
     @can('admin')
+      <li class="nav-item {{ active_class(['qrScanView','qrScan']) }}">
+        <a class="nav-link" href="{{ route('qrScanView.index') }}">
+          <i class="menu-icon mdi mdi-qrcode-scan"></i>
+          <span class="menu-title">Scan QR Code</span>
+        </a>
+      </li>
       <li class="nav-item {{ active_class(['appointment']) }}">
         <a class="nav-link" data-toggle="collapse" href="#basic-ui" aria-expanded="{{ is_active_route(['appointment/*']) }}" aria-controls="basic-ui">
           <i class="menu-icon mdi mdi-dna"></i>
@@ -45,19 +51,13 @@
           </ul>
         </div>
       </li>
-      <li class="nav-item {{ active_class(['qrScanView','qrScan']) }}">
-        <a class="nav-link" href="{{ route('qrScanView.index') }}">
-          <i class="menu-icon mdi mdi-qrcode-scan"></i>
-          <span class="menu-title">Scan QR Code</span>
-        </a>
-      </li>
     @endcan
 
-    <li class="nav-item {{ active_class(['tables/basic-table']) }}">
+    {{-- <li class="nav-item {{ active_class(['tables/basic-table']) }}">
       <a class="nav-link" href="#">
         <i class="menu-icon mdi mdi-table-large"></i>
         <span class="menu-title">Tables</span>
       </a>
-    </li>
+    </li> --}}
   </ul>
 </nav>

@@ -9,20 +9,25 @@
     <div class="col-lg-12 grid-margin">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title mb-5">Create Ticket</h4>
+                <h4 class="card-title mb-5">Create Ticket <small class="text-muted pl-0">/ Buat Tiket/ チケットを作る</small></h4>
                 
                 <form action="{{ route('appointment.create') }}" method="post" enctype="multipart/form-data" id="appointmentForm">
                     {{ csrf_field() }}
                     <div class="form-group row">
-                        <label for="inputEmail3" class="col-sm-2 col-form-label">Guest Name</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control mt-2" id="nama" name="nama" placeholder="Masukkan nama...">
+                        <div class="col-md-4">
+                            <label for="inputEmail3" class="col-form-label">Guest Name <small class="text-muted pl-0">/ Nama Tamu / お客様のお名前</small></label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="hidden" value="{{ auth()->user()->name }}" name="nama">
+                            <input type="text" class="form-control mt-2" id="nama" name="nama" placeholder="Insert Name..." value="{{ auth()->user()->name }}" disabled>
                         </div>
                     </div>
                     
                     <div class="form-group row">
-                        <label for="inputEmail3" class="col-sm-2 col-form-label mt-4">Visit Purpose</label>
-                        <div class="col-sm-10">
+                        <div class="col-md-4">
+                            <label for="inputEmail3" class="col-form-label mt-4">Visit Purpose <small class="text-muted pl-0">/ Tujuan Kunjungan / 滞在目的</small></label></label>
+                        </div>
+                        <div class="col-md-8">
                             <div class="boxes">
                                 <input type="checkbox" id="purpose-1" name="purpose-1">
                                 <label for="purpose-1">Makan bareng sacho</label>
@@ -33,83 +38,99 @@
                                 <input type="checkbox" id="purpose-3" name="purpose-3">
                                 <label for="purpose-3">Makan di kantin aisin</label>
                             </div>
-                            <small id="emailHelp" class="form-text text-muted mt-3">Pilih satu atau lebih</small>
+                            <small id="emailHelp" class="form-text text-muted mt-3">
+                                select one or more</small>
                         </div>
                     </div>
                     
                     <div class="form-group row">
-                        <label for="inputEmail3" class="col-sm-2 col-form-label">Plan Visit</label>
-                        <div class="col-sm-10">
+                        <div class="col-md-4">
+                            <label for="inputEmail3" class="col-form-label">Plan Visit <small class="text-muted pl-0">/ Rencana Kunjungan / 見学プラン</small></label>
+                        </div>
+                        <div class="col-md-8">
                             <select class="form-control mt-1" id="frekuensi" name="frekuensi">
-                                <option value="0" selected>-- pilih frekuensi --</option>
+                                <option value="0" selected>-- Select Frequency --</option>
                                 <option value="once">Once</option>
                                 <option value="daily">Daily</option>
                                 <option value="weekly">Weekly</option>
                                 <option value="monthly">Monthly</option>
                             </select>
-                            <small id="emailHelp" class="form-text text-muted">Pilih frekuensi kedatangan</small>
+                            <small id="emailHelp" class="form-text text-muted">select arrival frequency</small>
                         </div>
                     </div>
                     
                     <div class="form-group row">
-                        <label for="inputEmail3" class="col-sm-2 col-form-label">Select Date</label>
-                        <div class="col-sm-5">
+                        <div class="col-md-4">
+                            <label for="inputEmail3" class="col-form-label">Select Date <small class="text-muted pl-0">/ Pilih Tanggal / 日付を選択</small></label>
+                        </div>
+                        <div class="col-md-4">
                             <input type="date" name="start_date" id="date" class="form-control mt-1"/>
-                            <small id="emailHelp" class="form-text text-muted">Pilih tanggal mulai</small>
+                            <small id="emailHelp" class="form-text text-muted">Select start date</small>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="date" name="end_date" id="end_date" class="form-control mt-1"/>
+                            <small id="emailHelp" class="form-text text-muted">Select end date</small>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <div class="col-md-4">
+                            <label for="inputEmail3" class="col-form-label">Select Time <small class="text-muted pl-0">/ Pilih Waktu / 時間を選択</small></label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="time" name="time" id="time" class="form-control mt-1"/>
+                            <small id="emailHelp" class="form-text text-muted">Select time</small>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <div class="col-md-4">
+                            <label for="inputEmail3" class="col-form-label">Total Guest <small class="text-muted pl-0">/ Jumlah Tamu / 宿泊人数</small></label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="number" class="form-control mt-1" id="jumlahTamu" name="jumlahTamu" aria-describedby="emailHelp" placeholder="Total Guest" required>
+                            <small id="emailHelp" class="form-text text-muted">Number of guests arriving</small>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <div class="col-md-4">
+                            <label for="inputEmail3" class="col-form-label">PIC <small class="text-muted pl-0">/ PIC / 担当者</small></label>
                         </div>
                         <div class="col-sm-5">
-                            <input type="date" name="end_date" id="end_date" class="form-control mt-1"/>
-                            <small id="emailHelp" class="form-text text-muted">Pilih tanggal selesai</small>
+                            <input type="text" class="form-control mt-1" id="pic" name="pic" aria-describedby="emailHelp" placeholder="The name of the person in charge" required>
+                            <small id="emailHelp" class="form-text text-muted">responsible person to be met along with the department</small>
                         </div>
-                    </div>
-                    
-                    <div class="form-group row">
-                        <label for="inputEmail3" class="col-sm-2 col-form-label">Select Time</label>
-                        <div class="col-sm-10">
-                            <input type="time" name="time" id="time" class="form-control mt-1"/>
-                            <small id="emailHelp" class="form-text text-muted">Pilih jam</small>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group row">
-                        <label for="inputEmail3" class="col-sm-2 col-form-label">Total Guest</label>
-                        <div class="col-sm-10">
-                            <input type="number" class="form-control mt-1" id="jumlahTamu" name="jumlahTamu" aria-describedby="emailHelp" placeholder="jumlah orang" required>
-                            <small id="emailHelp" class="form-text text-muted">Jumlah tamu yang datang</small>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group row">
-                        <label for="inputEmail3" class="col-sm-2 col-form-label">PIC</label>
-                        <div class="col-sm-6">
-                            <input type="text" class="form-control mt-1" id="pic" name="pic" aria-describedby="emailHelp" placeholder="masukkan aja cyok" required>
-                            <small id="emailHelp" class="form-text text-muted">Nama PIC yang akan ditemui beserta department</small>
-                        </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-3">
                             <select class="form-control mt-1" id="dept" name="dept" required>
-                                <option value="0">-- pilih Department --</option>
+                                <option value="0">-- Select Department --</option>
                                 <option value="ITD">IT Development</option>
-                                <option value="Kepo">KEPO</option>
-                                <option value="Kepo">KEPO</option>
-                                <option value="Kepo">KEPO</option>
-                                <option value="Kepo">KEPO</option>
+                                <option value="Kepo">OMD</option>
+                                <option value="Kepo">MTE</option>
+                                <option value="Kepo">PPIC</option>
+                                <option value="Kepo">Quality</option>
                             </select>
                         </div>
                     </div>
                     
                     <div class="row">
-                        <label for="inputEmail3" class="col-sm-2 col-form-label">Document</label>
-                        <div class="col-sm-10">
+                        <div class="col-md-4">
+                            <label for="inputEmail3" class="col-form-label">Document <small class="text-muted pl-0">/ Dokumen / 資料</small></label>
+                        </div>
+                        <div class="col-md-8">
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" id="doc" name="doc">
                                 <label class="custom-file-label" for="inputGroupFile03">Choose file</label>
+                                <small id="emailHelp" class="form-text text-muted">ID card / KTP / others</small>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="row">
-                        <label for="inputEmail3" class="col-sm-2 col-form-label">Selfie Photo</label>
-                        <div class="col-sm-10">
+                    <div class="row mt-1">
+                        <div class="col-md-4">
+                            <label for="inputEmail3" class="col-form-label">Selfie Photo <small class="text-muted pl-0">/ Foto selfie / 自撮り写真</small></label>
+                        </div>
+                        <div class="col-md-8">
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" id="selfie" name="selfie">
                                 <label class="custom-file-label" for="inputGroupFile03">Choose file</label>
