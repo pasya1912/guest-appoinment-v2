@@ -15,11 +15,8 @@
   <!-- plugin css -->
   {!! Html::style('assets/plugins/@mdi/font/css/materialdesignicons.min.css') !!}
   {!! Html::style('assets/plugins/perfect-scrollbar/perfect-scrollbar.css') !!}
-  <script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-  <script
-  src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
-  <link rel="stylesheet"
-  href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap4.min.css">
+  
   <!-- end plugin css -->
   
   @stack('plugin-styles')

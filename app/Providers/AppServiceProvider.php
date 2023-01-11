@@ -27,12 +27,16 @@ class AppServiceProvider extends ServiceProvider
     {
         \Illuminate\Pagination\Paginator::defaultView('pagination.default');
         
+        Gate::define('approver', function(User $user){
+            return $user->role === 'approver';
+        });
+
         Gate::define('visitor', function(User $user){
-            return $user->role == 'visitor';
+            return $user->role === 'visitor';
         });
         
         Gate::define('admin', function(User $user){
-            return $user->role == 'admin';
+            return $user->role === 'admin';
         });
     }
 }

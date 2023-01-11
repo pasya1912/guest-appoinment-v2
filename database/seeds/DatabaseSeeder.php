@@ -12,10 +12,11 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         \App\User::insert([
-            'name' => 'admin',
-            'role' => 'admin',
-            'company' => 'AIIA',
+            'department_id' => 'null',
+            'name' => 'administrator',
             'email' => 'administrator@aiia.co.id',
+            'company' => 'AIOP',
+            'role' => 'visitor',
             'password' => \Illuminate\Support\Facades\Hash::make('12345678')
         ]);
     }

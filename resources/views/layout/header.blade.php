@@ -3,7 +3,7 @@
     <a class="navbar-brand brand-logo" href="{{ url('/dashboard') }}">
       
       {{-- logo --}}
-      <img src="{{ url('assets/images/logo.svg') }}" alt="logo" /> </a>
+      <img src="{{ url('assets/images/aiia.svg') }}" alt="logo" /> </a>
       
       <a class="navbar-brand brand-logo-mini" href="{{ url('/dashboard') }}">
         <img src="{{ url('assets/images/logo-mini.svg') }}" alt="logo" /> </a>

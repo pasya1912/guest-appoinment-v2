@@ -106,6 +106,7 @@
                     <h2>Your Barcode is Here!</h2>
                     <p class="text-muted">show this barcode to the security guard</p>
                     <span>{!! \QrCode::size(200)->generate($appointment->id) !!}</span>
+                    <h5 class="mt-3">id={{ $appointment->id }}</h5>
                     <form class="pt-5">
                       <button type="submit" class="btn btn-primary" data-dismiss="modal" aria-label="Close">close modal</button>
                     </form>

@@ -186,7 +186,7 @@
                                 <p>Are you sure want to <strong>approve</strong> this ticket?</p>
                             </div>
                             <div class="modal-footer">
-                                <form action="/appointment/approval/{{ $appointment->id }}" method="post" class="d-inline">
+                                <form action="/approval/approve/{{ $appointment->id }}" method="post" class="d-inline">
                                     {{ csrf_field() }}
                                     <button type="submit" class="btn btn-primary">Confirm</button>
                                 </form>
@@ -214,7 +214,7 @@
                                 <p>Are you sure want to <strong>reject</strong> this ticket?</p>
                             </div>
                             <div class="modal-footer">
-                                <form action="/appointment/rejection/{{ $appointment->id }}" method="post" class="d-inline">
+                                <form action="/approval/reject/{{ $appointment->id }}" method="post" class="d-inline">
                                     {{ csrf_field() }}
                                     <button type="submit" class="btn btn-primary">Confirm</button>
                                 </form>

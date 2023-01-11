@@ -9,7 +9,7 @@
     <div class="col-lg-12 grid-margin">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title mb-5">Create Ticket <small class="text-muted pl-0">/ Buat Tiket/ チケットを作る</small></h4>
+                <h4 class="card-title mb-5">Create Ticket <small class="text-muted pl-0">/ Buat Tiket / チケットを作る</small></h4>
                 
                 <form action="{{ route('appointment.create') }}" method="post" enctype="multipart/form-data" id="appointmentForm">
                     {{ csrf_field() }}
@@ -25,18 +25,23 @@
                     
                     <div class="form-group row">
                         <div class="col-md-4">
-                            <label for="inputEmail3" class="col-form-label mt-4">Visit Purpose <small class="text-muted pl-0">/ Tujuan Kunjungan / 滞在目的</small></label></label>
+                            <label for="inputEmail3" class="col-form-label">Visit Purpose <small class="text-muted pl-0">/ Tujuan Kunjungan / 滞在目的</small></label></label>
                         </div>
                         <div class="col-md-8">
                             <div class="boxes">
                                 <input type="checkbox" id="purpose-1" name="purpose-1">
-                                <label for="purpose-1">Makan bareng sacho</label>
+                                <label for="purpose-1">Company Visit</label>
                                 
                                 <input type="checkbox" id="purpose-2" name="purpose-2">
-                                <label for="purpose-2">Jalan-jalan keliling aisin</label>
+                                <label for="purpose-2">Benchmarking</label>
                                 
                                 <input type="checkbox" id="purpose-3" name="purpose-3">
-                                <label for="purpose-3">Makan di kantin aisin</label>
+                                <label for="purpose-3">Trial</label>
+
+                                <input type="checkbox" id="check_purpose" name="purpose-4">
+                                <label for="check_purpose">Other</label>
+
+                                <input type="text" class="form-control mt-2" id="other_purpose" name="other_purpose" placeholder="other purpose...">
                             </div>
                             <small id="emailHelp" class="form-text text-muted mt-3">
                                 select one or more</small>
@@ -64,7 +69,7 @@
                             <label for="inputEmail3" class="col-form-label">Select Date <small class="text-muted pl-0">/ Pilih Tanggal / 日付を選択</small></label>
                         </div>
                         <div class="col-md-4">
-                            <input type="date" name="start_date" id="date" class="form-control mt-1"/>
+                            <input type="date" name="start_date" id="start_date" class="form-control mt-1"/>
                             <small id="emailHelp" class="form-text text-muted">Select start date</small>
                         </div>
                         <div class="col-md-4">
@@ -102,13 +107,11 @@
                             <small id="emailHelp" class="form-text text-muted">responsible person to be met along with the department</small>
                         </div>
                         <div class="col-sm-3">
-                            <select class="form-control mt-1" id="dept" name="dept" required>
+                            <select class="form-control mt-1" id="dept" name="pic_dept" required>
                                 <option value="0">-- Select Department --</option>
-                                <option value="ITD">IT Development</option>
-                                <option value="Kepo">OMD</option>
-                                <option value="Kepo">MTE</option>
-                                <option value="Kepo">PPIC</option>
-                                <option value="Kepo">Quality</option>
+                                @foreach ($departments as $dept)
+                                    <option value="{{ $dept->id }}">{{ $dept->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -171,6 +174,19 @@
     $(".custom-file-input").on("change", function() {
     var fileName = $(this).val().split("\\").pop();
     $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+
+    const checkbox = document.getElementById('check_purpose');
+
+    $('#other_purpose').hide();
+    $("input[type='checkbox']").on("change", function() {
+        if(this.checked) {
+            if(this == checkbox){
+                $('#other_purpose').show();
+            }
+        }else{
+            $('#other_purpose').hide();
+        }
     });
 </script>
 @endpush

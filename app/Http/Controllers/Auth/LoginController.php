@@ -39,7 +39,7 @@ class LoginController extends Controller
             return redirect()->intended('/dashboard');
         }
 
-        return redirect()->back();
+        return redirect()->back()->with('error', 'Email or password do not match our records!');
     }
 
     public function logout(Request $request)

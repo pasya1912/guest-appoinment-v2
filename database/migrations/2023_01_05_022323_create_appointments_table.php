@@ -25,10 +25,11 @@ class CreateAppointmentsTable extends Migration
             $table->time('time');
             $table->string('guest');
             $table->string('pic');
-            $table->string('dept');
+            $table->bigInteger('pic_dept');
             $table->string('doc');
             $table->string('selfie');
             $table->string('status');
+            $table->string('checkin_status');
             $table->timestamps();
         });
     }

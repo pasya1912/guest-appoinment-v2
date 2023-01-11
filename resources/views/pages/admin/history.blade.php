@@ -26,7 +26,7 @@
 
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title mb-5">Appointment History</h4>
+        <h4 class="card-title mb-5">Ticket History</h4>
         <table class="table table-responsive-lg">
           <thead>
             <tr>

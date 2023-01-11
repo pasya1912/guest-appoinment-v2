@@ -26,7 +26,7 @@
                         {{ csrf_field() }}
                         <div class="products text-center">
                             <h3 class="title">Scan QR Code</h3>
-                            <input type="text" class="form-control" placeholder="QR Code..." name="qrcode" autofocus>
+                            <input type="text" class="form-control my-4 py-4" placeholder="QR Code..." name="qrcode"  autofocus>
                         </div>
                     </form>
                 </div>
@@ -46,10 +46,18 @@
                                 </div>
                             @else
                                 @if ($appointments->status === 'approved')
-                                    <div class="alert alert-success" role="alert">
-                                        Ticket valid!
-                                    </div>
-                                    <img class="rounded" src="{{ asset('uploads/selfie/'. $appointments->selfie) }}" width="300" height="200">
+
+                                    @if ($status->status === 'in')
+                                        <div class="alert alert-success text-center" role="alert">
+                                            Ticket valid! Visitor inside AIIA
+                                        </div>
+                                        @else
+                                        <div class="alert alert-success text-center" role="alert">
+                                            Ticket valid! Visitor outside AIIA
+                                        </div>
+                                    @endif
+
+                                    <img class="rounded mx-auto d-block mb-4 img-fluid" src="{{ asset('uploads/doc/'. $appointments->doc) }}" width="400" height="200">
                                     <div class="d-flex justify-content-between">
                                         <span class="font-weight-bold">Personal Data</span>
                                     </div>
@@ -67,7 +75,7 @@
                                         <span class="font-weight-bold">Visit Plan</span>
                                     </div>
                                     <div class="d-flex justify-content-between">
-                                        <span class="text-muted">Visitor Purpose</span>
+                                        <span class="text-muted">Visit Purpose</span>
                                         <span class="font-weight-bold">{{ $appointments->purpose }}</span>
                                     </div>
                                     <div class="d-flex justify-content-between">

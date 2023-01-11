@@ -8,22 +8,32 @@
     </li>
     
     @can('visitor') 
-      <li class="nav-item {{ active_class(['appoinment']) }}">
-        <a class="nav-link" data-toggle="collapse" href="#basic-ui" aria-expanded="{{ is_active_route(['appointment','appointment/*']) }}" aria-controls="basic-ui">
-          <i class="menu-icon mdi mdi-dna"></i>
-          <span class="menu-title">Appointment</span>
-          <i class="menu-arrow"></i>
+      <li class="nav-item {{ active_class(['appointment']) }}">
+        <a class="nav-link" href="{{ route('appointment.index') }}">
+          <i class="menu-icon mdi mdi-comment-plus-outline"></i>
+          <span class="menu-title">Create Ticket</span>
         </a>
-        <div class="collapse {{ show_class(['appointment','appointment/*']) }}" id="basic-ui">
-          <ul class="nav flex-column sub-menu">
-            <li class="nav-item {{ active_class(['appointment']) }}">
-              <a class="nav-link" href="{{ route('appointment.index') }}">Create Ticket</a>
-            </li>
-            <li class="nav-item {{ active_class(['appointment/history']) }}">
-              <a class="nav-link" href="{{ route('appointment.history') }}">My Ticket</a>
-            </li>
-          </ul>
-        </div>
+      </li>
+      <li class="nav-item {{ active_class(['appointment/history']) }}">
+        <a class="nav-link" href="{{ route('appointment.history') }}">
+          <i class="menu-icon mdi mdi-ticket-confirmation"></i>
+          <span class="menu-title">My Ticket</span>
+        </a>
+      </li>
+    @endcan
+
+    @can('approver')
+      <li class="nav-item {{ active_class(['approval']) }}">
+        <a class="nav-link" href="{{ route('ticket.index') }}">
+          <i class="menu-icon mdi mdi-comment-check-outline"></i>
+          <span class="menu-title">Ticket Approval</span>
+        </a>
+      </li>
+      <li class="nav-item {{ active_class(['approval/history']) }}">
+        <a class="nav-link" href="{{ route('ticket.history') }}">
+          <i class="menu-icon mdi mdi-history"></i>
+          <span class="menu-title">History</span>
+        </a>
       </li>
     @endcan
 
@@ -34,30 +44,6 @@
           <span class="menu-title">Scan QR Code</span>
         </a>
       </li>
-      <li class="nav-item {{ active_class(['appointment']) }}">
-        <a class="nav-link" data-toggle="collapse" href="#basic-ui" aria-expanded="{{ is_active_route(['appointment/*']) }}" aria-controls="basic-ui">
-          <i class="menu-icon mdi mdi-dna"></i>
-          <span class="menu-title">Approval</span>
-          <i class="menu-arrow"></i>
-        </a>
-        <div class="collapse {{ show_class(['appointment/*']) }}" id="basic-ui">
-          <ul class="nav flex-column sub-menu">
-            <li class="nav-item {{ active_class(['appointment/appointment-ticket']) }}">
-              <a class="nav-link" href="{{ route('ticket.index') }}">Appointment Ticket</a>
-            </li>
-            <li class="nav-item {{ active_class(['appointment/history']) }}">
-              <a class="nav-link" href="{{ route('appointment.history') }}">History</a>
-            </li>
-          </ul>
-        </div>
-      </li>
     @endcan
-
-    {{-- <li class="nav-item {{ active_class(['tables/basic-table']) }}">
-      <a class="nav-link" href="#">
-        <i class="menu-icon mdi mdi-table-large"></i>
-        <span class="menu-title">Tables</span>
-      </a>
-    </li> --}}
   </ul>
 </nav>
