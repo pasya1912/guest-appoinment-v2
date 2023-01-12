@@ -102,16 +102,18 @@
                         <div class="col-md-4">
                             <label for="inputEmail3" class="col-form-label">PIC <small class="text-muted pl-0">/ PIC / 担当者</small></label>
                         </div>
-                        <div class="col-sm-5">
-                            <input type="text" class="form-control mt-1" id="pic" name="pic" aria-describedby="emailHelp" placeholder="The name of the person in charge" required>
-                            <small id="emailHelp" class="form-text text-muted">responsible person to be met along with the department</small>
-                        </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-4">
                             <select class="form-control mt-1" id="dept" name="pic_dept" required>
                                 <option value="0">-- Select Department --</option>
                                 @foreach ($departments as $dept)
                                     <option value="{{ $dept->id }}">{{ $dept->name }}</option>
                                 @endforeach
+                            </select>
+                            <small id="emailHelp" class="form-text text-muted">Responsible person to be met</small>
+                        </div>
+                        <div class="col-sm-4">
+                            <select class="form-control mt-1" id="pic" name="pic" required>
+                                <option value="0">-- Select Department --</option>
                             </select>
                         </div>
                     </div>
@@ -187,6 +189,22 @@
         }else{
             $('#other_purpose').hide();
         }
+    });
+
+    $('#dept').change(function(){
+        $.ajax({
+            url: '/get-pic',
+            type: 'GET',
+            data: { 
+                dept: $(this).val() 
+            },
+            success: function(pic) {
+                $('#pic').empty();
+                $.each(pic, function(key, value) {
+                    $('#pic').append(`<option value='${value.name}'> ${value.name}</option>`);
+                });
+            }
+        });
     });
 </script>
 @endpush

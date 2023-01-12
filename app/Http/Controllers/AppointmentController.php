@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Checkin;
 use App\Department;
+use App\Exports\ExportTicket;
 use App\Models\Appointment;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AppointmentController extends Controller
 {
@@ -89,7 +92,7 @@ class AppointmentController extends Controller
             'status' => 'out',
         ]);
         
-        return redirect()->route('appointment.history')->with('success', 'Your ticket has been successfully created!');
+        return redirect()->route('appointment.history')->with('success', 'Your ticket has been successfully created! Please wait for the PIC to approve your ticket or Contact the PIC');
     }
     
     public function history()
@@ -103,5 +106,19 @@ class AppointmentController extends Controller
             ]);
         }
         
+    }
+
+    public function getPic(Request $request)
+    {
+        // get all pic where dept_id is dept
+        $pic = User::where('department_id', $request->dept)->get();
+
+        return $pic;
+    }
+
+    public function export()
+    {
+        // export ticket
+        return Excel::download(new ExportTicket, 'appointment.xlsx');
     }
 }

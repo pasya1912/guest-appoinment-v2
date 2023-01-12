@@ -1,7 +1,7 @@
 <nav class="sidebar sidebar-offcanvas dynamic-active-class-disabled pt-3" id="sidebar">
   <ul class="nav">
     <li class="nav-item {{ active_class(['dashboard']) }}">
-      <a class="nav-link" href="{{ route('dashboard') }}">
+      <a class="nav-link" href="{{ route('dashboard.index') }}">
         <i class="menu-icon mdi mdi-television"></i>
         <span class="menu-title">Dashboard</span>
       </a>

@@ -14,11 +14,11 @@ class ApprovalController extends Controller
     
     public function index()
     {
-        $user_dept_id = auth()->user()->department_id;
+        $username = auth()->user()->name;
 
         $appointments = Appointment::latest()
                                 ->where('status','pending')
-                                ->where('pic_dept',$user_dept_id)
+                                ->where('pic',$username)
                                 ->paginate(8);
         
         return view('pages.admin.index',[
@@ -28,9 +28,9 @@ class ApprovalController extends Controller
 
     public function history()
     {
-        $user_dept_id = auth()->user()->department_id;
+        $username = auth()->user()->name;
         $appointments = Appointment::latest()
-                                ->where('pic_dept',$user_dept_id)
+                                ->where('pic',$username)
                                 ->paginate(8);
         
         return view('pages.admin.history',[
@@ -71,24 +71,26 @@ class ApprovalController extends Controller
 
         // get checkin status
         $checkin_status = Checkin::where('appointment_id', $qrId)->first();
-        // dd($checkin_status->status);
 
         // update checkin status
-        if($checkin_status->status === 'out'){
-            $checkin_status->update([
-                'status' => 'in',
-                'checkin_at' => Carbon::now(),
-            ]);
-        }elseif($checkin_status->status === 'in'){
-            $checkin_status->update([
-                'status' => 'out',
-                'checkout_at' => Carbon::now(),
-            ]);
+        if($appointments !== null || $checkin_status !== null){
+            if($checkin_status->status === 'out'){
+                $checkin_status->update([
+                    'status' => 'in',
+                    'checkin_at' => Carbon::now(),
+                ]);
+            }elseif($checkin_status->status === 'in'){
+                $checkin_status->update([
+                    'status' => 'out',
+                    'checkout_at' => Carbon::now(),
+                ]);
+            }
         }
         
         return view('pages.admin.qrcode',[
             'appointments' => $appointments,
             'status' => $checkin_status,
+            'qr' => $qrId
         ]);
     }
 }

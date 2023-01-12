@@ -18,8 +18,8 @@ class CreateCheckinTable extends Migration
             $table->bigInteger('appointment_id')->unsigned();
             $table->foreign('appointment_id')->references('id')->on('appointments');
             $table->string('status');
-            $table->timestamp('checkin_at');
-            $table->timestamp('checkout_at');
+            $table->timestamp('checkin_at')->nullable();
+            $table->timestamp('checkout_at')->nullable();
             $table->timestamps();
         });
     }

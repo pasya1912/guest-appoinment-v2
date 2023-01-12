@@ -98,7 +98,7 @@
                                     <div class="item mt-0">
                                     </div>
                                     <div class="total">PIC<span class="price">{{ $appointments->pic }}</span></div>
-                                @elseif ($appointments === 'null')
+                                @elseif ($appointments === null)
                                     <div class="alert alert-danger" role="alert">
                                         Ticket Invalid!
                                     </div>

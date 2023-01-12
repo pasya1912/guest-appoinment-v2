@@ -29,7 +29,6 @@ class CreateAppointmentsTable extends Migration
             $table->string('doc');
             $table->string('selfie');
             $table->string('status');
-            $table->string('checkin_status');
             $table->timestamps();
         });
     }
