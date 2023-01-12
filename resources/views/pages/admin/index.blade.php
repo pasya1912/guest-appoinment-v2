@@ -25,16 +25,15 @@
         @endif
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title mb-5">Ticket list</h4>
+                <h4 class="card-title mb-5">Ticket list <small class="text-muted"> / チケット一覧</small></h4>
                 <table class="table table-responsive-lg">
                     <thead>
                         <tr>
                             <th class="text-center">No</th>
-                            <th class="text-center">Guest Name</th>
-                            <th class="text-center">Visit Purpose</th>
-                            <th class="text-center">Plan Visit</th>
-                            <th class="text-center">Visit Date</th>
-                            {{-- <th class="text-center">Total Guest</th> --}}
+                            <th class="text-center">Visitor Name <small class="text-muted"> / 訪問者名</small></th>
+                            <th class="text-center">Visit Purpose <small class="text-muted"> / 訪問目的</small></th>
+                            <th class="text-center">Visit Plan<small class="text-muted"> / 見学プラン</small></th>
+                            <th class="text-center">Visit Date <small class="text-muted"> / 訪問日</small></th>
                             <th class="text-center">Status</th>
                             <th class="text-center">Action</th>
                         </tr>
@@ -75,7 +74,7 @@
                         @else
                         <tr>
                             <td colspan="7">
-                                <h4 class="mt-4">No tickets have been created yet</h4>
+                                <h4 class="mt-4">No tickets have been created yet <small class="text-muted"> / チケットはまだ作成されていません</small></h4>
                             </td>
                         </tr>
                         @endif
@@ -90,7 +89,7 @@
                         <div class="modal-content">
                             <div class="modal-body ">
                                 <div class="modal-header">
-                                    <h5 class="modal-title">Ticket Detail</h5>
+                                    <h5 class="modal-title">Ticket Details</h5>
                                     <button type="button px-4" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -125,7 +124,7 @@
                                     </div>
 
                                     <div class="d-flex justify-content-between">
-                                        <span class="text-muted">Visitor Purpose</span>
+                                        <span class="text-muted">Visit Purpose</span>
                                         <span class="font-weight-bold">{{ $appointment->purpose }}</span>
                                     </div>
                                     <div class="d-flex justify-content-between">

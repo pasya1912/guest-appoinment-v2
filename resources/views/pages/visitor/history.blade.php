@@ -17,16 +17,16 @@
     @endif
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title mb-5">Ticket List</h4>
+        <h4 class="card-title mb-5">Ticket List <small class="text-muted"> / チケット一覧</small></h4>
         <table class="table table-responsive-lg">
           <thead>
             <tr>
               <th class="text-center">No</th>
-              <th class="text-center">Guest Name</th>
-              <th class="text-center">Visit Purpose</th>
-              <th class="text-center">Plan Visit</th>
-              <th class="text-center">Visit Date</th>
-              <th class="text-center">Status</th>
+              <th class="text-center">PIC <small class="text-muted"> / 担当者</small></th>
+              <th class="text-center">Visit Purpose <small class="text-muted"> / 訪問目的</small></th>
+              <th class="text-center">Visit Plan<small class="text-muted"> / 見学プラン</small></th>
+              <th class="text-center">Visit Date <small class="text-muted"> / 訪問日</small></th>
+              <th class="text-center">Status <small class="text-muted"> / スターテス</small></th>
               <th class="text-center"></th>
             </tr>
           </thead>
@@ -36,7 +36,7 @@
               
               <tr>
                 <td class="display-4">{{ $loop->iteration }}</td>
-                <td class="display-4">{{ $appointment->name }}</td>
+                <td class="display-4">{{ $appointment->pic }}</td>
                 <td class="display-4">{{ $appointment->purpose }}</td>
                 <td class="display-4">{{ $appointment->frequency }}</td>
                 <td class="display-4">{{ Carbon\Carbon::parse($appointment->start_date)->toFormattedDateString() }} - {{ Carbon\Carbon::parse($appointment->end_date)->toFormattedDateString() }}</td>

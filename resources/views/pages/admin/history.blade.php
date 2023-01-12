@@ -26,15 +26,15 @@
 
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title mb-5">Ticket History</h4>
+        <h4 class="card-title mb-5">Ticket History <small class="text-muted"> / チケット履歴</small></h4>
         <table class="table table-responsive-lg">
           <thead>
             <tr>
               <th class="text-center">No</th>
-              <th class="text-center">Guest Name</th>
-              <th class="text-center">Visit Purpose</th>
-              <th class="text-center">Plan Visit</th>
-              <th class="text-center">Visit Date</th>
+              <th class="text-center">Visitor Name <small class="text-muted"> / 訪問者名</small></th>
+              <th class="text-center">Visit Purpose <small class="text-muted"> / 訪問目的</small></th>
+              <th class="text-center">Visit Plan<small class="text-muted"> / 見学プラン</small></th>
+              <th class="text-center">Visit Date <small class="text-muted"> / 訪問日</small></th>
               <th class="text-center">Status</th>
             </tr>
           </thead>
@@ -56,18 +56,114 @@
                 @else
                   <td><span class="badge badge-pill badge-danger p-2 text-light">{{ $appointment->status }}</span></td>
                 @endif
+
+                <td class="display-4">
+                    {{-- detail --}}
+                    <button data-toggle="modal" data-target="#detailModal-{{ $appointment->id }}"  class="btn btn-icons btn-inverse-info" data-toggle="tooltip" title="Detail">
+                      <i class="mdi mdi-information"></i>
+                    </button>
+                </td>
               </tr>
               
               @endforeach
             @else
               <tr>
                 <td colspan="7">
-                  <h4 class="mt-4">No tickets have been created yet</h4>
+                  <h4 class="mt-4">No tickets have been created yet <small class="text-muted"> / チケットはまだ作成されていません</small></h4>
                 </td>
               </tr>
             @endif
           </tbody>
         </table>
+
+                <!-- Modal -->
+                {{-- Detail Modal --}}
+                @foreach ($appointments as $appointment)   
+                <div class="modal fade" id="detailModal-{{ $appointment->id }}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-body ">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Ticket Details</h5>
+                                    <button type="button px-4" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                
+                                <div class="px-4 py-1">
+                                    
+                                    <div class="text-center">
+
+                                        <img class="rounded" src="{{ asset('uploads/selfie/'. $appointment->selfie) }}" width="300" height="200">
+                                    </div>
+                                    {{-- <span class="theme-color font-weight-bold">Ticket Detail</span> --}}
+                                    <div class="mb-3">
+                                        <hr class="new1">
+                                    </div>
+                                    
+                                    <div class="d-flex justify-content-between">
+                                        <span class="font-weight-bold h4">Personal Data</span>
+                                    </div>
+                                    
+                                    <div class="d-flex justify-content-between">
+                                        <span class="text-muted">Visitor Name</span>
+                                        <span class="font-weight-bold">{{ $appointment->name }}</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span class="text-muted">Visitor Company</span>
+                                        <span class="font-weight-bold">{{ $appointment->user->company }}</span>
+                                    </div>
+
+                                    <div class="d-flex justify-content-between pt-4">
+                                        <span class="font-weight-bold h4">Plan Visit</span>
+                                    </div>
+
+                                    <div class="d-flex justify-content-between">
+                                        <span class="text-muted">Visit Purpose</span>
+                                        <span class="font-weight-bold">{{ $appointment->purpose }}</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span class="text-muted">Visit Frequency</span>
+                                        <span class="font-weight-bold">{{ $appointment->frequency}}</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span class="text-muted">Visit Date</span>
+                                        <span class="font-weight-bold">{{ Carbon\Carbon::parse($appointment->start_date)->toFormattedDateString() }} - {{ Carbon\Carbon::parse($appointment->end_date)->toFormattedDateString() }}</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span class="text-muted">Visit Time</span>
+                                        <span class="font-weight-bold">{{ $appointment->time }}</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span class="text-muted">Total Visitor</span>
+                                        <span class="font-weight-bold">{{ $appointment->guest }}</span>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <hr class="new1">
+                                    </div>
+                                    
+                                    <div class="d-flex justify-content-between">
+                                        <span class="font-weight-bold">PIC</span>
+                                        <span class="font-weight-bold">{{ $appointment->pic }}</span>
+                                    </div>
+                                    
+                                    <div class="text-center mt-5">
+                                        <a class="btn btn-primary py-3" href="{{ asset('uploads/doc/' . $appointment->doc) }}" download="">
+                                            <i class="mdi mdi-cloud-check pr-2"></i>Download Document
+                                        </a>   
+                                    </div>                   
+                                    
+                                </div>
+                                
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+                <!-- Modal Ends -->
+
         {{-- @include('pagination.default') --}}
         {{ $appointments->links('pagination.default') }}
       </div>

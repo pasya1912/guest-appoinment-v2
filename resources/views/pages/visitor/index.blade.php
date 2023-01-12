@@ -15,7 +15,7 @@
                     {{ csrf_field() }}
                     <div class="form-group row">
                         <div class="col-md-4">
-                            <label for="inputEmail3" class="col-form-label">Guest Name <small class="text-muted pl-0">/ Nama Tamu / お客様のお名前</small></label>
+                            <label for="inputEmail3" class="col-form-label">Visitor Name <small class="text-muted pl-0">/ Nama Tamu / お客様のお名前</small></label>
                         </div>
                         <div class="col-md-8">
                             <input type="hidden" value="{{ auth()->user()->name }}" name="nama">
@@ -44,13 +44,13 @@
                                 <input type="text" class="form-control mt-2" id="other_purpose" name="other_purpose" placeholder="other purpose...">
                             </div>
                             <small id="emailHelp" class="form-text text-muted mt-3">
-                                select one or more</small>
+                                Select one or more</small>
                         </div>
                     </div>
                     
                     <div class="form-group row">
                         <div class="col-md-4">
-                            <label for="inputEmail3" class="col-form-label">Plan Visit <small class="text-muted pl-0">/ Rencana Kunjungan / 見学プラン</small></label>
+                            <label for="inputEmail3" class="col-form-label">Visit Plan <small class="text-muted pl-0">/ Rencana Kunjungan / 見学プラン</small></label>
                         </div>
                         <div class="col-md-8">
                             <select class="form-control mt-1" id="frekuensi" name="frekuensi">
@@ -58,9 +58,8 @@
                                 <option value="once">Once</option>
                                 <option value="daily">Daily</option>
                                 <option value="weekly">Weekly</option>
-                                <option value="monthly">Monthly</option>
                             </select>
-                            <small id="emailHelp" class="form-text text-muted">select arrival frequency</small>
+                            <small id="emailHelp" class="form-text text-muted">Select arrival frequency</small>
                         </div>
                     </div>
                     
@@ -120,7 +119,7 @@
                     
                     <div class="row">
                         <div class="col-md-4">
-                            <label for="inputEmail3" class="col-form-label">Document <small class="text-muted pl-0">/ Dokumen / 資料</small></label>
+                            <label for="inputEmail3" class="col-form-label">Document<small class="text-muted pl-0">/ Dokumen / 資料</small> <span class="text-danger">*PNG</span> </label>
                         </div>
                         <div class="col-md-8">
                             <div class="custom-file">
@@ -133,7 +132,7 @@
                     
                     <div class="row mt-1">
                         <div class="col-md-4">
-                            <label for="inputEmail3" class="col-form-label">Selfie Photo <small class="text-muted pl-0">/ Foto selfie / 自撮り写真</small></label>
+                            <label for="inputEmail3" class="col-form-label">Selfie Photo <small class="text-muted pl-0">/ Foto selfie / 自撮り写真</small> <span class="text-danger">*PNG</span> </label>
                         </div>
                         <div class="col-md-8">
                             <div class="custom-file">

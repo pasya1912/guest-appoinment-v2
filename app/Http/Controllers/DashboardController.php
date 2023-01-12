@@ -13,27 +13,37 @@ class DashboardController extends Controller
     {
         $user_role = auth()->user()->role;
         $user_id = auth()->user()->id;
+        $user_dept = auth()->user()->department_id;
         $current_date = date("Y-m-d");
 
         $weekly_date = Appointment::select('start_date')->where('frequency','weekly')->get();
         $appointments = Appointment::where('status','approved')->get();
         $today_appointments = Appointment::whereIn('frequency',['daily','once','weekly'])
                                 ->where('start_date', $current_date)
-                                ->orWhere('end_date','>=', $current_date);
+                                ->Where('end_date','>=', $current_date);
                                 // get all day in the range of date
                                 foreach($weekly_date as $date){
                                     $today_appointments->orWhereRaw('DAYNAME(start_date) <= DAYNAME(?)', [$date])
-                                    ->orWhereRaw('DAYNAME(end_date) >= DAYNAME(?)',[$date]);
+                                    ->WhereRaw('DAYNAME(end_date) >= DAYNAME(?)',[$date]);
                                 }
                                 
         $today_appointment = $today_appointments->get();
         $visitor_inside = Checkin::where('status', 'in')->count();
         $today_visitor = $today_appointment->sum('guest');
         
-        if($user_role === 'admin' || $user_role === 'approver')
+        if($user_role === 'admin')
         {
             return view('dashboard',[
                 'appointments' => $today_appointment->where('status','approved'),
+                'total_appointment' => $appointments->count(),
+                'today_visitor' => $today_visitor,
+                'today_appointment' => $today_appointment->where('status','approved')->count(),
+                'visitor_inside' => $visitor_inside,
+            ]);
+        }elseif($user_role === 'approver'){
+            return view('dashboard',[
+                // showing appountment by department
+                'appointments' => $today_appointment->where('status','approved')->where('pic_dept', $user_dept),
                 'total_appointment' => $appointments->count(),
                 'today_visitor' => $today_visitor,
                 'today_appointment' => $today_appointment->where('status','approved')->count(),

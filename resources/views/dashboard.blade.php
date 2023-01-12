@@ -13,25 +13,19 @@
       <div class="card-body p-5">
         <div class="row">
           <div class="col-10">
-            <h4 class="card-title mb-5">Today's Appointment</h4>
-          </div>
-          <div class="col-2">
-            <form action="{{ route('appointment.export') }}" method="post">
-              {{ csrf_field() }}
-              <button type="submit" class="btn btn-info text-right"><i class="mdi mdi-file-export pr-1"></i>Export</button>
-            </form>
+            <h4 class="card-title mb-5">Today's Appointment <small class="text-muted"> / 今日の予定</small></h4>
           </div>
         </div>
         <table class="table table-responsive-lg" id="allTicket">
           <thead>
             <tr>
               <th class="text-center">No</th>
-              <th class="text-center">Guest Name</th>
-              <th class="text-center">Visit Purpose</th>
-              <th class="text-center">Plan Visit</th>
-              <th class="text-center">Visit Date</th>
-              <th class="text-center">PIC</th>
-              <th class="text-center">Status</th>
+              <th class="text-center">Visitor Name <small class="text-muted"> / 訪問者名</small></th>
+              <th class="text-center">Visit Purpose <small class="text-muted"> / 訪問目的</small></th>
+              <th class="text-center">Visit Date <small class="text-muted"> / 訪問日</small></th>
+              <th class="text-center">Visit Time <small class="text-muted"> / 訪問時間</small></th>
+              <th class="text-center">PIC <small class="text-muted"> / 担当者</small></th>
+              <th class="text-center">Checkin Status</th>
             </tr>
           </thead>
           <tbody class="text-center">
@@ -42,8 +36,8 @@
                 <td class="display-4">{{ $loop->iteration }}</td>
                 <td class="display-4">{{ $appointment->name }}</td>
                 <td class="display-4">{{ $appointment->purpose }}</td>
-                <td class="display-4">{{ $appointment->frequency }}</td>
-                <td class="display-4">{{ Carbon\Carbon::parse($appointment->start_date)->toFormattedDateString() }} - {{ Carbon\Carbon::parse($appointment->end_date)->toFormattedDateString() }}</td>
+                <td class="display-4">{{ Carbon\Carbon::parse()->toFormattedDateString() }}</td>
+                <td class="display-4">{{ $appointment->time }}</td>
                 <td class="display-4">{{ $appointment->pic }}</td>
                 
                 @if($appointment->checkin->status === 'in')
@@ -91,7 +85,7 @@
           </div>
         </div>
         <p class="text-muted mt-3 mb-0 text-left text-md-center text-xl-left">
-          <i class="mdi mdi-alert-octagon mr-1" aria-hidden="true"></i> Approved ticket </p>
+          <i class="mdi mdi-alert-octagon mr-1" aria-hidden="true"></i> Approved ticket <small class="text-muted"> / Jumlah tiket yang telah disetujui</small></p>
       </div>
     </div>
   </div>
@@ -110,7 +104,7 @@
           </div>
         </div>
         <p class="text-muted mt-3 mb-0 text-left text-md-center text-xl-left">
-          <i class="mdi mdi-bookmark-outline mr-1" aria-hidden="true"></i> Visitors came today </p>
+          <i class="mdi mdi-bookmark-outline mr-1" aria-hidden="true"></i> Visitors came today <small class="text-muted"> / Tamu yang akan datang hari ini</small></p>
       </div>
     </div>
   </div>
@@ -129,7 +123,7 @@
           </div>
         </div>
         <p class="text-muted mt-3 mb-0 text-left text-md-center text-xl-left">
-          <i class="mdi mdi-calendar mr-1" aria-hidden="true"></i> {{ Carbon\Carbon::parse()->toFormattedDateString() }} </p>
+          <i class="mdi mdi-calendar mr-1" aria-hidden="true"></i> {{ Carbon\Carbon::parse()->toFormattedDateString() }}<small class="text-muted"> / Jumlah janji temu hari ini</small></p>
       </div>
     </div>
   </div>
@@ -148,7 +142,7 @@
           </div>
         </div>
         <p class="text-muted mt-3 mb-0 text-left text-md-center text-xl-left">
-          <i class="mdi mdi-reload mr-1" aria-hidden="true"></i> Visitor inside AIIA </p>
+          <i class="mdi mdi-reload mr-1" aria-hidden="true"></i> Visitor inside AIIA<small class="text-muted"> / Jumlah tamu yang ada di dalam AIIA</small></p>
       </div>
     </div>
   </div>
@@ -159,7 +153,7 @@
       <div class="card-body p-5">
         <div class="row">
           <div class="col-10">
-            <h4 class="card-title mb-5">Today's Appointment</h4>
+            <h4 class="card-title mb-5">Today's Appointment<small class="text-muted"> / Janji temu hari ini</small></h4>
           </div>
           <div class="col-2">
             <form action="{{ route('appointment.export') }}" method="post">
@@ -172,7 +166,7 @@
           <thead>
             <tr>
               <th class="text-center">No</th>
-              <th class="text-center">Guest Name</th>
+              <th class="text-center">Visitor Name</th>
               <th class="text-center">Visit Purpose</th>
               <th class="text-center">Plan Visit</th>
               <th class="text-center">Visit Date</th>
@@ -227,18 +221,18 @@
       <div class="card-body p-5">
         <div class="row">
           <div class="col-10">
-            <h4 class="card-title mb-5">Today's Appointment Reminders</h4>
+            <h4 class="card-title mb-5">Today's Appointment Reminders<small class="text-muted"> / 今日の予定のリマインダー</small></h4>
           </div>
         </div>
         <table class="table table-responsive-lg" id="allTicket">
           <thead>
             <tr>
               <th class="text-center">No</th>
-              <th class="text-center">PIC</th>
-              <th class="text-center">Visit Purpose</th>
-              <th class="text-center">Plan Visit</th>
-              <th class="text-center">Visit Date</th>
-              <th class="text-center">Visit Time</th>
+              <th class="text-center">PIC <small class="text-muted"> / 担当者</small></th>
+              <th class="text-center">Visit Purpose <small class="text-muted"> / 訪問目的</small></th>
+              <th class="text-center">Visit Plan<small class="text-muted"> / 見学プラン</small></th>
+              <th class="text-center">Visit Date <small class="text-muted"> / 訪問日</small></th>
+              <th class="text-center">Visit Time <small class="text-muted"> / 訪問時間</small></th>
             </tr>
           </thead>
           <tbody class="text-center">
@@ -259,7 +253,7 @@
             @else
               <tr>
                 <td colspan="7">
-                  <h4 class="mt-4">You don't have any ticket</h4>
+                  <h4 class="mt-4">You don't have any ticket<small class="text-muted"> / あなたはチケットを持っていません</small></h4>
                 </td>
               </tr>
             @endif

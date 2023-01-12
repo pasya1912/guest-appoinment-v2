@@ -19,11 +19,11 @@ class ExportTicket implements FromView
         $weekly_date = Appointment::select('start_date')->where('frequency','weekly')->get();
         $today_appointments = Appointment::whereIn('frequency',['daily','once','weekly'])
                                 ->where('start_date', $current_date)
-                                ->orWhere('end_date','>=', $current_date);
+                                ->Where('end_date','>=', $current_date);
                                 // get all day in the range of date
                                 foreach($weekly_date as $date){
                                     $today_appointments->orWhereRaw('DAYNAME(start_date) <= DAYNAME(?)', [$date])
-                                    ->orWhereRaw('DAYNAME(end_date) >= DAYNAME(?)',[$date]);
+                                    ->WhereRaw('DAYNAME(end_date) >= DAYNAME(?)',[$date]);
                                 }
                                 
         $today_appointment = $today_appointments->get();
