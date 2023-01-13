@@ -19,13 +19,8 @@ class DashboardController extends Controller
         $weekly_date = Appointment::select('start_date')->where('frequency','weekly')->get();
         $appointments = Appointment::where('status','approved')->get();
         $today_appointments = Appointment::whereIn('frequency',['daily','once','weekly'])
-                                ->where('start_date', $current_date)
+                                ->where('start_date', '<=', $current_date)
                                 ->Where('end_date','>=', $current_date);
-                                // get all day in the range of date
-                                foreach($weekly_date as $date){
-                                    $today_appointments->orWhereRaw('DAYNAME(start_date) <= DAYNAME(?)', [$date])
-                                    ->WhereRaw('DAYNAME(end_date) >= DAYNAME(?)',[$date]);
-                                }
                                 
         $today_appointment = $today_appointments->get();
         $visitor_inside = Checkin::where('status', 'in')->count();

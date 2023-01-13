@@ -3,10 +3,10 @@
     <a class="navbar-brand brand-logo" href="{{ url('/dashboard') }}">
       
       {{-- logo --}}
-      <img src="{{ url('assets/images/aiia.svg') }}" alt="logo" /> </a>
+      <img src="{{ url('assets/images/aiia-logo.svg') }}" alt="logo" /> </a>
       
       <a class="navbar-brand brand-logo-mini" href="{{ url('/dashboard') }}">
-        <img src="{{ url('assets/images/logo-mini.svg') }}" alt="logo" /> </a>
+        <img src="{{ url('assets/images/gusta-mini.svg') }}" alt="logo" /> </a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">

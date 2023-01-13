@@ -53,12 +53,6 @@
               </tr>
               
               @endforeach
-            @else
-              <tr>
-                <td colspan="7">
-                  <h4 class="mt-4">You don't have any ticket</h4>
-                </td>
-              </tr>
             @endif
           </tbody>
         </table>
@@ -78,7 +72,7 @@
             <i class="mdi mdi-cube text-danger icon-lg"></i>
           </div>
           <div class="float-right">
-            <p class="mb-0 text-right">Total Appointment</p>
+            <p class="mb-0 text-right">Total Ticket</p>
             <div class="fluid-container">
               <h3 class="font-weight-medium text-right mb-0">{{ $total_appointment }}</h3>
             </div>
@@ -94,29 +88,10 @@
       <div class="card-body">
         <div class="d-flex flex-md-column flex-xl-row flex-wrap justify-content-between align-items-md-center justify-content-xl-between">
           <div class="float-left">
-            <i class="mdi mdi-receipt text-warning icon-lg"></i>
-          </div>
-          <div class="float-right">
-            <p class="mb-0 text-right">Today Visitor</p>
-            <div class="fluid-container">
-              <h3 class="font-weight-medium text-right mb-0">{{ $today_visitor }}</h3>
-            </div>
-          </div>
-        </div>
-        <p class="text-muted mt-3 mb-0 text-left text-md-center text-xl-left">
-          <i class="mdi mdi-bookmark-outline mr-1" aria-hidden="true"></i> Visitors came today <small class="text-muted"> / Tamu yang akan datang hari ini</small></p>
-      </div>
-    </div>
-  </div>
-  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
-    <div class="card card-statistics">
-      <div class="card-body">
-        <div class="d-flex flex-md-column flex-xl-row flex-wrap justify-content-between align-items-md-center justify-content-xl-between">
-          <div class="float-left">
             <i class="mdi mdi-poll-box text-success icon-lg"></i>
           </div>
           <div class="float-right">
-            <p class="mb-0 text-right">Today Appointment</p>
+            <p class="mb-0 text-right">Active Ticket</p>
             <div class="fluid-container">
               <h3 class="font-weight-medium text-right mb-0">{{ $today_appointment }}</h3>
             </div>
@@ -127,7 +102,7 @@
       </div>
     </div>
   </div>
-  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
+  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 grid-margin stretch-card">
     <div class="card card-statistics">
       <div class="card-body">
         <div class="d-flex flex-md-column flex-xl-row flex-wrap justify-content-between align-items-md-center justify-content-xl-between">
@@ -141,7 +116,7 @@
             </div>
           </div>
         </div>
-        <p class="text-muted mt-3 mb-0 text-left text-md-center text-xl-left">
+        <p class="text-muted mt-3 mb-0 text-left text-md-center text-xl-left pt-1">
           <i class="mdi mdi-reload mr-1" aria-hidden="true"></i> Visitor inside AIIA<small class="text-muted"> / Jumlah tamu yang ada di dalam AIIA</small></p>
       </div>
     </div>
@@ -153,7 +128,7 @@
       <div class="card-body p-5">
         <div class="row">
           <div class="col-10">
-            <h4 class="card-title mb-5">Today's Appointment<small class="text-muted"> / Janji temu hari ini</small></h4>
+            <h4 class="card-title mb-5">Active Ticket<small class="text-muted"> / Tiket yang sedang aktif</small></h4>
           </div>
           <div class="col-2">
             <form action="{{ route('appointment.export') }}" method="post">
@@ -199,12 +174,6 @@
               </tr>
               
               @endforeach
-            @else
-              <tr>
-                <td colspan="7">
-                  <h4 class="mt-4">You don't have any ticket</h4>
-                </td>
-              </tr>
             @endif
           </tbody>
         </table>
