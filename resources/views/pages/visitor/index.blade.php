@@ -186,7 +186,9 @@
                 $('#other_purpose').show();
             }
         }else{
-            $('#other_purpose').hide();
+             if(this == checkbox){
+                $('#other_purpose').hide();
+            }
         }
     });
 
