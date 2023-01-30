@@ -23,7 +23,11 @@ class DashboardController extends Controller
                                 ->Where('end_date','>=', $current_date);
                                 
         $today_appointment = $today_appointments->get();
-        $visitor_inside = Checkin::where('status', 'in')->count();
+        $visitor_inside = Checkin::with('appointment')
+                        ->join('appointments', 'appointments.id', '=', 'checkin.appointment_id')
+                        ->where('appointments.start_date', '<=', $current_date)
+                        ->Where('appointments.end_date','>=', $current_date)
+                        ->where('checkin.status', 'in')->count();
         $today_visitor = $today_appointment->sum('guest');
         
         if($user_role === 'admin')
@@ -37,7 +41,7 @@ class DashboardController extends Controller
             ]);
         }elseif($user_role === 'approver'){
             return view('dashboard',[
-                // showing appountment by department
+                // showing appointment by department
                 'appointments' => $today_appointment->where('status','approved')->where('pic_dept', $user_dept),
                 'total_appointment' => $appointments->count(),
                 'today_visitor' => $today_visitor,

@@ -18,7 +18,7 @@
     <div class="card">
       <div class="card-body">
         <h4 class="card-title mb-5">Ticket List <small class="text-muted"> / チケット一覧</small></h4>
-        <table class="table table-responsive-lg">
+        <table class="table table-responsive">
           <thead>
             <tr>
               <th class="text-center">No</th>

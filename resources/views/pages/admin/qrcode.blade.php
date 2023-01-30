@@ -26,7 +26,7 @@
                         {{ csrf_field() }}
                         <div class="products text-center">
                             <h3 class="title">Scan QR Code</h3>
-                            <input type="text" class="form-control my-4 py-4" placeholder="QR Code..." name="qrcode"  autofocus>
+                            <input id="qrcode" type="text" class="form-control my-4 py-4" placeholder="QR Code..." name="qrcode"  autofocus>
                         </div>
                     </form>
                 </div>
@@ -124,4 +124,13 @@
 
 @push('custom-scripts')
 {!! Html::script('/assets/js/dashboard.js') !!}
+
+<script>
+    $(document).ready(function() {
+        $('#qrcode').focus();
+        $(document).on('click', function() {
+            $('#qrcode').focus();
+        });
+    });
+</script>
 @endpush
