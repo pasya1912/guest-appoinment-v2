@@ -27,7 +27,7 @@
     <div class="card">
       <div class="card-body">
         <h4 class="card-title mb-5">Ticket History <small class="text-muted"> / チケット履歴</small></h4>
-        <table class="table table-responsive-lg">
+        <table class="table table-responsive" id="allTicket">
           <thead>
             <tr>
               <th class="text-center">No</th>
@@ -66,12 +66,6 @@
               </tr>
               
               @endforeach
-            @else
-              <tr>
-                <td colspan="7">
-                  <h4 class="mt-4">No tickets have been created yet <small class="text-muted"> / チケットはまだ作成されていません</small></h4>
-                </td>
-              </tr>
             @endif
           </tbody>
         </table>
@@ -179,14 +173,19 @@
 
 @push('custom-scripts')
 {!! Html::script('/assets/js/dashboard.js') !!}
-{{-- <script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap4.min.js"></script>
+
+<script>
   $(document).ready(function() {
-    
-    $('#table').DataTable({
-      searching: true,
-      ordering:  true      
+
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
     });
-    
+          
+    $('#allTicket').DataTable();
+          
   });
-</script> --}}
+</script>
 @endpush

@@ -26,7 +26,7 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title mb-5">Ticket list <small class="text-muted"> / チケット一覧</small></h4>
-                <table class="table table-responsive">
+                <table class="table table-responsive" id="allTicket">
                     <thead>
                         <tr>
                             <th class="text-center">No</th>
@@ -71,12 +71,6 @@
                         </tr>
                         
                         @endforeach
-                        @else
-                        <tr>
-                            <td colspan="7">
-                                <h4 class="mt-4">No tickets have been created yet <small class="text-muted"> / チケットはまだ作成されていません</small></h4>
-                            </td>
-                        </tr>
                         @endif
                     </tbody>
                 </table>
@@ -224,7 +218,6 @@
                 </div>
                 @endforeach
                 <!-- Modal Ends -->
-                {{ $appointments->links() }}
             </div>
         </div>
     </div>
@@ -239,11 +232,18 @@
 @push('custom-scripts')
 {!! Html::script('/assets/js/dashboard.js') !!}
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap4.min.js"></script>
 
-<script type="text/javascript">
+<script>
+  $(document).ready(function() {
+
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
     });
+          
+    $('#allTicket').DataTable();
+          
+  });
 </script>
-
 @endpush

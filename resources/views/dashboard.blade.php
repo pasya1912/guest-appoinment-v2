@@ -129,7 +129,7 @@
             <div class="card-body p-5">
               <div class="row container-fluid">
                 <div class="col-10">
-                  <h4 class="card-title mb-5">Active Ticket<small class="text-muted"> / Tiket yang sedang aktif</small></h4>
+                  <h4 class="card-title mb-5">Active Ticket<small class="text-muted"> / Tiket yang masih aktif</small></h4>
                 </div>
                 <div class="col-2 text-right">
                   <form action="{{ route('appointment.export') }}" method="post">
@@ -138,7 +138,7 @@
                   </form>
                 </div>
               </div>
-              <table class="table table-responsive-lg" id="allTicket">
+              <table class="table table-responsive table-responsive-lg" id="allTicket">
                 <thead>
                   <tr>
                     <th class="text-center">No</th>
@@ -244,7 +244,9 @@
       <script>
         $(document).ready(function() {
           
-          $('#allTicket').DataTable();
+          $('#allTicket').DataTable({
+            "lengthChange": false
+          });
           
         });
       </script>

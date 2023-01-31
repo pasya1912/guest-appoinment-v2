@@ -18,7 +18,7 @@
     <div class="card">
       <div class="card-body">
         <h4 class="card-title mb-5">Ticket List <small class="text-muted"> / チケット一覧</small></h4>
-        <table class="table table-responsive">
+        <table class="table table-responsive table-responsive-lg" id="allTicket">
           <thead>
             <tr>
               <th class="text-center">No</th>
@@ -81,12 +81,6 @@
               </tr>
               
               @endforeach
-            @else
-              <tr>
-                <td colspan="7">
-                  <h4 class="mt-4">You don't have any ticket</h4>
-                </td>
-              </tr>
             @endif
           </tbody>
         </table>
@@ -145,9 +139,6 @@
         </div>
         @endforeach
         <!-- Modal Ends -->
-
-        {{-- @include('pagination.default') --}}
-        {{ $appointments->links() }}
       </div>
     </div>
   </div>
@@ -162,10 +153,20 @@
 @push('custom-scripts')
 {!! Html::script('/assets/js/dashboard.js') !!}
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap4.min.js"></script>
 
 <script>
-  $(function () {
-      $('[data-toggle="tooltip"]').tooltip()
+  $(document).ready(function() {
+
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    });
+          
+    $('#allTicket').DataTable({
+      "lengthChange": false
+    });
+          
   });
 </script>
 @endpush

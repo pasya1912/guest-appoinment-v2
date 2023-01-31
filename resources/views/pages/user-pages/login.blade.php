@@ -26,6 +26,8 @@
         <div class="row flex-grow">
           <div class="col-lg-4 mx-auto">
 
+            {{-- <img  src="{{ url('assets/images/aiia.svg') }}" alt="logo" /> </a> --}}
+
             @if (session('error'))
               <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <small>{{ session('error') }}</small>
