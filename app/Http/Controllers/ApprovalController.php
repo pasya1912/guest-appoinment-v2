@@ -19,7 +19,7 @@ class ApprovalController extends Controller
         $appointments = Appointment::latest()
                                 ->where('status','pending')
                                 ->where('pic',$username)
-                                ->paginate(8);
+                                ->get();
         
         return view('pages.admin.index',[
             'appointments' => $appointments,
@@ -31,7 +31,7 @@ class ApprovalController extends Controller
         $username = auth()->user()->name;
         $appointments = Appointment::latest()
                                 ->where('pic',$username)
-                                ->paginate(8);
+                                ->get();
         
         return view('pages.admin.history',[
             'appointments' => $appointments,

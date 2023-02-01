@@ -99,7 +99,7 @@ class AppointmentController extends Controller
     {
         if(auth()->user()->role === 'visitor')
         {
-            $appointments = Appointment::latest()->where('user_id', auth()->user()->id)->paginate(8);
+            $appointments = Appointment::latest()->where('user_id', auth()->user()->id)->get();
     
             return view('pages.visitor.history',[
                 'appointments' => $appointments,
