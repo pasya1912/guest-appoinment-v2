@@ -24,9 +24,7 @@
     <div class="container-fluid page-body-wrapper full-page-wrapper">
       <div class="content-wrapper d-flex align-items-center auth">
         <div class="row flex-grow">
-          <div class="col-lg-4 mx-auto">
-
-            {{-- <img  src="{{ url('assets/images/aiia.svg') }}" alt="logo" /> </a> --}}
+          <div class="col-lg-4 mx-auto text-center">
 
             @if (session('error'))
               <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -44,9 +42,10 @@
                 </div>
             @endif
 
-            <div class="auth-form-light text-left p-5">
-              <h4>Hello! let's get started</h4>
-              <h6 class="font-weight-light">Sign in to continue.</h6>
+            <div class="auth-form-light text-center p-5">
+              {{-- <h4>Hello! Welcome Back</h4>
+              <h6 class="font-weight-light">Sign in to continue.</h6> --}}
+              <img class="mb-4" src="{{ url('assets/images/aiia-logo.png') }}" alt="logo" width="200"/>
               <form class="pt-3" action="{{ route('login.auth') }}" method="POST">
                 {{ csrf_field() }}
                 <div class="form-group">

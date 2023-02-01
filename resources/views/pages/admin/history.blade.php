@@ -36,6 +36,7 @@
               <th class="text-center">Visit Plan<small class="text-muted"> / 見学プラン</small></th>
               <th class="text-center">Visit Date <small class="text-muted"> / 訪問日</small></th>
               <th class="text-center">Status</th>
+              <th></th>
             </tr>
           </thead>
           <tbody class="text-center">
