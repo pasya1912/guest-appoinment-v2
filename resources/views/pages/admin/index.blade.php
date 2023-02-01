@@ -242,7 +242,9 @@
         $('[data-toggle="tooltip"]').tooltip()
     });
           
-    $('#allTicket').DataTable();
+    $('#allTicket').DataTable({
+      "lengthChange": false
+    });
           
   });
 </script>
