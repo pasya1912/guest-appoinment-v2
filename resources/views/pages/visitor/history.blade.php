@@ -166,6 +166,8 @@
     $('#allTicket').DataTable({
       "lengthChange": false
     });
+
+    
           
   });
 </script>

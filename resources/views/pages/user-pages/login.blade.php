@@ -23,7 +23,7 @@
   <div class="container-scroller">
     <div class="container-fluid page-body-wrapper full-page-wrapper">
       <div class="content-wrapper d-flex align-items-center auth">
-        <div class="row flex-grow">
+        <div class="row flex-grow" id="card">
           <div class="col-lg-4 mx-auto text-center">
 
             @if (session('error'))
@@ -78,5 +78,9 @@
   <script src="../../js/off-canvas.js"></script>
   <script src="../../js/misc.js"></script>
   <!-- endinject -->
+
+  <script>
+    
+  </script>
 </body>
 </html>
