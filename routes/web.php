@@ -39,6 +39,8 @@ Route::middleware(['guest'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard.index');
+    Route::get('/update-password', 'UpdatePasswordController@index')->name('password.index');
+    Route::post('/update-password/update', 'UpdatePasswordController@update')->name('password.update');
     
     // visitor (create,history)
     Route::get('/appointment', 'AppointmentController@index')->name('appointment.index');

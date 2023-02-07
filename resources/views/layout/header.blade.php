@@ -35,9 +35,7 @@
                 </div>
               </div>
             </a>
-            <a class="dropdown-item mt-2"> Manage Accounts </a>
-            <a class="dropdown-item"> Change Password </a>
-            <a class="dropdown-item"> Check Inbox </a>
+            <a href="{{ route('password.index') }}" class="dropdown-item"> Change Password </a>
             <form action="{{ route('logout.auth') }}" method="POST">
               {{ csrf_field() }}
               <button type="submit" class="dropdown-item"> Sign Out </button>

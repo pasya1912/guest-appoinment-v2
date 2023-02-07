@@ -18,14 +18,14 @@
     <div class="card">
       <div class="card-body">
         <h4 class="card-title mb-5">Ticket List <small class="text-muted"> / チケット一覧</small></h4>
-        <table class="table table-responsive table-responsive-lg" id="allTicket">
+        <table class="table table-responsive-lg" id="allTicket">
           <thead>
             <tr>
               <th class="text-center">No</th>
               <th class="text-center">PIC <small class="text-muted"> / 担当者</small></th>
               <th class="text-center">Visit Purpose <small class="text-muted"> / 訪問目的</small></th>
               <th class="text-center">Visit Plan<small class="text-muted"> / 見学プラン</small></th>
-              <th class="text-center">Visit Date <small class="text-muted"> / 訪問日</small></th>
+              <th class="text-center">Expired Date <small class="text-muted"> / 有効期限</small></th>
               <th class="text-center">Status <small class="text-muted"> / スターテス</small></th>
               <th class="text-center"></th>
             </tr>
@@ -39,7 +39,7 @@
                 <td class="display-4">{{ $appointment->pic }}</td>
                 <td class="display-4">{{ $appointment->purpose }}</td>
                 <td class="display-4">{{ $appointment->frequency }}</td>
-                <td class="display-4">{{ Carbon\Carbon::parse($appointment->start_date)->toFormattedDateString() }} - {{ Carbon\Carbon::parse($appointment->end_date)->toFormattedDateString() }}</td>
+                <td class="display-4">{{ Carbon\Carbon::parse($appointment->end_date)->toFormattedDateString() }}</td>
                 
                 @if($appointment->status === 'pending')
                   <td>

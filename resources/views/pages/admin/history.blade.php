@@ -27,7 +27,7 @@
     <div class="card">
       <div class="card-body">
         <h4 class="card-title mb-5">Ticket History <small class="text-muted"> / チケット履歴</small></h4>
-        <table class="table table-responsive" id="allTicket">
+        <table class="table table-responsive-lg" id="allTicket">
           <thead>
             <tr>
               <th class="text-center">No</th>

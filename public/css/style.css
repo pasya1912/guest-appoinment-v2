@@ -18370,4 +18370,13 @@ dl li {
     }
 }
 
+.card-animate{
+    transform: translate(0, -40px);
+    opacity: 0;
+    transition: 1.5s;
+}
+.card-animate.from-top{
+    transform: translate(0,0);
+    opacity: 1;
+}
 /*# sourceMappingURL=style.css.map */

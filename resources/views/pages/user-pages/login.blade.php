@@ -42,7 +42,7 @@
                 </div>
             @endif
 
-            <div class="auth-form-light text-center p-5">
+            <div class="auth-form-light text-center p-5 card-animate" id="login">
               {{-- <h4>Hello! Welcome Back</h4>
               <h6 class="font-weight-light">Sign in to continue.</h6> --}}
               <img class="mb-4" src="{{ url('assets/images/aiia-logo.png') }}" alt="logo" width="200"/>
@@ -80,7 +80,11 @@
   <!-- endinject -->
 
   <script>
-    
+    var login = document.getElementById("login");
+
+    window.addEventListener("load", (event) => {
+        login.classList.add("from-top");
+    })
   </script>
 </body>
 </html>
