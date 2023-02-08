@@ -34,7 +34,7 @@
                       </ul>
                   </div>
                 @endif
-              <div class="auth-form-light text-left p-5">
+              <div class="auth-form-light text-left p-5 card-animate" id="login">
                 <h4>New here?</h4>
                 <h6 class="font-weight-light pb-4">Signing up is easy. It only takes a few steps</h6>
                 <form action="{{ route('register.store') }}" method="POST">
@@ -75,5 +75,12 @@
     <script src="../../js/off-canvas.js"></script>
     <script src="../../js/misc.js"></script>
     <!-- endinject -->
+    <script>
+      var login = document.getElementById("login");
+  
+      window.addEventListener("load", (event) => {
+          login.classList.add("from-top");
+      });
+    </script>
   </body>
 </html>
