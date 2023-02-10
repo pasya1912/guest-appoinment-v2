@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\ApprovalHistory;
 use App\Checkin;
+use App\RoomDetail;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 
@@ -20,5 +22,20 @@ class Appointment extends Model
     public function checkin()
     {
         return $this->hasOne(Checkin::class);
+    }
+
+    public function room_detail()
+    {
+        return $this->hasOne(RoomDetail::class);
+    }
+
+    public function facility_detail()
+    {
+        return $this->hasMany(FacilityDetail::class);
+    }
+
+    public function approval_history()
+    {
+        return $this->hasOne(ApprovalHistory::class);
     }
 }

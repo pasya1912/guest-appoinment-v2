@@ -92,7 +92,7 @@
                                 <div class="px-4 py-1">
                                     
                                     <div class="text-center">
-
+                                        
                                         <img class="rounded" src="{{ asset('uploads/selfie/'. $appointment->selfie) }}" width="300" height="200">
                                     </div>
                                     {{-- <span class="theme-color font-weight-bold">Ticket Detail</span> --}}
@@ -112,11 +112,11 @@
                                         <span class="text-muted">Visitor Company</span>
                                         <span class="font-weight-bold">{{ $appointment->user->company }}</span>
                                     </div>
-
+                                    
                                     <div class="d-flex justify-content-between pt-4">
                                         <span class="font-weight-bold h4">Plan Visit</span>
                                     </div>
-
+                                    
                                     <div class="d-flex justify-content-between">
                                         <span class="text-muted">Visit Purpose</span>
                                         <span class="font-weight-bold">{{ $appointment->purpose }}</span>
@@ -137,7 +137,7 @@
                                         <span class="text-muted">Total Visitor</span>
                                         <span class="font-weight-bold">{{ $appointment->guest }}</span>
                                     </div>
-
+                                    
                                     <div class="mb-3">
                                         <hr class="new1">
                                     </div>
@@ -179,16 +179,98 @@
                                 <p>Are you sure want to <strong>approve</strong> this ticket?</p>
                             </div>
                             <div class="modal-footer">
-                                <form action="/approval/approve/{{ $appointment->id }}" method="post" class="d-inline">
-                                    {{ csrf_field() }}
-                                    <button type="submit" class="btn btn-primary">Confirm</button>
-                                </form>
+                                <button data-toggle="modal" data-target="#facilityModal" type="submit" class="btn btn-primary" data-toggle="tooltip" title="Approve" data-dismiss="modal">
+                                    Confirm
+                                </button>
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                             </div>
                         </div>
                     </div>
                 </div>
                 @endforeach
+                <!-- Modal Ends -->
+                
+                <!-- Modal -->
+                {{-- Approval Modal --}}
+                <div id="facilityModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog animated zoomInDown modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Approval confirmation</h5>
+                                <button type="button px-4" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body" id="myWizard">
+                                
+                                <div class="progress mb-3" style="height: 10%;">
+                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="4" style="width: 20%;">
+                                        Step 1 of 5
+                                    </div>
+                                </div>
+                                
+                                <div class="nav">
+                                    <div class="nav">
+                                        <div class="btn-group" role="group" aria-label="First group">
+                                            <a class="btn btn-primary" href="#step1" data-toggle="tab" data-step="1">Step 1</a>
+                                            <a class="btn btn-primary" href="#step2" data-toggle="tab" data-step="2">Step 2</a>
+                                            <a class="btn btn-primary" href="#step3" data-toggle="tab" data-step="3">Step 3</a>
+                                            <a class="btn btn-primary" href="#step4" data-toggle="tab" data-step="4">Step 4</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="tab-content">
+                                    <div class="tab-pane active fade first" id="step1">
+                                        
+                                        <div class="well"> 
+                                            <label>Security Question 1</label>
+                                            <select class="form-control input-lg">
+                                                <option value="What was the name of your first pet?">What was the name of your first pet?</option>
+                                                <option value="Where did you first attend school?">Where did you first attend school?</option>
+                                                <option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
+                                                <option value="What is your favorite car model?">What is your favorite car model?</option>
+                                            </select>
+                                            <br>
+                                            <label>Enter Response</label>
+                                            <input class="form-control input-lg">
+                                        </div>
+                                        <a class="btn btn-default next" href="#">Continue</a>
+                                    </div>
+                                    <div class="tab-pane fade" id="step2">
+                                        <div class="well"> 
+                                            <label>Security Question 2</label>
+                                            <select class="form-control  input-lg">
+                                                <option value="What was the name of your first pet?">What was the name of your first pet?</option>
+                                                <option selected="" value="Where did you first attend school?">Where did you first attend school?</option>
+                                                <option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
+                                                <option value="What is your favorite car model?">What is your favorite car model?</option>
+                                            </select>
+                                            <br>
+                                            <label>Enter Response</label>
+                                            <input class="form-control input-lg">
+                                        </div>
+                                        <a class="btn btn-default next" href="#">Continue</a>
+                                    </div>
+                                    <div class="tab-pane fade" id="step3">
+                                        <div class="well"> <h2>Step 3</h2> Add another step here..</div>
+                                        <a class="btn btn-default next" href="#">Continue</a>
+                                    </div>
+                                    <div class="tab-pane fade" id="step4">
+                                        <div class="well"> <h2>Step 4</h2> You're Done!</div>
+                                        <a class="btn btn-success first" href="#">Start over</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button data-toggle="modal" data-target="#facilityModal" type="submit" class="btn btn-primary" data-toggle="tooltip" title="Approve" data-dismiss="modal">
+                                    Confirm
+                                </button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <!-- Modal Ends -->
                 
                 <!-- Modal -->
@@ -236,16 +318,43 @@
 <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap4.min.js"></script>
 
 <script>
-  $(document).ready(function() {
-
-    $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
+    $(document).ready(function() {
+        
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        });
+        
+        $('#allTicket').DataTable({
+            "lengthChange": false
+        });
+        
+        $('.next').click(function(){
+            
+            var nextId = $(this).parents('.tab-pane').next().attr("id");
+            $('[href=#'+nextId+']').tab('show');
+            return false;
+            
+        })
+        
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+            
+            //update progress
+            var step = $(e.target).data('step');
+            var percent = (parseInt(step) / 4) * 100;
+            
+            $('.progress-bar').css({width: percent + '%'});
+            $('.progress-bar').text("Step " + step + " of 4");
+            
+            //e.relatedTarget // previous tab
+            
+        })
+        
+        $('.first').click(function(){
+            
+            $('#myWizard a:first').tab('show')
+            
+        })
+        
     });
-          
-    $('#allTicket').DataTable({
-      "lengthChange": false
-    });
-          
-  });
 </script>
 @endpush

@@ -28,7 +28,8 @@ class CreateAppointmentsTable extends Migration
             $table->bigInteger('pic_dept');
             $table->string('doc');
             $table->string('selfie');
-            $table->string('status');
+            $table->string('pic_approval');
+            $table->string('dh_approval');
             $table->timestamps();
         });
     }
