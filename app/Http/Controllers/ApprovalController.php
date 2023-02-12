@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ApprovalHistory;
 use App\User;
 use App\Checkin;
 use Carbon\Carbon;
@@ -14,11 +15,12 @@ class ApprovalController extends Controller
     
     public function index()
     {
-        $username = auth()->user()->name;
+        $userId = auth()->user()->id;
 
         $appointments = Appointment::latest()
-                                ->where('status','pending')
-                                ->where('pic',$username)
+                                ->where('pic_approval','pending')
+                                ->where('dh_approval','pending')
+                                ->where('pic_id',$userId)
                                 ->get();
         
         return view('pages.admin.index',[
@@ -28,9 +30,9 @@ class ApprovalController extends Controller
 
     public function history()
     {
-        $username = auth()->user()->name;
+        $userId = auth()->user()->id;
         $appointments = Appointment::latest()
-                                ->where('pic',$username)
+                                ->where('pic_id',$userId)
                                 ->get();
         
         return view('pages.admin.history',[
@@ -48,10 +50,19 @@ class ApprovalController extends Controller
         return redirect()->back()->with('approved','Ticket has been approved!');
     }
     
-    public function ticketRejection(Appointment $ticket)
+    public function ticketRejection(Request $request, Appointment $ticket)
     {
-        Appointment::where('id', $ticket->id)->update([
+        // create approval history
+        ApprovalHistory::create([
+            'signed_by' => auth()->user()->id,
+            'appointment_id' =>  $ticket->id,
+            'note' => $request->note,
             'status' => 'rejected'
+        ]);
+
+        // update appointment status
+        Appointment::where('id', $ticket->id)->update([
+            'pic_approval' => 'rejected'
         ]);
         
         return redirect()->back()->with('reject','Ticket has been rejected!');

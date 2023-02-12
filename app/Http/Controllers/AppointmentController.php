@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Room;
+use App\User;
 use App\Checkin;
 use App\Department;
-use App\Exports\ExportTicket;
 use App\Models\Appointment;
-use App\User;
 use Illuminate\Http\Request;
+use App\Exports\ExportTicket;
+use App\RoomDetail;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -16,9 +18,11 @@ class AppointmentController extends Controller
     public function index()
     {
         $departments = Department::all();
+        $rooms = Room::where('status','available')->get();
 
         return view('pages.visitor.index',[
             'departments' => $departments,
+            'rooms' =>  $rooms
         ]);
     }
 
@@ -35,7 +39,8 @@ class AppointmentController extends Controller
             'end_date' => 'required',
             'time' => 'required',
             'jumlahTamu' => 'required',
-            'pic' => 'required',
+            'room' => '',
+            'pic_id' => 'required',
             'pic_dept' => 'required',
         ]);
 
@@ -78,11 +83,12 @@ class AppointmentController extends Controller
             'end_date' => $request->end_date,
             'time' => $request->time,
             'guest' => $request->jumlahTamu,
-            'pic' => $request->pic,
+            'pic_id' => $request->pic_id,
             'pic_dept' => $request->pic_dept,
             'doc' => $docName,
             'selfie' => $doc2Name,
-            'status' => 'pending',
+            'pic_approval' => 'pending',
+            'dh_approval' => 'pending',
             'user_id' => auth()->user()->id
         ]);
 
@@ -90,6 +96,16 @@ class AppointmentController extends Controller
         Checkin::create([
             'appointment_id' => $appointment->id,
             'status' => 'out',
+        ]);
+
+        // create rooms detail data immedietly
+        RoomDetail::create([
+            'appointment_id' => $appointment->id,
+            'room_id' => $request->room
+        ]);
+
+        Room::where('id', $request->room)->update([
+            'status' => 'booked'
         ]);
         
         return redirect()->route('appointment.history')->with('success', 'Your ticket has been successfully created! Please wait for the PIC to approve your ticket or Contact the PIC');

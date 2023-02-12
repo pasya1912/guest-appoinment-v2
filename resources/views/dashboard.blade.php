@@ -190,7 +190,7 @@
               <div class="row">
                 <div class="col-10">
                   
-                   <!-- Modal -->
+                  <!-- Modal -->
                   @foreach ($appointments as $appointment)   
                   <div class="modal fade auto-off" id="demoModal-{{ $appointment->id }}" tabindex="-1" role="dialog" aria-labelledby="demoModal-{{ $appointment->id }}" aria-hidden="true">
                     <div class="modal-dialog animated zoomInDown modal-dialog-centered" role="document">

@@ -11,7 +11,7 @@
             <div class="card-body">
                 <h4 class="card-title mb-5">Create Ticket <small class="text-muted pl-0">/ Buat Tiket / チケットを作る</small></h4>
                 
-                <form action="{{ route('appointment.create') }}" method="post" enctype="multipart/form-data" id="appointmentForm">
+                <form action="{{ route('appointment.create') }}" method="POST" enctype="multipart/form-data" id="appointmentForm">
                     {{ csrf_field() }}
                     <div class="form-group row">
                         <div class="col-md-4">
@@ -96,6 +96,20 @@
                             <small id="emailHelp" class="form-text text-muted">Number of guests arriving</small>
                         </div>
                     </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-4">
+                            <label for="inputEmail3" class="col-form-label">Select Room <small class="text-muted pl-0">/ Pilih Ruangan / 部屋を選択</small></label>
+                        </div>
+                        <div class="col-md-8">
+                            <select class="form-control mt-1" id="room" name="room">
+                                <option value="null" selected>-- Select Room --</option>
+                                @foreach($rooms as $room)
+                                    <option value="{{ $room->id }}">{{ $room->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
                     
                     <div class="form-group row">
                         <div class="col-md-4">
@@ -111,7 +125,7 @@
                             <small id="emailHelp" class="form-text text-muted">Responsible person to be met</small>
                         </div>
                         <div class="col-sm-4">
-                            <select class="form-control mt-1" id="pic" name="pic" required>
+                            <select class="form-control mt-1" id="pic_id" name="pic_id" required>
                                 <option value="0">-- Select Department --</option>
                             </select>
                         </div>
@@ -186,7 +200,7 @@
                 $('#other_purpose').show();
             }
         }else{
-             if(this == checkbox){
+            if(this == checkbox){
                 $('#other_purpose').hide();
             }
         }
@@ -200,9 +214,9 @@
                 dept: $(this).val() 
             },
             success: function(pic) {
-                $('#pic').empty();
+                $('#pic_id').empty();
                 $.each(pic, function(key, value) {
-                    $('#pic').append(`<option value='${value.name}'> ${value.name}</option>`);
+                    $('#pic_id').append(`<option value='${value.id}'> ${value.name}</option>`);
                 });
             }
         });

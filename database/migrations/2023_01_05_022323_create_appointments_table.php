@@ -16,7 +16,9 @@ class CreateAppointmentsTable extends Migration
         Schema::create('appointments', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('pic_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('pic_id')->references('id')->on('users');
             $table->string('name');
             $table->string('purpose');
             $table->string('frequency');
@@ -24,7 +26,6 @@ class CreateAppointmentsTable extends Migration
             $table->date('end_date');
             $table->time('time');
             $table->string('guest');
-            $table->string('pic');
             $table->bigInteger('pic_dept');
             $table->string('doc');
             $table->string('selfie');

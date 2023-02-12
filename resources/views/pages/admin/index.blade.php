@@ -144,7 +144,7 @@
                                     
                                     <div class="d-flex justify-content-between">
                                         <span class="font-weight-bold">PIC</span>
-                                        <span class="font-weight-bold">{{ $appointment->pic }}</span>
+                                        <span class="font-weight-bold">{{ $appointment->pic->name }}</span>
                                     </div>
                                     
                                     <div class="text-center mt-5">
@@ -285,16 +285,17 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <div class="modal-body">
-                                <p>Are you sure want to <strong>reject</strong> this ticket?</p>
-                            </div>
-                            <div class="modal-footer">
-                                <form action="/approval/reject/{{ $appointment->id }}" method="post" class="d-inline">
-                                    {{ csrf_field() }}
+                            <form action="/approval/reject/{{ $appointment->id }}" method="post" class="d-inline">
+                                {{ csrf_field() }}
+                                <div class="modal-body">
+                                    <p>Are you sure want to <strong>reject</strong> this ticket?</p>
+                                    <input type="text" class="form-control mt-2" id="nama" name="note" placeholder="Insert Reason or note...">
+                                </div>
+                                <div class="modal-footer">
                                     <button type="submit" class="btn btn-primary">Confirm</button>
-                                </form>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                            </div>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>

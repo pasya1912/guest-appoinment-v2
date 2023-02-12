@@ -50,12 +50,12 @@
               <td class="display-4">{{ $appointment->frequency }}</td>
               <td class="display-4">{{ Carbon\Carbon::parse($appointment->start_date)->toFormattedDateString() }} - {{ Carbon\Carbon::parse($appointment->end_date)->toFormattedDateString() }}</td>
               {{-- <td class="display-4">{{ $appointment->guest }}</td> --}}
-              @if($appointment->status === "pending")
-              <td><span class="badge badge-pill badge-warning p-2 text-light">{{ $appointment->status }}</span></td>
-              @elseif($appointment->status === "approved")
-              <td><span class="badge badge-pill badge-success p-2 text-light">{{ $appointment->status }}</span></td>
+              @if($appointment->pic_approval === "pending")
+                <td><span class="badge badge-pill badge-warning p-2 text-light">{{ $appointment->pic_approval }}</span></td>
+              @elseif($appointment->pic_approval === "approved")
+                <td><span class="badge badge-pill badge-success p-2 text-light">{{ $appointment->pic_approval }}</span></td>
               @else
-              <td><span class="badge badge-pill badge-danger p-2 text-light">{{ $appointment->status }}</span></td>
+                <td><span class="badge badge-pill badge-danger p-2 text-light">{{ $appointment->pic_approval }}</span></td>
               @endif
               
               <td class="display-4">
@@ -140,7 +140,7 @@
                   
                   <div class="d-flex justify-content-between">
                     <span class="font-weight-bold">PIC</span>
-                    <span class="font-weight-bold">{{ $appointment->pic }}</span>
+                    <span class="font-weight-bold">{{ $appointment->pic->name }}</span>
                   </div>
                   
                   <div class="text-center mt-5">

@@ -21,12 +21,13 @@
         <table class="table table-responsive-lg" id="allTicket">
           <thead>
             <tr>
-              <th class="text-center">No</th>
-              <th class="text-center">PIC <small class="text-muted"> / 担当者</small></th>
+              {{-- <th class="text-center">No</th> --}}
+              <th class="text-center">PIC</th>
               <th class="text-center">Visit Purpose <small class="text-muted"> / 訪問目的</small></th>
               <th class="text-center">Visit Plan<small class="text-muted"> / 見学プラン</small></th>
-              <th class="text-center">Expired Date <small class="text-muted"> / 有効期限</small></th>
-              <th class="text-center">Status <small class="text-muted"> / スターテス</small></th>
+              <th class="text-center">Visit Date <small class="text-muted"> / 訪問日</small></th>
+              <th class="text-center">PIC approval</th>
+              <th class="text-center">Dept. Head approval</th>
               <th class="text-center"></th>
             </tr>
           </thead>
@@ -35,24 +36,42 @@
               @foreach ($appointments as $appointment)
               
               <tr>
-                <td class="display-4">{{ $loop->iteration }}</td>
-                <td class="display-4">{{ $appointment->pic }}</td>
+                {{-- <td class="display-4">{{ $loop->iteration }}</td> --}}
+                <td class="display-4">{{ $appointment->pic->name }}</td>
                 <td class="display-4">{{ $appointment->purpose }}</td>
                 <td class="display-4">{{ $appointment->frequency }}</td>
-                <td class="display-4">{{ Carbon\Carbon::parse($appointment->end_date)->toFormattedDateString() }}</td>
+                <td class="display-4">{{ Carbon\Carbon::parse($appointment->start_date)->toFormattedDateString() }} - {{ Carbon\Carbon::parse($appointment->end_date)->toFormattedDateString() }}</td>
                 
-                @if($appointment->status === 'pending')
+                @if($appointment->pic_approval === 'pending' && $appointment->dh_approval === 'pending')
                   <td>
-                    <span class="badge badge-pill badge-warning p-2 text-light">{{ $appointment->status }}</span>
+                    <span class="badge badge-pill badge-warning p-2 text-light">{{ $appointment->pic_approval }}</span>
+                  </td>
+                  <td>
+                    <span class="badge badge-pill badge-warning p-2 text-light">{{ $appointment->dh_approval }}</span>
                   </td>
                   <td>
                     <button class="btn btn-icons btn-inverse-info" data-toggle="tooltip" title="QR disable" disabled>
                       <i class="mdi mdi-qrcode"></i>
                     </button>
                   </td>
-                @elseif($appointment->status === 'approved')
+                @elseif($appointment->pic_approval === 'approved' && $appointment->dh_approval === 'pending')
                   <td>
-                    <span class="badge badge-pill badge-success p-2 text-light">{{ $appointment->status }}</span>
+                    <span class="badge badge-pill badge-success p-2 text-light">{{ $appointment->pic_approval }}</span>
+                  </td>
+                  <td>
+                    <span class="badge badge-pill badge-warning p-2 text-light">{{ $appointment->dh_approval }}</span>
+                  </td>
+                  <td>
+                    <button class="btn btn-icons btn-inverse-info" data-toggle="tooltip" title="QR disable" disabled>
+                      <i class="mdi mdi-qrcode"></i>
+                    </button>
+                  </td>
+                @elseif($appointment->pic_approval === 'approved' && $appointment->dh_approval === 'approved')
+                  <td>
+                    <span class="badge badge-pill badge-success p-2 text-light">{{ $appointment->pic_approval }}</span>
+                  </td>
+                  <td>
+                    <span class="badge badge-pill badge-success p-2 text-light">{{ $appointment->dh_approval }}</span>
                   </td>
                   @php
 
@@ -74,7 +93,8 @@
                     </td>
                   @endif
                 @else
-                  <td><span class="badge badge-pill badge-danger p-2 text-light">{{ $appointment->status }}</span></td>
+                  <td><span class="badge badge-pill badge-danger p-2 text-light">{{ $appointment->pic_approval }}</span></td>
+                  <td><span class="badge badge-pill badge-danger p-2 text-light">{{ $appointment->dh_approval }}</span></td>
                   <td><button hidden>QR code</button></td>
                 @endif
 

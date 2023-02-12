@@ -17,11 +17,12 @@ class DashboardController extends Controller
         $current_date = date("Y-m-d");
 
         $weekly_date = Appointment::select('start_date')->where('frequency','weekly')->get();
-        $appointments = Appointment::where('status','approved')->get();
+        $appointments = Appointment::where('pic_approval','approved')->where('dh_approval','approved')->get();
         $today_appointments = Appointment::whereIn('frequency',['daily','once','weekly'])
                                 ->where('start_date', '<=', $current_date)
                                 ->Where('end_date','>=', $current_date);
-                                
+
+        // active ticket
         $today_appointment = $today_appointments->get();
         $visitor_inside = Checkin::with('appointment')
                         ->join('appointments', 'appointments.id', '=', 'checkin.appointment_id')
@@ -33,7 +34,7 @@ class DashboardController extends Controller
         if($user_role === 'admin')
         {
             return view('dashboard',[
-                'appointments' => $today_appointment->where('status','approved'),
+                'appointments' => $today_appointment->where('pic_approval','approved')->where('dh_approval','approved'),
                 'total_appointment' => $appointments->count(),
                 'today_visitor' => $today_visitor,
                 'today_appointment' => $today_appointment->where('status','approved')->count(),
@@ -42,18 +43,18 @@ class DashboardController extends Controller
         }elseif($user_role === 'approver'){
             return view('dashboard',[
                 // showing appointment by department
-                'appointments' => $today_appointment->where('status','approved')->where('pic_dept', $user_dept),
+                'appointments' => $today_appointment->where('pic_approval','approved')->where('dh_approval','approved')->where('pic_dept', $user_dept),
                 'total_appointment' => $appointments->count(),
                 'today_visitor' => $today_visitor,
-                'today_appointment' => $today_appointment->where('status','approved')->count(),
+                'today_appointment' => $today_appointment->where('pic_approval','approved')->where('dh_approval','approved')->count(),
                 'visitor_inside' => $visitor_inside,
             ]);
         }elseif($user_role === 'visitor'){
             return view('dashboard',[
-                'appointments' => $today_appointment->where('status','approved')->where('user_id',$user_id),
+                'appointments' => $today_appointment->where('pic_approval','approved')->where('dh_approval','approved')->where('user_id',$user_id),
                 'total_appointment' => $appointments->count(),
                 'today_visitor' => $today_visitor,
-                'today_appointment' => $today_appointment->where('user_id',$user_id)->where('status','approved')->count(),
+                'today_appointment' => $today_appointment->where('user_id',$user_id)->where('pic_approval','approved')->where('dh_approval','approved')->count(),
                 'visitor_inside' => $visitor_inside,
             ]);
         }
