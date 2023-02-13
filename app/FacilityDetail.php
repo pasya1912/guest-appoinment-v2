@@ -11,11 +11,6 @@ class FacilityDetail extends Model
 
     protected $guarded = ['id'];
 
-    public function facility()
-    {
-        return $this->belongsTo(Facility::class);
-    }
-
     public function appointment()
     {
         return $this->belongsTo(Appointment::class);

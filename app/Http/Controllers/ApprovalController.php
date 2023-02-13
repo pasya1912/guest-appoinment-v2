@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\ApprovalHistory;
 use App\User;
 use App\Checkin;
+use App\FacilityDetail;
 use Carbon\Carbon;
 use App\Models\Appointment;
 use Illuminate\Http\Request;
@@ -41,12 +42,38 @@ class ApprovalController extends Controller
         
     }
     
-    public function ticketApproval(Appointment $ticket)
+    public function ticketApproval(Request $request, Appointment $ticket)
     {
+        // occupation (1)
         Appointment::where('id', $ticket->id)->update([
-            'status' => 'approved'
+            'pic_approval' => 'approved'
         ]);
+
+        $validatedData = $request->validate([
+            'dry-food-quantity' => 'integer',
+            'wet-food-quantity' => 'integer',
+            'lunch-quantity' => 'integer',
+            'candy-quantity' => 'integer',
+            'coffee-quantity' => 'integer',
+            'tea-quantity' => 'integer',
+            'soft-drink-quantity' => 'integer',
+            'mineral-water-quantity' => 'integer',
+            'helm-quantity' => 'integer',
+            'handuk-quantity' => 'integer',
+            'speaker-quantity' => 'integer',
+            'speaker-wireless-quantity' => 'integer',
+            'motor-quantity' => 'integer',
+            'mobil-quantity' => 'integer',
+            'mini-bus-quantity' => 'integer',
+            'bus-quantity' => 'integer',
+            'appointment_id' => '' 
+        ]);
+
+        $validatedData['appointment_id'] = $ticket->id;
         
+        FacilityDetail::create($validatedData);
+        
+                
         return redirect()->back()->with('approved','Ticket has been approved!');
     }
     
