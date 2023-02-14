@@ -16,7 +16,7 @@ class CreateRoomsTable extends Migration
         Schema::create('rooms', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->string('status')->default('available');
+            $table->string('booking_date')->nullable();
             $table->timestamps();
         });
     }

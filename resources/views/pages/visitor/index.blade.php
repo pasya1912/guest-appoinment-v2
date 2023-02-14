@@ -50,30 +50,11 @@
                     
                     <div class="form-group row">
                         <div class="col-md-4">
-                            <label for="inputEmail3" class="col-form-label">Visit Plan <small class="text-muted pl-0">/ Rencana Kunjungan / 見学プラン</small></label>
-                        </div>
-                        <div class="col-md-8">
-                            <select class="form-control mt-1" id="frekuensi" name="frekuensi">
-                                <option value="0" selected>-- Select Frequency --</option>
-                                <option value="once">Once</option>
-                                <option value="daily">Daily</option>
-                                <option value="weekly">Weekly</option>
-                            </select>
-                            <small id="emailHelp" class="form-text text-muted">Select arrival frequency</small>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group row">
-                        <div class="col-md-4">
                             <label for="inputEmail3" class="col-form-label">Select Date <small class="text-muted pl-0">/ Pilih Tanggal / 日付を選択</small></label>
                         </div>
-                        <div class="col-md-4">
-                            <input type="date" name="start_date" id="start_date" class="form-control mt-1"/>
-                            <small id="emailHelp" class="form-text text-muted">Select start date</small>
-                        </div>
-                        <div class="col-md-4">
-                            <input type="date" name="end_date" id="end_date" class="form-control mt-1"/>
-                            <small id="emailHelp" class="form-text text-muted">Select end date</small>
+                        <div class="col-md-8">
+                            <input type="date" name="date" id="date" class="form-control mt-1"/>
+                            <small id="emailHelp" class="form-text text-muted">Select Date</small>
                         </div>
                     </div>
                     
@@ -104,9 +85,6 @@
                         <div class="col-md-8">
                             <select class="form-control mt-1" id="room" name="room">
                                 <option value="null" selected>-- Select Room --</option>
-                                @foreach($rooms as $room)
-                                    <option value="{{ $room->id }}">{{ $room->name }}</option>
-                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -217,6 +195,23 @@
                 $('#pic_id').empty();
                 $.each(pic, function(key, value) {
                     $('#pic_id').append(`<option value='${value.id}'> ${value.name}</option>`);
+                });
+            }
+        });
+    });
+
+    $('#date').change(function(){
+        $.ajax({
+            url: '/get-room',
+            type: 'GET',
+            data: { 
+                date : $(this).val() 
+            },
+            success: function(room) {
+                console.log(room);
+                $('#room').empty();
+                $.each(room, function(key, value) {
+                    $('#room').append(`<option value='${value.id}'> ${value.name}</option>`);
                 });
             }
         });

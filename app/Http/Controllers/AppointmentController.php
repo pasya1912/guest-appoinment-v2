@@ -6,10 +6,11 @@ use App\Room;
 use App\User;
 use App\Checkin;
 use App\Department;
+use App\RoomDetail;
 use App\Models\Appointment;
 use Illuminate\Http\Request;
 use App\Exports\ExportTicket;
-use App\RoomDetail;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -18,11 +19,11 @@ class AppointmentController extends Controller
     public function index()
     {
         $departments = Department::all();
-        $rooms = Room::where('status','available')->get();
+        // $rooms = Room::where('status','available')->get();
 
         return view('pages.visitor.index',[
             'departments' => $departments,
-            'rooms' =>  $rooms
+            // 'rooms' =>  $rooms
         ]);
     }
 
@@ -30,13 +31,11 @@ class AppointmentController extends Controller
     {
         $request->validate([
             'nama' => 'required',
-            'frekuensi' => 'required',
             'purpose-1' => 'required_without_all:purpose-2,purpose-3,purpose-4',
             'purpose-2' => 'required_without_all:purpose-1,purpose-3,purpose-4',
             'purpose-3' => 'required_without_all:purpose-1,purpose-2,purpose-4',
             'purpose-4' => 'required_without_all:purpose-1,purpose-2,purpose-3',
-            'start_date' => 'required',
-            'end_date' => 'required',
+            'date' => 'required',
             'time' => 'required',
             'jumlahTamu' => 'required',
             'room' => '',
@@ -78,9 +77,7 @@ class AppointmentController extends Controller
         $appointment = Appointment::create([
             'name' => $request->nama,
             'purpose' => $purpose,
-            'frequency' => $request->frekuensi,
-            'start_date' => $request->start_date,
-            'end_date' => $request->end_date,
+            'date' => $request->date,
             'time' => $request->time,
             'guest' => $request->jumlahTamu,
             'pic_id' => $request->pic_id,
@@ -101,11 +98,9 @@ class AppointmentController extends Controller
         // create rooms detail data immedietly
         RoomDetail::create([
             'appointment_id' => $appointment->id,
-            'room_id' => $request->room
-        ]);
-
-        Room::where('id', $request->room)->update([
-            'status' => 'booked'
+            'room_id' => $request->room,
+            'booking_date' => $request->date,
+            'booking_time' => $request->time
         ]);
         
         return redirect()->route('appointment.history')->with('success', 'Your ticket has been successfully created! Please wait for the PIC to approve your ticket or Contact the PIC');
@@ -130,6 +125,16 @@ class AppointmentController extends Controller
         $pic = User::where('department_id', $request->dept)->get();
 
         return $pic;
+    }
+
+    public function getRoom(Request $request)
+    {
+        $date = date($request->date);
+
+        // get booked rooms
+        $roomBooked = Room::whereRaw("id NOT IN (SELECT room_id FROM room_details WHERE booking_date = '2023-02-14')")->get();
+        
+        return $roomBooked;
     }
 
     public function export()

@@ -15,22 +15,22 @@ class CreateFacilityDetailsTable extends Migration
     {
         Schema::create('facility_details', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('snack_kering');
-            $table->integer('snack_basah');
-            $table->integer('makan_siang');
-            $table->integer('permen');
-            $table->integer('kopi');
-            $table->integer('teh');
-            $table->integer('soft_drink');
-            $table->integer('air_mineral');
-            $table->integer('helm');
-            $table->integer('handuk');
-            $table->integer('speaker');
-            $table->integer('speker_wireless');
-            $table->integer('mobil');
-            $table->integer('motor');
-            $table->integer('mini_bus');
-            $table->integer('bus');
+            $table->integer('snack_kering')->nullable();
+            $table->integer('snack_basah')->nullable();
+            $table->integer('makan_siang')->nullable();
+            $table->integer('permen')->nullable();
+            $table->integer('kopi')->nullable();
+            $table->integer('teh')->nullable();
+            $table->integer('soft_drink')->nullable();
+            $table->integer('air_mineral')->nullable();
+            $table->integer('helm')->nullable();
+            $table->integer('handuk')->nullable();
+            $table->integer('speaker')->nullable();
+            $table->integer('speker_wireless')->nullable();
+            $table->integer('mobil')->nullable();
+            $table->integer('motor')->nullable();
+            $table->integer('mini_bus')->nullable();
+            $table->integer('bus')->nullable();
             $table->bigInteger('appointment_id')->unsigned();
             $table->foreign('appointment_id')->references('id')->on('appointments');
             $table->timestamps();

@@ -16,28 +16,22 @@ class DashboardController extends Controller
         $user_dept = auth()->user()->department_id;
         $current_date = date("Y-m-d");
 
-        $weekly_date = Appointment::select('start_date')->where('frequency','weekly')->get();
         $appointments = Appointment::where('pic_approval','approved')->where('dh_approval','approved')->get();
-        $today_appointments = Appointment::whereIn('frequency',['daily','once','weekly'])
-                                ->where('start_date', '<=', $current_date)
-                                ->Where('end_date','>=', $current_date);
+        $today_appointments = Appointment::where('date', $current_date);
 
-        // active ticket
         $today_appointment = $today_appointments->get();
         $visitor_inside = Checkin::with('appointment')
                         ->join('appointments', 'appointments.id', '=', 'checkin.appointment_id')
-                        ->where('appointments.start_date', '<=', $current_date)
-                        ->Where('appointments.end_date','>=', $current_date)
+                        ->where('date', $current_date)
                         ->where('checkin.status', 'in')->count();
         $today_visitor = $today_appointment->sum('guest');
         
-        if($user_role === 'admin')
-        {
+        if($user_role === 'admin'){
             return view('dashboard',[
                 'appointments' => $today_appointment->where('pic_approval','approved')->where('dh_approval','approved'),
                 'total_appointment' => $appointments->count(),
                 'today_visitor' => $today_visitor,
-                'today_appointment' => $today_appointment->where('status','approved')->count(),
+                'today_appointment' => $today_appointment->where('pic_status','approved')->where('dh_approval','approved')->count(),
                 'visitor_inside' => $visitor_inside,
             ]);
         }elseif($user_role === 'approver'){

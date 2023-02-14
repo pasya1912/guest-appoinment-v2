@@ -21,9 +21,7 @@ class CreateAppointmentsTable extends Migration
             $table->foreign('pic_id')->references('id')->on('users');
             $table->string('name');
             $table->string('purpose');
-            $table->string('frequency');
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->date('date');
             $table->time('time');
             $table->string('guest');
             $table->bigInteger('pic_dept');

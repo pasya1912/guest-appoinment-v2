@@ -195,11 +195,9 @@
                 
                 <!-- Modal -->
                 {{-- Approval Modal --}}
-                @foreach ($appointments as $appointment) 
-                <div class="modal fade auto-off" id="facilityModal-{{ $appointment->id }}" tabindex="-1" role="dialog"  aria-hidden="true">
-                    <div class="modal-dialog animated zoomInDown modal-dialog-centered" role="document">
-                        <form method="POST" action="/approval/approve/{{ $appointment->id }}" class="login-box">
-                            {{ csrf_field() }}
+                    @foreach ($appointments as $appointment) 
+                    <div class="modal fade auto-off" id="facilityModal-{{ $appointment->id }}" tabindex="-1" role="dialog"  aria-hidden="true">
+                        <div class="modal-dialog animated zoomInDown modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title">Facility Needs</h5>
@@ -207,14 +205,16 @@
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <div class="row d-flex justify-content-center my-5">
-                                    <div class="col-md-12">
-                                        <div class="wizard">
-                                            <div class="wizard-inner">
-                                                <div class="connecting-line"></div>
-                                                <ul class="nav nav-tabs pr-3" role="tablist">
-                                                    <li role="presentation" class="active">
-                                                        <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" aria-expanded="true"><span class="round-tab">1 </span > <i class="pl-4">Makanan</i></a>
+                                <form method="POST" action="/approval/approve/{{ $appointment->id }}" class="login-box">
+                                    {{ csrf_field() }}
+                                    <div class="row d-flex justify-content-center my-5">
+                                        <div class="col-md-12">
+                                            <div class="wizard">
+                                                <div class="wizard-inner">
+                                                    <div class="connecting-line"></div>
+                                                    <ul class="nav nav-tabs pr-3" role="tablist">
+                                                        <li role="presentation" class="active">
+                                                            <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" aria-expanded="true"><span class="round-tab">1 </span > <i class="pl-4">Makanan</i></a>
                                                         </li>
                                                         <li role="presentation" class="disabled">
                                                             <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" aria-expanded="false"><span class="round-tab">2</span> <i class="pl-4">Minuman</i></a>
@@ -356,8 +356,8 @@
                                         <button type="submit" class="btn btn-primary">Submit</button>
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                                     </div>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
                     @endforeach

@@ -19,6 +19,8 @@ class CreateRoomDetailsTable extends Migration
             $table->bigInteger('room_id')->unsigned();
             $table->foreign('appointment_id')->references('id')->on('appointments');
             $table->foreign('room_id')->references('id')->on('rooms');
+            $table->date('booking_date');
+            $table->time('booking_time');
             $table->timestamps();
         });
     }

@@ -43,35 +43,31 @@ class ApprovalController extends Controller
     }
     
     public function ticketApproval(Request $request, Appointment $ticket)
-    {
+    {        
         // occupation (1)
         Appointment::where('id', $ticket->id)->update([
             'pic_approval' => 'approved'
         ]);
-
-        $validatedData = $request->validate([
-            'dry-food-quantity' => 'integer',
-            'wet-food-quantity' => 'integer',
-            'lunch-quantity' => 'integer',
-            'candy-quantity' => 'integer',
-            'coffee-quantity' => 'integer',
-            'tea-quantity' => 'integer',
-            'soft-drink-quantity' => 'integer',
-            'mineral-water-quantity' => 'integer',
-            'helm-quantity' => 'integer',
-            'handuk-quantity' => 'integer',
-            'speaker-quantity' => 'integer',
-            'speaker-wireless-quantity' => 'integer',
-            'motor-quantity' => 'integer',
-            'mobil-quantity' => 'integer',
-            'mini-bus-quantity' => 'integer',
-            'bus-quantity' => 'integer',
-            'appointment_id' => '' 
-        ]);
-
-        $validatedData['appointment_id'] = $ticket->id;
         
-        FacilityDetail::create($validatedData);
+        FacilityDetail::create([
+            'snack_kering' => $request->get('dry-food-quantity'),
+            'snack_basah' => $request->get('wet-food-quantity'),
+            'makan_siang' => $request->get('lunch-quantity'),
+            'permen' => $request->get('candy-quantity'),
+            'kopi' => $request->get('coffee-quantity'),
+            'teh' => $request->get('tea-quantity'),
+            'soft_drink' => $request->get('soft-drink-quantity'),
+            'air_mineral' => $request->get('mineral-water-quantity'),
+            'helm' => $request->get('helm-quantity'),
+            'handuk' => $request->get('handuk-quantity'),
+            'speaker' => $request->get('speaker-quantity'),
+            'speaker_wireless' => $request->get('speaker-wireless-quantity'),
+            'mobil' => $request->get('mobil-quantity'),
+            'motor' => $request->get('motor-quantity'),
+            'mini_bus' => $request->get('mini-bus-quantity'),
+            'bus' => $request->get('bus-quantity'),
+            'appointment_id' => $ticket->id
+        ]);
         
                 
         return redirect()->back()->with('approved','Ticket has been approved!');

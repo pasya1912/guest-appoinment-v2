@@ -12,6 +12,6 @@ class Room extends Model
 
     public function room_detail()
     {
-        return $this->hasOne(RoomDetail::class);
+        return $this->hasMany(RoomDetail::class);
     }
 }

@@ -47,6 +47,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/appointment/create-ticket', 'AppointmentController@create')->name('appointment.create');
     Route::get('/appointment/history', 'AppointmentController@history')->name('appointment.history');
     Route::get('/get-pic', 'AppointmentController@getPic')->name('appointment.getPic');
+    Route::get('/get-room', 'AppointmentController@getRoom')->name('appointment.getRoom');
     
     // approver (approve, history)
     Route::get('/approval', 'ApprovalController@index')->name('ticket.index');
