@@ -68,6 +68,14 @@ class ApprovalController extends Controller
             'bus' => $request->get('bus-quantity'),
             'appointment_id' => $ticket->id
         ]);
+
+        // create approval history
+        ApprovalHistory::create([
+            'signed_by' => auth()->user()->id,
+            'appointment_id' =>  $ticket->id,
+            // 'note' => $request->note,
+            'status' => 'approved'
+        ]);
         
                 
         return redirect()->back()->with('approved','Ticket has been approved!');

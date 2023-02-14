@@ -13,8 +13,8 @@
       <div class="card-body p-5">
         <div class="row">
           <div class="col-10">
-            <h4 class="card-title mb-5">Active Ticket <small class="text-muted"> / 
-              有効なチケット</small></h4>
+            <h4 class="card-title mb-5">Today's Appointment <small class="text-muted"> / 
+              今日の予定</small></h4>
           </div>
         </div>
         <table class="table table-responsive-lg" id="allTicket">
@@ -23,7 +23,7 @@
               <th class="text-center">No</th>
               <th class="text-center">Visitor Name <small class="text-muted"> / 訪問者名</small></th>
               <th class="text-center">Visit Purpose <small class="text-muted"> / 訪問目的</small></th>
-              <th class="text-center">Expired Date <small class="text-muted"> / 有効期限</small></th>
+              <th class="text-center">Visit Date <small class="text-muted"> / 訪問日</small></th>
               <th class="text-center">PIC <small class="text-muted"> / 担当者</small></th>
               <th class="text-center">Checkin Status</th>
             </tr>
@@ -90,14 +90,14 @@
               <i class="mdi mdi-poll-box text-success icon-lg"></i>
             </div>
             <div class="float-right">
-              <p class="mb-0 text-right">Active Ticket</p>
+              <p class="mb-0 text-right">Today's Appointment</p>
               <div class="fluid-container">
                 <h3 class="font-weight-medium text-right mb-0">{{ $today_appointment }}</h3>
               </div>
             </div>
           </div>
           <p class="text-muted mt-3 mb-0 text-left text-md-center text-xl-left">
-            <i class="mdi mdi-calendar mr-1" aria-hidden="true"></i> {{ Carbon\Carbon::parse()->toFormattedDateString() }}<small class="text-muted"> / Jumlah tiket yang aktif</small></p>
+            <i class="mdi mdi-calendar mr-1" aria-hidden="true"></i> {{ Carbon\Carbon::parse()->toFormattedDateString() }}<small class="text-muted"> / Janji temu hari ini</small></p>
           </div>
         </div>
       </div>
@@ -142,8 +142,7 @@
                     <th class="text-center">No</th>
                     <th class="text-center">Visitor Name</th>
                     <th class="text-center">Visit Purpose</th>
-                    <th class="text-center">Plan Visit</th>
-                    <th class="text-center">Expired Date</th>
+                    <th class="text-center">Visit Date</th>
                     <th class="text-center">PIC</th>
                     <th class="text-center">Status</th>
                   </tr>
@@ -156,8 +155,7 @@
                     <td class="display-4">{{ $loop->iteration }}</td>
                     <td class="display-4">{{ $appointment->name }}</td>
                     <td class="display-4">{{ $appointment->purpose }}</td>
-                    <td class="display-4">{{ $appointment->frequency }}</td>
-                    <td class="display-4">{{ Carbon\Carbon::parse($appointment->end_date)->toFormattedDateString() }}</td>
+                    <td class="display-4">{{ Carbon\Carbon::parse($appointment->date)->toFormattedDateString() }}</td>
                     <td class="display-4">{{ $appointment->pic }}</td>
                     
                     @if($appointment->checkin->status === 'in')
@@ -218,8 +216,8 @@
                   @endforeach
                   <!-- Modal Ends -->
 
-                  <h4 class="card-title mb-5">Active Ticket<small class="text-muted"> / 
-                    有効なチケット</small></h4>
+                  <h4 class="card-title mb-5">Today's Appointment<small class="text-muted"> / 
+                    今日の予定</small></h4>
                 </div>
               </div>
               <table class="table table-responsive-lg" id="allTicket">
@@ -228,8 +226,7 @@
                     <th class="text-center">No</th>
                     <th class="text-center">PIC <small class="text-muted"> / 担当者</small></th>
                     <th class="text-center">Visit Purpose <small class="text-muted"> / 訪問目的</small></th>
-                    <th class="text-center">Visit Plan<small class="text-muted"> / 見学プラン</small></th>
-                    <th class="text-center">Expired Date <small class="text-muted"> / 有効期限</small></th>
+                    <th class="text-center">Visit Date<small class="text-muted"> / 訪問日</small></th>
                     <th class="text-center">QR <small class="text-muted"> / QRコード</small></th>
                   </tr>
                 </thead>
@@ -241,8 +238,7 @@
                     <td class="display-4">{{ $loop->iteration }}</td>
                     <td class="display-4">{{ $appointment->pic }}</td>
                     <td class="display-4">{{ $appointment->purpose }}</td>
-                    <td class="display-4">{{ $appointment->frequency }}</td>
-                    <td class="display-4">{{ Carbon\Carbon::parse($appointment->end_date)->toFormattedDateString() }}</td>
+                    <td class="display-4">{{ Carbon\Carbon::parse($appointment->date)->toFormattedDateString() }}</td>
                     <td>
                       <button data-toggle="modal" data-target="#demoModal-{{ $appointment->id }}"data-toggle="tooltip" title="QR Code" type="submit" class="btn btn-icons btn-inverse-info">
                         <i class="mdi mdi-qrcode"></i>

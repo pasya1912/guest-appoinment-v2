@@ -118,12 +118,8 @@
                     <span class="font-weight-bold">{{ $appointment->purpose }}</span>
                   </div>
                   <div class="d-flex justify-content-between">
-                    <span class="text-muted">Visit Frequency</span>
-                    <span class="font-weight-bold">{{ $appointment->frequency}}</span>
-                  </div>
-                  <div class="d-flex justify-content-between">
                     <span class="text-muted">Visit Date</span>
-                    <span class="font-weight-bold">{{ Carbon\Carbon::parse($appointment->start_date)->toFormattedDateString() }} - {{ Carbon\Carbon::parse($appointment->end_date)->toFormattedDateString() }}</span>
+                    <span class="font-weight-bold">{{ Carbon\Carbon::parse($appointment->date)->toFormattedDateString() }}<span>
                   </div>
                   <div class="d-flex justify-content-between">
                     <span class="text-muted">Visit Time</span>

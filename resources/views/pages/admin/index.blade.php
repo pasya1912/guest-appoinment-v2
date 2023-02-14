@@ -34,10 +34,10 @@
                         <tr>
                             <th class="text-center">No</th>
                             <th class="text-center">Visitor Name <small class="text-muted"> / 訪問者名</small></th>
+                            <th class="text-center">Visitor Company <small class="text-muted"> / 合計ゲスト</small></th>
+                            <th class="text-center">Total Guest <small class="text-muted"> / 会社</small></th>
                             <th class="text-center">Visit Purpose <small class="text-muted"> / 訪問目的</small></th>
-                            <th class="text-center">Visit Plan<small class="text-muted"> / 見学プラン</small></th>
                             <th class="text-center">Visit Date <small class="text-muted"> / 訪問日</small></th>
-                            <th class="text-center">Status</th>
                             <th class="text-center">Action</th>
                         </tr>
                     </thead>
@@ -48,11 +48,10 @@
                         <tr>
                             <td class="display-4">{{ $loop->iteration }}</td>
                             <td class="display-4">{{ $appointment->name }}</td>
+                            <td class="display-4">{{ $appointment->user->company }}</td>
+                            <td class="display-4">{{ $appointment->guest }}</td>
                             <td class="display-4">{{ $appointment->purpose }}</td>
-                            <td class="display-4">{{ $appointment->frequency }}</td>
-                            <td class="display-4">{{ Carbon\Carbon::parse($appointment->start_date)->toFormattedDateString() }} - {{ Carbon\Carbon::parse($appointment->end_date)->toFormattedDateString() }}</td>
-                            {{-- <td class="display-4">{{ $appointment->guest }}</td> --}}
-                            <td><span class="badge badge-pill badge-warning p-2 text-light">{{ $appointment->status }}</span></td>
+                            <td class="display-4">{{ Carbon\Carbon::parse($appointment->date)->toFormattedDateString() }}</td>
                             <td>
                                 
                                 {{-- detail --}}
@@ -125,12 +124,8 @@
                                         <span class="font-weight-bold">{{ $appointment->purpose }}</span>
                                     </div>
                                     <div class="d-flex justify-content-between">
-                                        <span class="text-muted">Visit Frequency</span>
-                                        <span class="font-weight-bold">{{ $appointment->frequency}}</span>
-                                    </div>
-                                    <div class="d-flex justify-content-between">
                                         <span class="text-muted">Visit Date</span>
-                                        <span class="font-weight-bold">{{ Carbon\Carbon::parse($appointment->start_date)->toFormattedDateString() }} - {{ Carbon\Carbon::parse($appointment->end_date)->toFormattedDateString() }}</span>
+                                        <span class="font-weight-bold">{{ Carbon\Carbon::parse($appointment->date)->toFormattedDateString() }}</span>
                                     </div>
                                     <div class="d-flex justify-content-between">
                                         <span class="text-muted">Visit Time</span>
@@ -169,33 +164,33 @@
                 <!-- Modal -->
                 {{-- Approval Modal --}}
                 @foreach ($appointments as $appointment)   
-                <div class="modal fade auto-off" id="approveModal-{{ $appointment->id }}" tabindex="-1" role="dialog" aria-labelledby="demoModal-{{ $appointment->id }}" aria-hidden="true">
-                    <div class="modal-dialog animated zoomInDown modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title">Approval confirmation</h5>
-                                <button type="button px-4" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <p>Next, you will fill in the details of the <strong> facilities </strong> needed by guests</p>
-                            </div>
-                            <div class="modal-footer">
-                                <button data-toggle="modal" data-target="#facilityModal-{{ $appointment->id }}" type="submit" class="btn btn-primary" data-toggle="tooltip" title="Approve" data-dismiss="modal">
-                                    Continue
-                                </button>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <div class="modal fade auto-off" id="approveModal-{{ $appointment->id }}" tabindex="-1" role="dialog" aria-labelledby="demoModal-{{ $appointment->id }}" aria-hidden="true">
+                        <div class="modal-dialog animated zoomInDown modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Approval confirmation</h5>
+                                    <button type="button px-4" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Next, you will fill in the details of the <strong> facilities </strong> needed by guests</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button data-toggle="modal" data-target="#facilityModal-{{ $appointment->id }}" type="submit" class="btn btn-primary" data-toggle="tooltip" title="Approve" data-dismiss="modal">
+                                        Continue
+                                    </button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 @endforeach
                 <!-- Modal Ends -->
                 
                 <!-- Modal -->
                 {{-- Approval Modal --}}
-                    @foreach ($appointments as $appointment) 
+                @foreach ($appointments as $appointment) 
                     <div class="modal fade auto-off" id="facilityModal-{{ $appointment->id }}" tabindex="-1" role="dialog"  aria-hidden="true">
                         <div class="modal-dialog animated zoomInDown modal-dialog-centered" role="document">
                             <div class="modal-content">

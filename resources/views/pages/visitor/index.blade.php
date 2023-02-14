@@ -104,7 +104,7 @@
                         </div>
                         <div class="col-sm-4">
                             <select class="form-control mt-1" id="pic_id" name="pic_id" required>
-                                <option value="0">-- Select Department --</option>
+                                <option value="0">-- Select PIC --</option>
                             </select>
                         </div>
                     </div>
@@ -210,6 +210,7 @@
             success: function(room) {
                 console.log(room);
                 $('#room').empty();
+                $('#room').append(`<option value='null'>-- Select Room --</option>`);
                 $.each(room, function(key, value) {
                     $('#room').append(`<option value='${value.id}'> ${value.name}</option>`);
                 });

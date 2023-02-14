@@ -129,10 +129,10 @@ class AppointmentController extends Controller
 
     public function getRoom(Request $request)
     {
-        $date = date($request->date);
+        $date = $request->date;
 
         // get booked rooms
-        $roomBooked = Room::whereRaw("id NOT IN (SELECT room_id FROM room_details WHERE booking_date = '2023-02-14')")->get();
+        $roomBooked = Room::whereRaw("id NOT IN (SELECT room_id FROM room_details WHERE booking_date = '$date')")->get();
         
         return $roomBooked;
     }

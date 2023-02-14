@@ -24,11 +24,10 @@
               {{-- <th class="text-center">No</th> --}}
               <th class="text-center">PIC</th>
               <th class="text-center">Visit Purpose <small class="text-muted"> / 訪問目的</small></th>
-              <th class="text-center">Visit Plan<small class="text-muted"> / 見学プラン</small></th>
               <th class="text-center">Visit Date <small class="text-muted"> / 訪問日</small></th>
               <th class="text-center">PIC approval</th>
               <th class="text-center">Dept. Head approval</th>
-              <th class="text-center"></th>
+              <th class="text-center">QR Code</th>
             </tr>
           </thead>
           <tbody class="text-center">
@@ -39,8 +38,7 @@
                 {{-- <td class="display-4">{{ $loop->iteration }}</td> --}}
                 <td class="display-4">{{ $appointment->pic->name }}</td>
                 <td class="display-4">{{ $appointment->purpose }}</td>
-                <td class="display-4">{{ $appointment->frequency }}</td>
-                <td class="display-4">{{ Carbon\Carbon::parse($appointment->start_date)->toFormattedDateString() }} - {{ Carbon\Carbon::parse($appointment->end_date)->toFormattedDateString() }}</td>
+                <td class="display-4">{{ Carbon\Carbon::parse($appointment->date)->toFormattedDateString() }}</td>
                 
                 @if($appointment->pic_approval === 'pending' && $appointment->dh_approval === 'pending')
                   <td>
