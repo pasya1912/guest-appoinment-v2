@@ -99,6 +99,15 @@ class ApprovalController extends Controller
         return redirect()->back()->with('reject','Ticket has been rejected!');
     }
 
+    public function facilityDone(FacilityDetail $facility){
+
+        FacilityDetail::where('id', $facility->id)->update([
+            'status' => 'done'
+        ]);
+
+        return redirect()->back()->with('selesai','Kebutuhan untuk tiket' . $facility->appointment_id . 'telah siap!');
+    }
+
     public function qrScanView()
     {
         return view('pages.admin.qrcode', [

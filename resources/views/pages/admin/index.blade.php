@@ -60,7 +60,7 @@
                                 </button>
                                 
                                 {{-- apporval --}}
-                                <button data-toggle="modal" data-target="#approveModal-{{ $appointment->id }}" type="submit" class="btn btn-icons btn-inverse-success" data-toggle="tooltip" title="Approve">
+                                <button data-toggle="modal" data-target="#facilityModal-{{ $appointment->id }}" type="submit" class="btn btn-icons btn-inverse-success" data-toggle="tooltip" title="Approve">
                                     <i class="mdi mdi-check-circle"></i>
                                 </button>
                                 
@@ -164,7 +164,7 @@
                 <!-- Modal -->
                 {{-- Approval Modal --}}
                 @foreach ($appointments as $appointment)   
-                    <div class="modal fade auto-off" id="approveModal-{{ $appointment->id }}" tabindex="-1" role="dialog" aria-labelledby="demoModal-{{ $appointment->id }}" aria-hidden="true">
+                    <div class="modal fade auto-off" id="approveModal-{{ $appointment->id }}" tabindex="-1" role="dialog" aria-labelledby="approveModal-{{ $appointment->id }}" aria-hidden="true">
                         <div class="modal-dialog animated zoomInDown modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -191,7 +191,7 @@
                 <!-- Modal -->
                 {{-- Approval Modal --}}
                 @foreach ($appointments as $appointment) 
-                    <div class="modal fade auto-off" id="facilityModal-{{ $appointment->id }}" tabindex="-1" role="dialog"  aria-hidden="true">
+                    <div class="modal fade auto-off" id="facilityModal-{{ $appointment->id }}" tabindex="-1" role="dialog"  aria-hidden="true" aria-labelledby="facilityModal-{{ $appointment->id }}">
                         <div class="modal-dialog animated zoomInDown modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -224,8 +224,8 @@
                                                 </div>
                                                 <div class="tab-content" id="main_form">
                                                     <div class="tab-pane active" role="tabpanel" id="step1">
-                                                        {{-- <h4 class="text-center">Makanan</h4> --}}
-                                                        <div class="container ml-5">
+                                                        <h4 class="text-center">Makanan</h4>
+                                                        <div class="container ml-5 mt-5">
                                                             <div class="row">
                                                                 <div class="col-md-10">
                                                                     <div class="boxes">
@@ -254,8 +254,8 @@
                                                         </div>
                                                     </div>
                                                     <div class="tab-pane" role="tabpanel" id="step2">
-                                                        {{-- <h4 class="text-center">Minuman</h4> --}}
-                                                        <div class="container ml-5 ">
+                                                        <h4 class="text-center">Minuman</h4>
+                                                        <div class="container ml-5 mt-5">
                                                             <div class="row">
                                                                 <div class="col-md-10">
                                                                     <div class="boxes">
@@ -284,8 +284,8 @@
                                                         </div>
                                                     </div>
                                                     <div class="tab-pane" role="tabpanel" id="step3">
-                                                        {{-- <h4 class="text-center">Plant Tour</h4> --}}
-                                                        <div class="container ml-5 ">
+                                                        <h4 class="text-center">Plant Tour</h4>
+                                                        <div class="container ml-5 mt-5">
                                                             <div class="row">
                                                                 <div class="col-md-10">
                                                                     <div class="boxes">
@@ -314,8 +314,8 @@
                                                         </div>
                                                     </div>
                                                     <div class="tab-pane" role="tabpanel" id="step4">
-                                                        {{-- <h4 class="text-center">Parkir</h4> --}}
-                                                        <div class="container ml-5 ">
+                                                        <h4 class="text-center">Parkir</h4>
+                                                        <div class="container ml-5 mt-5">
                                                             <div class="row">
                                                                 <div class="col-md-10">
                                                                     <div class="boxes">

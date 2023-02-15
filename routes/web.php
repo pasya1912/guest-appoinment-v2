@@ -60,6 +60,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/qrScanView', 'ApprovalController@qrScanView')->name('qrScanView.index');
     Route::post('/qrScan', 'ApprovalController@qrScan')->name('qrScan.index');
     
+    // GA
+    Route::post('/facility-done/{facility}', 'ApprovalController@facilityDone')->name('facility.done');
+
     // logout
     Route::post('/logout-auth', 'Auth\LoginController@logout')->name('logout.auth');    
 });

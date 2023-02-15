@@ -6,6 +6,159 @@
 
 @section('content')
 
+@can('GA')
+<div class="row">
+  <div class="col-lg-12 grid-margin">
+
+    @if (session('selesai'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('selesai') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @endif
+
+    <div class="card">
+      <div class="card-body p-5">
+        <div class="row">
+          <div class="col-12">
+              <h4 class="card-title mb-5">Kebutuhan Tamu Hari ini <small class="text-muted"> / 
+                今日のゲストニーズ</small></h4>
+              @if (!$facilities->isEmpty())
+              @foreach ($facilities as $facility)
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                  <div class="panel panel-default">
+                      <div class="panel-heading" role="tab" id="headingOne">
+                          <h4 class="panel-title">
+                              <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-{{ $facility->id }}" aria-expanded="true" aria-controls="collapseOne">
+                                  Ticket ID : {{ $facility->appointment_id }} 
+                                  @if ($facility->date == date("Y-m-d"))
+                                  <span class="badge badge-pill badge-danger ml-3">Today!</span>
+                                  @endif
+                                </a>
+                          </h4>
+                      </div>
+                      <div id="collapse-{{ $facility->id }}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                          <div class="panel-body">
+                            <ul class="list-group">
+                              @if ($facility->snack_kering != 0 || $facility->snack_kering != null)  
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                  Snack Kering
+                                  <h4><span class="badge badge-lg badge-primary badge-pill"> Jumlah : {{ $facility->snack_kering }}</span></h4>
+                                </li>
+                              @endif
+                              @if ($facility->snack_basah != 0 || $facility->snack_basah != null)  
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                  Snack Basah
+                                  <h4><span class="badge badge-primary badge-pill"> Jumlah : {{ $facility->snack_basah }}</span></h4>
+                                </li>
+                              @endif
+                              @if ($facility->makan_siang != 0 || $facility->makan_siang != null)  
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                  Makan Siang
+                                  <h4><span class="badge badge-primary badge-pill"> Jumlah : {{ $facility->makan_siang }}</span></h4>
+                                </li>
+                              @endif
+                              @if ($facility->permen != 0 || $facility->permen != null)  
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                  Permen
+                                  <h4><span class="badge badge-primary badge-pill"> Jumlah : {{ $facility->permen }}</span></h4>
+                                </li>
+                              @endif
+                              @if ($facility->kopi != 0 || $facility->kopi != null)  
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                  Kopi
+                                  <h4><span class="badge badge-primary badge-pill"> Jumlah : {{ $facility->kopi }}</span></h4>
+                                </li>
+                              @endif
+                              @if ($facility->teh != 0 || $facility->teh != null)  
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                  Teh
+                                  <h4><span class="badge badge-primary badge-pill"> Jumlah : {{ $facility->teh }}</span></h4>
+                                </li>
+                              @endif
+                              @if ($facility->soft_drink != 0 || $facility->soft_drink != null)  
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                  Soft Drink
+                                  <h4><span class="badge badge-primary badge-pill"> Jumlah : {{ $facility->soft_drink }}</span></h4>
+                                </li>
+                              @endif
+                              @if ($facility->air_mineral != 0 || $facility->air_mineral != null)  
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                  Air Mineral
+                                  <h4><span class="badge badge-primary badge-pill"> Jumlah : {{ $facility->air_mineral }}</span></h4>
+                                </li>
+                              @endif
+                              @if ($facility->helm != 0 || $facility->helm != null)  
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                  Helm
+                                  <h4><span class="badge badge-primary badge-pill"> Jumlah : {{ $facility->helm }}</span></h4>
+                                </li>
+                              @endif
+                              @if ($facility->handuk != 0 || $facility->handuk != null)  
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                  Handuk
+                                  <h4><span class="badge badge-primary badge-pill"> Jumlah : {{ $facility->handuk }}</span></h4>
+                                </li>
+                              @endif
+                              @if ($facility->speaker != 0 || $facility->speaker != null)  
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                  Speaker
+                                  <h4><span class="badge badge-primary badge-pill"> Jumlah : {{ $facility->speaker }}</span></h4>
+                                </li>
+                              @endif
+                              @if ($facility->speaker_wireless != 0 || $facility->speaker_wireless != null)  
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                  Speaker Wireless
+                                  <h4><span class="badge badge-primary badge-pill"> Jumlah : {{ $facility->speaker_wireless }}</span></h4>
+                                </li>
+                              @endif
+                              @if ($facility->mobil != 0 || $facility->mobil != null)  
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                  Parkir Mobil
+                                  <h4><span class="badge badge-primary badge-pill"> Jumlah : {{ $facility->mobil }}</span></h4>
+                                </li>
+                              @endif
+                              @if ($facility->motor != 0 || $facility->motor != null)  
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                  Parkir Motor
+                                  <h4><span class="badge badge-primary badge-pill"> Jumlah : {{ $facility->motor }}</span></h4>
+                                </li>
+                              @endif
+                              @if ($facility->mini_bus != 0 || $facility->mini_bus != null)  
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                  Parkir Mini Bus
+                                  <h4><span class="badge badge-primary badge-pill"> Jumlah : {{ $facility->mini_bus }}</span></h4>
+                                </li>
+                              @endif
+                              @if ($facility->bus != 0 || $facility->bus != null)  
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                  Parkir Bus
+                                  <h4><span class="badge badge-primary badge-pill"> Jumlah : {{ $facility->bus }}</span></h4>
+                                </li>
+                              @endif
+                            </ul>
+                            <form action="/facility-done/{{ $facility->appointment_id }}" method="post">
+                              {{ csrf_field() }}
+                              <button class="btn btn-outline-primary btn-lg mt-3">Selesai Disiapkan</button>
+                            </form>
+                          </div>
+                      </div>
+                  </div>
+                </div>
+              @endforeach
+              @else
+                  <h3 class="text-center">Tidak ada yang perlu disiapkan hari ini :)</h3>
+              @endif
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+@endcan
+
 @can('approver')
 <div class="row">
   <div class="col-lg-12 grid-margin">
@@ -37,7 +190,7 @@
               <td class="display-4">{{ $appointment->name }}</td>
               <td class="display-4">{{ $appointment->purpose }}</td>
               <td class="display-4">{{ Carbon\Carbon::parse($appointment->end_date)->toFormattedDateString() }}</td>
-              <td class="display-4">{{ $appointment->pic }}</td>
+              <td class="display-4">{{ $appointment->pic->name }}</td>
               
               @if($appointment->checkin->status === 'in')
               <td>
@@ -127,12 +280,16 @@
             <div class="card-body p-5">
               <div class="row container-fluid">
                 <div class="col-10">
-                  <h4 class="card-title mb-5">Active Ticket<small class="text-muted"> / Tiket yang masih aktif</small></h4>
+                  <h4 class="card-title mb-5">Today's Appointment<small class="text-muted"> / Janji Temu Hari ini</small></h4>
                 </div>
                 <div class="col-2 text-right">
                   <form action="{{ route('appointment.export') }}" method="post">
                     {{ csrf_field() }}
-                    <button type="submit" class="btn btn-info"><i class="mdi mdi-file-export pr-1"></i>Export</button>
+                    @if(!$appointments->isEmpty())
+                      <button type="submit" class="btn btn-info"><i class="mdi mdi-file-export pr-1"></i>Export</button>
+                    @else
+                      <button type="submit" class="btn btn-info" disabled><i class="mdi mdi-file-export pr-1"></i>Export</button>
+                    @endif
                   </form>
                 </div>
               </div>
@@ -156,7 +313,7 @@
                     <td class="display-4">{{ $appointment->name }}</td>
                     <td class="display-4">{{ $appointment->purpose }}</td>
                     <td class="display-4">{{ Carbon\Carbon::parse($appointment->date)->toFormattedDateString() }}</td>
-                    <td class="display-4">{{ $appointment->pic }}</td>
+                    <td class="display-4">{{ $appointment->pic->name }}</td>
                     
                     @if($appointment->checkin->status === 'in')
                     <td>

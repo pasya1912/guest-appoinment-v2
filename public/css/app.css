@@ -20291,39 +20291,36 @@ input[type="checkbox"]:checked + label:before {
     }
 }
 
-.d-flex{
-	display: flex;
+.d-flex {
+    display: flex;
 }
-.justify-content-center{
-	justify-content: center;
+.justify-content-center {
+    justify-content: center;
 }
-.align-items-center{
-	align-items: center;
+.align-items-center {
+    align-items: center;
 }
 
 /*---------signup-step-------------*/
-.bg-color{
-	background-color: #333;
+.bg-color {
+    background-color: #333;
 }
-.signup-step-container{
-	padding: 150px 0px;
-	padding-bottom: 60px;
+.signup-step-container {
+    padding: 150px 0px;
+    padding-bottom: 60px;
 }
 
+.wizard .nav-tabs {
+    position: relative;
+    margin-bottom: 0;
+    border-bottom-color: transparent;
+}
 
-
-
-    .wizard .nav-tabs {
-        position: relative;
-        margin-bottom: 0;
-        border-bottom-color: transparent;
-    }
-
-    .wizard > div.wizard-inner {
-            position: relative;
+.wizard > div.wizard-inner {
+    position: relative;
     margin-bottom: 50px;
     text-align: center;
-    }
+}
 
 .connecting-line {
     height: 2px;
@@ -20337,7 +20334,9 @@ input[type="checkbox"]:checked + label:before {
     z-index: 1;
 }
 
-.wizard .nav-tabs > li.active > a, .wizard .nav-tabs > li.active > a:hover, .wizard .nav-tabs > li.active > a:focus {
+.wizard .nav-tabs > li.active > a,
+.wizard .nav-tabs > li.active > a:hover,
+.wizard .nav-tabs > li.active > a:focus {
     color: #555555;
     cursor: default;
     border: 0;
@@ -20360,19 +20359,19 @@ span.round-tab {
     font-weight: 500;
     border: 1px solid #ddd;
 }
-span.round-tab i{
-    color:#555555;
+span.round-tab i {
+    color: #555555;
 }
 .wizard li.active span.round-tab {
-        background: #0db02b;
+    background: #0db02b;
     color: #fff;
     border-color: #0db02b;
 }
-.wizard li.active span.round-tab i{
+.wizard li.active span.round-tab i {
     color: #5bc0de;
 }
-.wizard .nav-tabs > li.active > a i{
-	color: #0db02b;
+.wizard .nav-tabs > li.active > a i {
+    color: #0db02b;
 }
 
 .wizard .nav-tabs > li {
@@ -20391,8 +20390,6 @@ span.round-tab i{
     transition: 0.1s ease-in-out;
 }
 
-
-
 .wizard .nav-tabs > li a {
     width: 30px;
     height: 30px;
@@ -20403,8 +20400,8 @@ span.round-tab i{
     position: relative;
     top: 0;
 }
-.wizard .nav-tabs > li a i{
-	position: absolute;
+.wizard .nav-tabs > li a i {
+    position: absolute;
     top: -15px;
     font-style: normal;
     font-weight: 400;
@@ -20416,42 +20413,41 @@ span.round-tab i{
     color: #000;
 }
 
-    .wizard .nav-tabs > li a:hover {
-        background: transparent;
-    }
+.wizard .nav-tabs > li a:hover {
+    background: transparent;
+}
 
 .wizard .tab-pane {
     position: relative;
     padding-top: 20px;
 }
 
-
 .wizard h3 {
     margin-top: 0;
 }
 .prev-step,
-.next-step{
+.next-step {
     font-size: 13px;
     padding: 8px 24px;
     border: none;
     border-radius: 4px;
     margin-top: 30px;
 }
-.next-step{
-	background-color: #0db02b;
+.next-step {
+    background-color: #0db02b;
 }
-.skip-btn{
-	background-color: #cec12d;
+.skip-btn {
+    background-color: #cec12d;
 }
-.step-head{
+.step-head {
     font-size: 20px;
     text-align: center;
     font-weight: 500;
     margin-bottom: 20px;
 }
-.term-check{
-	font-size: 14px;
-	font-weight: 400;
+.term-check {
+    font-size: 14px;
+    font-weight: 400;
 }
 .custom-file {
     position: relative;
@@ -20475,13 +20471,13 @@ span.round-tab i{
     left: 0;
     z-index: 1;
     height: 40px;
-    padding: .375rem .75rem;
+    padding: 0.375rem 0.75rem;
     font-weight: 400;
     line-height: 2;
     color: #495057;
     background-color: #fff;
     border: 1px solid #ced4da;
-    border-radius: .25rem;
+    border-radius: 0.25rem;
 }
 .custom-file-label::after {
     position: absolute;
@@ -20491,25 +20487,24 @@ span.round-tab i{
     z-index: 3;
     display: block;
     height: 38px;
-    padding: .375rem .75rem;
+    padding: 0.375rem 0.75rem;
     line-height: 2;
     color: #495057;
     content: "Browse";
     background-color: #e9ecef;
     border-left: inherit;
-    border-radius: 0 .25rem .25rem 0;
+    border-radius: 0 0.25rem 0.25rem 0;
 }
-.footer-link{
-	margin-top: 30px;
+.footer-link {
+    margin-top: 30px;
 }
-.all-info-container{
-
+.all-info-container {
 }
-.list-content{
-	margin-bottom: 10px;
+.list-content {
+    margin-bottom: 10px;
 }
-.list-content a{
-	padding: 10px 15px;
+.list-content a {
+    padding: 10px 15px;
     width: 100%;
     display: inline-block;
     background-color: #f5f5f5;
@@ -20518,37 +20513,39 @@ span.round-tab i{
     font-weight: 400;
     border-radius: 4px;
 }
-.list-content a[aria-expanded="true"] i{
-	transform: rotate(180deg);
+.list-content a[aria-expanded="true"] i {
+    transform: rotate(180deg);
 }
-.list-content a i{
-	text-align: right;
+.list-content a i {
+    text-align: right;
     position: absolute;
     top: 15px;
     right: 10px;
     transition: 0.5s;
 }
-.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+.form-control[disabled],
+.form-control[readonly],
+fieldset[disabled] .form-control {
     background-color: #fdfdfd;
 }
-.list-box{
-	padding: 10px;
+.list-box {
+    padding: 10px;
 }
-.signup-logo-header .logo_area{
-	width: 200px;
+.signup-logo-header .logo_area {
+    width: 200px;
 }
-.signup-logo-header .nav > li{
-	padding: 0;
+.signup-logo-header .nav > li {
+    padding: 0;
 }
-.signup-logo-header .header-flex{
-	display: flex;
-	justify-content: center;
-	align-items: center;
+.signup-logo-header .header-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.list-inline li{
+.list-inline li {
     display: inline-block;
 }
-.pull-right{
+.pull-right {
     float: right;
 }
 /*-----------custom-checkbox-----------*/
@@ -20590,23 +20587,89 @@ input[type="checkbox"]:checked::before{
     border-color: #18ba60;
 } */
 
+@media (max-width: 767px) {
+    .sign-content h3 {
+        font-size: 40px;
+    }
+    .wizard .nav-tabs > li a i {
+        display: none;
+    }
+    .signup-logo-header .navbar-toggle {
+        margin: 0;
+        margin-top: 8px;
+    }
+    .signup-logo-header .logo_area {
+        margin-top: 0;
+    }
+    .signup-logo-header .header-flex {
+        display: block;
+    }
+}
 
-@media (max-width: 767px){
-	.sign-content h3{
-		font-size: 40px;
-	}
-	.wizard .nav-tabs > li a i{
-		display: none;
-	}
-	.signup-logo-header .navbar-toggle{
-		margin: 0;
-		margin-top: 8px;
-	}
-	.signup-logo-header .logo_area{
-		margin-top: 0;
-	}
-	.signup-logo-header .header-flex{
-		display: block;
-	}
+a:hover,
+a:focus {
+    text-decoration: none;
+    outline: none;
+}
+#accordion .panel {
+    border: none;
+    border-radius: 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    margin: 0 0 12px 0;
+    position: relative;
+}
+#accordion .panel:before {
+    content: "";
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(to bottom, #688e26 0%, #ff816a 100%);
+    position: absolute;
+    top: 0;
+    left: -2px;
+}
+#accordion .panel-heading {
+    padding: 0;
+    background: #fff;
+    position: relative;
+}
+#accordion .panel-title a {
+    display: block;
+    padding: 15px 55px 15px 30px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #550527;
+    border: none;
+    margin: 0;
+    position: relative;
+}
+#accordion .panel-title a:before,
+#accordion .panel-title a.collapsed:before {
+    content: "\f068";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    border-radius: 50%;
+    font-size: 15px;
+    font-weight: normal;
+    color: #688e26;
+    text-align: center;
+    border: 1px solid #688e26;
+    position: absolute;
+    top: 50%;
+    right: 25px;
+    transform: translateY(-50%);
+    transition: all 0.5s ease 0s;
+}
+#accordion .panel-title a.collapsed:before {
+    content: "\f067";
+}
+#accordion .panel-body {
+    padding: 0 30px 15px;
+    border: none;
+    font-size: 14px;
+    color: #305275;
+    line-height: 28px;
 }
 /*# sourceMappingURL=app.css.map*/

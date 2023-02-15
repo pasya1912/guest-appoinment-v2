@@ -26,11 +26,12 @@ class CreateFacilityDetailsTable extends Migration
             $table->integer('helm')->nullable();
             $table->integer('handuk')->nullable();
             $table->integer('speaker')->nullable();
-            $table->integer('speker_wireless')->nullable();
+            $table->integer('speaker_wireless')->nullable();
             $table->integer('mobil')->nullable();
             $table->integer('motor')->nullable();
             $table->integer('mini_bus')->nullable();
             $table->integer('bus')->nullable();
+            $table->string('status')->default('pending');
             $table->bigInteger('appointment_id')->unsigned();
             $table->foreign('appointment_id')->references('id')->on('appointments');
             $table->timestamps();

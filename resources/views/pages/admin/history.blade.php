@@ -32,8 +32,8 @@
             <tr>
               <th class="text-center">No</th>
               <th class="text-center">Visitor Name <small class="text-muted"> / 訪問者名</small></th>
+              <th class="text-center">Visitor Company <small class="text-muted"> / 合計ゲスト</small></th>
               <th class="text-center">Visit Purpose <small class="text-muted"> / 訪問目的</small></th>
-              <th class="text-center">Visit Plan<small class="text-muted"> / 見学プラン</small></th>
               <th class="text-center">Visit Date <small class="text-muted"> / 訪問日</small></th>
               <th class="text-center">Status</th>
               <th></th>
@@ -46,9 +46,9 @@
             <tr>
               <td class="display-4">{{ $loop->iteration }}</td>
               <td class="display-4">{{ $appointment->name }}</td>
+              <td class="display-4">{{ $appointment->user->company }}</td>
               <td class="display-4">{{ $appointment->purpose }}</td>
-              <td class="display-4">{{ $appointment->frequency }}</td>
-              <td class="display-4">{{ Carbon\Carbon::parse($appointment->start_date)->toFormattedDateString() }} - {{ Carbon\Carbon::parse($appointment->end_date)->toFormattedDateString() }}</td>
+              <td class="display-4">{{ Carbon\Carbon::parse($appointment->date)->toFormattedDateString() }}</td>
               {{-- <td class="display-4">{{ $appointment->guest }}</td> --}}
               @if($appointment->pic_approval === "pending")
                 <td><span class="badge badge-pill badge-warning p-2 text-light">{{ $appointment->pic_approval }}</span></td>

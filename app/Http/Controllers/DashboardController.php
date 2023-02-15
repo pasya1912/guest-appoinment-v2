@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Checkin;
+use App\FacilityDetail;
 use App\Models\Appointment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -25,7 +27,13 @@ class DashboardController extends Controller
                         ->where('date', $current_date)
                         ->where('checkin.status', 'in')->count();
         $today_visitor = $today_appointment->sum('guest');
-        
+
+        $facilities = DB::table('facility_details')->join('appointments', 'appointments.id', '=', 'facility_details.appointment_id')
+                            ->where('pic_approval','approved')
+                            ->where('dh_approval','approved')
+                            ->where('status','pending')
+                            ->get();
+
         if($user_role === 'admin'){
             return view('dashboard',[
                 'appointments' => $today_appointment->where('pic_approval','approved')->where('dh_approval','approved'),
@@ -50,6 +58,10 @@ class DashboardController extends Controller
                 'today_visitor' => $today_visitor,
                 'today_appointment' => $today_appointment->where('user_id',$user_id)->where('pic_approval','approved')->where('dh_approval','approved')->count(),
                 'visitor_inside' => $visitor_inside,
+            ]);
+        }else{
+            return view('dashboard',[
+                'facilities' => $facilities
             ]);
         }
     }
