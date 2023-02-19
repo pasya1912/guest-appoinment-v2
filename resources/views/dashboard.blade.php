@@ -23,7 +23,7 @@
       <div class="card-body p-5">
         <div class="row">
           <div class="col-12">
-              <h4 class="card-title mb-5">Kebutuhan Tamu Hari ini <small class="text-muted"> / 
+              <h4 class="card-title mb-5">Kebutuhan Tamu<small class="text-muted"> / 
                 今日のゲストニーズ</small></h4>
               @if (!$facilities->isEmpty())
               @foreach ($facilities as $facility)
@@ -34,7 +34,7 @@
                               <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-{{ $facility->id }}" aria-expanded="true" aria-controls="collapseOne">
                                   Ticket ID : {{ $facility->appointment_id }} 
                                   @if ($facility->date == date("Y-m-d"))
-                                  <span class="badge badge-pill badge-danger ml-3">Today!</span>
+                                  <span class="badge badge-pill badge-danger ml-3">Hari ini, jam : {{ $facility->time }}</span>
                                   @endif
                                 </a>
                           </h4>
@@ -166,7 +166,7 @@
       <div class="card-body p-5">
         <div class="row">
           <div class="col-10">
-            <h4 class="card-title mb-5">Today's Appointment <small class="text-muted"> / 
+            <h4 class="card-title mb-5">Today's Appointment <small class="text-muted"> / Janji Temu Hari ini / 
               今日の予定</small></h4>
           </div>
         </div>
@@ -373,7 +373,7 @@
                   @endforeach
                   <!-- Modal Ends -->
 
-                  <h4 class="card-title mb-5">Today's Appointment<small class="text-muted"> / 
+                  <h4 class="card-title mb-5">Today's Appointment<small class="text-muted"> / Janji Temu Hari ini / 
                     今日の予定</small></h4>
                 </div>
               </div>
@@ -393,7 +393,7 @@
                   
                   <tr>
                     <td class="display-4">{{ $loop->iteration }}</td>
-                    <td class="display-4">{{ $appointment->pic }}</td>
+                    <td class="display-4">{{ $appointment->pic->name }}</td>
                     <td class="display-4">{{ $appointment->purpose }}</td>
                     <td class="display-4">{{ Carbon\Carbon::parse($appointment->date)->toFormattedDateString() }}</td>
                     <td>

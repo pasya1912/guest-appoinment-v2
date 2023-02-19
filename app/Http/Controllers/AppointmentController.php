@@ -29,6 +29,9 @@ class AppointmentController extends Controller
 
     public function create(Request $request)
     {
+
+        $pic = User::select('occupation')->where('id',$request->pic_id)->first();
+        
         $request->validate([
             'nama' => 'required',
             'purpose-1' => 'required_without_all:purpose-2,purpose-3,purpose-4',
@@ -74,6 +77,13 @@ class AppointmentController extends Controller
             $doc2Name = '';
         }
 
+        // if pic == dept head (2), only 1 step approval
+        if($pic->occupation == 2){
+            $pic_approval = 'approved';
+        }else{
+            $pic_approval = 'pending';
+        }
+
         $appointment = Appointment::create([
             'name' => $request->nama,
             'purpose' => $purpose,
@@ -84,7 +94,7 @@ class AppointmentController extends Controller
             'pic_dept' => $request->pic_dept,
             'doc' => $docName,
             'selfie' => $doc2Name,
-            'pic_approval' => 'pending',
+            'pic_approval' => $pic_approval,
             'dh_approval' => 'pending',
             'user_id' => auth()->user()->id
         ]);

@@ -32,7 +32,7 @@
                 <table class="table table-responsive-lg" id="allTicket">
                     <thead>
                         <tr>
-                            <th class="text-center">No</th>
+                            <th class="text-center">PIC</th>
                             <th class="text-center">Visitor Name <small class="text-muted"> / 訪問者名</small></th>
                             <th class="text-center">Visitor Company <small class="text-muted"> / 合計ゲスト</small></th>
                             <th class="text-center">Total Guest <small class="text-muted"> / 会社</small></th>
@@ -46,7 +46,7 @@
                         @foreach ($appointments as $appointment)
                         
                         <tr>
-                            <td class="display-4">{{ $loop->iteration }}</td>
+                            <td class="display-4">{{ $appointment->pic->name}}</td>
                             <td class="display-4">{{ $appointment->name }}</td>
                             <td class="display-4">{{ $appointment->user->company }}</td>
                             <td class="display-4">{{ $appointment->guest }}</td>
@@ -60,9 +60,22 @@
                                 </button>
                                 
                                 {{-- apporval --}}
-                                <button data-toggle="modal" data-target="#facilityModal-{{ $appointment->id }}" type="submit" class="btn btn-icons btn-inverse-success" data-toggle="tooltip" title="Approve">
-                                    <i class="mdi mdi-check-circle"></i>
-                                </button>
+                                {{-- if the pic of ticket is spv down (1) and the auth user is manager up, then show the approval button modal, because the ticket is appear when already approved by the pic , when the ticket not approved yet by the pic, the ticket should not appear in the list--}}
+                                @if($appointment->pic->occupation == 1  && auth()->user()->occupation == 2 )
+                                    <button data-toggle="modal" data-target="#approveModal-{{ $appointment->id }}" type="submit" class="btn btn-icons btn-inverse-success" data-toggle="tooltip" title="Approve">
+                                        <i class="mdi mdi-check-circle"></i>
+                                    </button>
+                                {{-- if the pic of the ticket is spv down and the auth user is spv (the pic itself) then show the facility button modal --}}
+                                @elseif($appointment->pic->occupation == 1 && auth()->user()->occupation == 1)
+                                    <button data-toggle="modal" data-target="#facilityModal-{{ $appointment->id }}" type="submit" class="btn btn-icons btn-inverse-success" data-toggle="tooltip" title="Approve">
+                                        <i class="mdi mdi-check-circle"></i>
+                                    </button>
+                                {{-- if the pic of the ticket is manager up and the auth user is manager (the pic itself) then show the facility button modal --}}
+                                @elseif($appointment->pic->occupation == 2 && auth()->user()->occupation == 2)
+                                    <button data-toggle="modal" data-target="#facilityModal-{{ $appointment->id }}" type="submit" class="btn btn-icons btn-inverse-success" data-toggle="tooltip" title="Approve">
+                                        <i class="mdi mdi-check-circle"></i>
+                                    </button>
+                                @endif
                                 
                                 {{-- reject --}}
                                 <button data-toggle="modal" data-target="#rejectModal-{{ $appointment->id }}" type="submit" class="btn btn-icons btn-inverse-danger" data-toggle="tooltip" title="Reject">
@@ -174,14 +187,15 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <p>Next, you will fill in the details of the <strong> facilities </strong> needed by guests</p>
+                                    <p>Are you sure want to <strong>approve</strong> this ticket?</p>
                                 </div>
-                                <div class="modal-footer">
-                                    <button data-toggle="modal" data-target="#facilityModal-{{ $appointment->id }}" type="submit" class="btn btn-primary" data-toggle="tooltip" title="Approve" data-dismiss="modal">
-                                        Continue
-                                    </button>
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                </div>
+                                <form action="/approval/approve/{{ $appointment->id }}" method="post" class="d-inline">
+                                    {{ csrf_field() }}
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary">Confirm</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -189,7 +203,7 @@
                 <!-- Modal Ends -->
                 
                 <!-- Modal -->
-                {{-- Approval Modal --}}
+                {{-- Facility Modal --}}
                 @foreach ($appointments as $appointment) 
                     <div class="modal fade auto-off" id="facilityModal-{{ $appointment->id }}" tabindex="-1" role="dialog"  aria-hidden="true" aria-labelledby="facilityModal-{{ $appointment->id }}">
                         <div class="modal-dialog animated zoomInDown modal-dialog-centered" role="document">

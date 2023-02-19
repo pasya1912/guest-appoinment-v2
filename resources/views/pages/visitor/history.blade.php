@@ -17,7 +17,7 @@
     @endif
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title mb-5">Ticket List <small class="text-muted"> / チケット一覧</small></h4>
+        <h4 class="card-title mb-5">Ticket List <small class="text-muted"> / Daftar Tiket / チケット一覧</small></h4>
         <table class="table table-responsive-lg" id="allTicket">
           <thead>
             <tr>
@@ -74,7 +74,7 @@
                   @php
 
                       $current_date = date("Y-m-d");
-                      $end_date = date($appointment->end_date);
+                      $end_date = date($appointment->date);
                       
                   @endphp
                   @if ($current_date > $end_date)

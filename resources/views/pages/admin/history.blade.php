@@ -50,12 +50,22 @@
               <td class="display-4">{{ $appointment->purpose }}</td>
               <td class="display-4">{{ Carbon\Carbon::parse($appointment->date)->toFormattedDateString() }}</td>
               {{-- <td class="display-4">{{ $appointment->guest }}</td> --}}
-              @if($appointment->pic_approval === "pending")
-                <td><span class="badge badge-pill badge-warning p-2 text-light">{{ $appointment->pic_approval }}</span></td>
-              @elseif($appointment->pic_approval === "approved")
-                <td><span class="badge badge-pill badge-success p-2 text-light">{{ $appointment->pic_approval }}</span></td>
-              @else
-                <td><span class="badge badge-pill badge-danger p-2 text-light">{{ $appointment->pic_approval }}</span></td>
+              @if($user->occupation == 1)
+                @if($appointment->pic_approval === "pending")
+                  <td><span class="badge badge-pill badge-warning p-2 text-light">{{ $appointment->pic_approval }}</span></td>
+                @elseif($appointment->pic_approval === "approved")
+                  <td><span class="badge badge-pill badge-success p-2 text-light">{{ $appointment->pic_approval }}</span></td>
+                @else
+                  <td><span class="badge badge-pill badge-danger p-2 text-light">{{ $appointment->pic_approval }}</span></td>
+                @endif
+              @elseif($user->occupation == 2)
+                @if($appointment->dh_approval === "pending")
+                  <td><span class="badge badge-pill badge-warning p-2 text-light">{{ $appointment->dh_approval }}</span></td>
+                @elseif($appointment->dh_approval === "approved")
+                  <td><span class="badge badge-pill badge-success p-2 text-light">{{ $appointment->dh_approval }}</span></td>
+                @else
+                  <td><span class="badge badge-pill badge-danger p-2 text-light">{{ $appointment->dh_approval }}</span></td>
+                @endif
               @endif
               
               <td class="display-4">
