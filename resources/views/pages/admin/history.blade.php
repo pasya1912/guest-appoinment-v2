@@ -151,6 +151,10 @@
                                                 <span class="text-muted">Total Visitor</span>
                                                 <span class="font-weight-bold">{{ $appointment->guest }}</span>
                                             </div>
+                                            <div class="d-flex justify-content-between">
+                                                <span class="text-muted">Assigned Room</span>
+                                                <span class="font-weight-bold">{{isset($appointment->room_detail) ? $appointment->room_detail->room->name : '-' }}</span>
+                                            </div>
 
                                             <div class="mb-3">
                                                 <hr class="new1">

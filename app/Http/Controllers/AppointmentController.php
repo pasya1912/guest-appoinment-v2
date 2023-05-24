@@ -38,11 +38,11 @@ class AppointmentController extends Controller
             'purpose-2' => 'required_without_all:purpose-1,purpose-3,purpose-4',
             'purpose-3' => 'required_without_all:purpose-1,purpose-2,purpose-4',
             'purpose-4' => 'required_without_all:purpose-1,purpose-2,purpose-3',
-            'date' => 'required',
+            'date' => 'required|date|after_or_equal:'.date('Y-m-d'),
             'time' => 'required',
             'jumlahTamu' => 'required',
             'pic_id' => 'required',
-            'pic_dept' => 'required',
+            'pic_dept' => 'required'
         ]);
 
         $purpose = '';
@@ -129,6 +129,7 @@ class AppointmentController extends Controller
             $appointments = Appointment::latest()->where('user_id', auth()->user()->id)->get();
             //get the pic name laravel 5
             $appointments->load('pic')->toArray();
+
 
             return view('pages.visitor.history',[
                 'appointments' => $appointments,

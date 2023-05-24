@@ -53,7 +53,7 @@
                             <label for="inputEmail3" class="col-form-label">Select Date <small class="text-muted pl-0">/ Pilih Tanggal / 日付を選択</small></label>
                         </div>
                         <div class="col-md-8">
-                            <input type="date" name="date" id="date" class="form-control mt-1"/>
+                            <input type="date" name="date" id="date" min="{{date('Y-m-d')}}" class="form-control mt-1"/>
                             <small id="emailHelp" class="form-text text-muted">Select Date</small>
                         </div>
                     </div>
