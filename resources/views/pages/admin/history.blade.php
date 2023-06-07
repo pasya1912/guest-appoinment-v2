@@ -52,7 +52,6 @@
                                         {{-- <td class="display-4">{{ $appointment->guest }}</td> --}}
 
                                         @if ($appointment->pic_approval == 'pending' && $appointment->dh_approval == 'pending')
-
                                             <td class="display-4">
                                                 <span class="badge badge-warning">Pending</span>
                                             </td>
@@ -148,12 +147,27 @@
                                                 <span class="font-weight-bold">{{ $appointment->time }}</span>
                                             </div>
                                             <div class="d-flex justify-content-between">
+                                                <span class="text-muted">Visit Out Time</span>
+                                                <span class="font-weight-bold">{{ $appointment->time_end }}</span>
+                                            </div>
+                                            <div class="d-flex justify-content-between">
                                                 <span class="text-muted">Total Visitor</span>
                                                 <span class="font-weight-bold">{{ $appointment->guest }}</span>
                                             </div>
                                             <div class="d-flex justify-content-between">
                                                 <span class="text-muted">Assigned Room</span>
-                                                <span class="font-weight-bold">{{isset($appointment->room_detail) ? $appointment->room_detail->room->name : '-' }}</span>
+                                                <span
+                                                    class="font-weight-bold">{{ isset($appointment->room_detail) ? $appointment->room_detail->room->name : '-' }}</span>
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <span class="text-muted">Room Time</span>
+                                                <span
+                                                    class="font-weight-bold">{{ isset($appointment->room_detail) ? $appointment->room_detail->booking_time : '-' }}</span>
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <span class="text-muted">Room Time Out</span>
+                                                <span
+                                                    class="font-weight-bold">{{ isset($appointment->room_detail) ? $appointment->room_detail->booking_time_end : '-' }}</span>
                                             </div>
 
                                             <div class="mb-3">
@@ -164,214 +178,136 @@
                                                 <span class="font-weight-bold">PIC</span>
                                                 <span class="font-weight-bold">{{ $appointment->pic->name }}</span>
                                             </div>
-                                            <div class="row d-flex justify-content-center my-5">
+                                            <div class="row d-flex justify-content-center">
 
                                                 <div class="col-md-12">
-                                                    <div class="wizard">
-                                                        <div class="wizard-inner">
-                                                            <div class="connecting-line"></div>
-                                                            <ul class="nav nav-tabs pr-3" role="tablist">
-                                                                <li role="presentation" class="active">
-                                                                    <a href="#step1-non-history" data-toggle="tab" aria-controls="step1-non-history"
-                                                                        role="tab" aria-expanded="true"><span
-                                                                            class="round-tab">1 </span> <i
-                                                                            class="pl-4">Makanan</i></a>
-                                                                </li>
-                                                                <li role="presentation" class="disabled">
-                                                                    <a href="#step2-non-history" data-toggle="tab" aria-controls="step2-non-history"
-                                                                        role="tab" aria-expanded="false"><span
-                                                                            class="round-tab">2</span> <i
-                                                                            class="pl-4">Minuman</i></a>
-                                                                </li>
-                                                                <li role="presentation" class="disabled">
-                                                                    <a href="#step3-non-history" data-toggle="tab" aria-controls="step3-non-history"
-                                                                        role="tab"><span class="round-tab">3</span> <i
-                                                                            class="pl-4">Plan Tour</i></a>
-                                                                </li>
-                                                                <li role="presentation" class="disabled">
-                                                                    <a href="#step4-non-history" data-toggle="tab" aria-controls="step4-non-history"
-                                                                        role="tab"><span class="round-tab">4</span> <i
-                                                                            class="pl-4">Parkir</i></a>
-                                                                </li>
 
-                                                            </ul>
-                                                        </div>
-                                                        <div class="tab-content" id="main_form">
-                                                            <div class="tab-pane active" role="tabpanel" id="step1-non-history">
-                                                                <h4 class="text-center">Makanan</h4>
-                                                                <div class="container ml-5 mt-5">
-                                                                    <div class="row">
-                                                                        <div class="col-md-10">
-                                                                            <div class="boxes">
-                                                                                <input type="checkbox" id="dry-food-non-history"
-                                                                                    name="dry-food-non-history"
-                                                                                    <?= $appointment->facility_detail != null && $appointment->facility_detail->snack_kering > 0 ? 'checked' : '' ?>
-                                                                                    disabled>
+                                                    <input type="checkbox" id="dry-food-non-history"
+                                                        name="dry-food-non-history"
+                                                        <?= $appointment->facility_detail != null && $appointment->facility_detail->snack_kering > 0 ? 'checked' : '' ?>
+                                                        disabled>
 
-                                                                                <label for="dry-food-non-history">Snack Kering :
-                                                                                    <span>{{ $appointment->facility_detail->snack_kering ?? '0' }}</label>
+                                                    <label for="dry-food-non-history">Snack Kering :
+                                                        <span>{{ $appointment->facility_detail->snack_kering ?? '0' }}</label>
 
 
-                                                                                <input type="checkbox" id="wet-food-non-history"
-                                                                                    name="wet-food-non-history"
-                                                                                    <?= $appointment->facility_detail != null && $appointment->facility_detail->snack_basah > 0 ? 'checked' : '' ?>
-                                                                                    disabled>
-                                                                                <label for="wet-food-non-history">Snack Basah:
-                                                                                    <span>{{ $appointment->facility_detail->snack_basah ?? '0' }}</label>
+                                                    <input type="checkbox" id="wet-food-non-history"
+                                                        name="wet-food-non-history"
+                                                        <?= $appointment->facility_detail != null && $appointment->facility_detail->snack_basah > 0 ? 'checked' : '' ?>
+                                                        disabled>
+                                                    <label for="wet-food-non-history">Snack Basah:
+                                                        <span>{{ $appointment->facility_detail->snack_basah ?? '0' }}</label>
 
-                                                                                <input type="checkbox" id="lunch-non-history"
-                                                                                    name="lunch-non-history"
-                                                                                    <?= $appointment->facility_detail != null && $appointment->facility_detail->makan_siang > 0 ? 'checked' : '' ?>
-                                                                                    disabled>
-                                                                                <label for="lunch-non-history">Makan Siang :
-                                                                                    <span>{{ $appointment->facility_detail->makan_siang ?? '0' }}</label>
+                                                    <input type="checkbox" id="lunch-non-history"
+                                                        name="lunch-non-history"
+                                                        <?= $appointment->facility_detail != null && $appointment->facility_detail->makan_siang > 0 ? 'checked' : '' ?>
+                                                        disabled>
+                                                    <label for="lunch-non-history">Makan Siang :
+                                                        <span>{{ $appointment->facility_detail->makan_siang ?? '0' }}</label>
 
-                                                                                <input type="checkbox" id="candy-non-history"
-                                                                                    name="candy-non-history"
-                                                                                    <?= $appointment->facility_detail != null && $appointment->facility_detail->permen > 0 ? 'checked' : '' ?>
-                                                                                    disabled>
-                                                                                <label for="candy-non-history">Permen :
-                                                                                    <span>{{ $appointment->facility_detail->permen ?? '0' }}</label>
+                                                    <input type="checkbox" id="candy-non-history"
+                                                        name="candy-non-history"
+                                                        <?= $appointment->facility_detail != null && $appointment->facility_detail->permen > 0 ? 'checked' : '' ?>
+                                                        disabled>
+                                                    <label for="candy-non-history">Permen :
+                                                        <span>{{ $appointment->facility_detail->permen ?? '0' }}</label>
+                                                    <input type="checkbox" id="coffee-non-history"
+                                                        name="coffee-non-history"
+                                                        <?= $appointment->facility_detail != null && $appointment->facility_detail->kopi > 0 ? 'checked' : '' ?>
+                                                        disabled>
+                                                    <label for="coffee-non-history">Coffee :
+                                                        <span>{{ $appointment->facility_detail->kopi ?? '0' }}</label>
 
+                                                    <input type="checkbox" id="tea-non-history" name="tea-non-history"
+                                                        <?= $appointment->facility_detail != null && $appointment->facility_detail->teh > 0 ? 'checked' : '' ?>
+                                                        disabled>
+                                                    <label for="tea-non-history">Tea :
+                                                        <span>{{ $appointment->facility_detail->teh ?? '0' }}</label>
 
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="tab-pane" role="tabpanel" id="step2-non-history">
-                                                                <h4 class="text-center">Minuman</h4>
-                                                                <div class="container ml-5 mt-5">
-                                                                    <div class="row">
-                                                                        <div class="col-md-10">
-                                                                            <div class="boxes">
-                                                                                <input type="checkbox" id="coffee-non-history"
-                                                                                    name="coffee-non-history"
-                                                                                    <?= $appointment->facility_detail != null && $appointment->facility_detail->kopi > 0 ? 'checked' : '' ?>
-                                                                                    disabled>
-                                                                                <label for="coffee-non-history">Coffee :
-                                                                                    <span>{{ $appointment->facility_detail->kopi ?? '0' }}</label>
+                                                    <input type="checkbox" id="soft-drink-non-history"
+                                                        name="soft-drink-non-history"
+                                                        <?= $appointment->facility_detail != null && $appointment->facility_detail->soft_drink > 0 ? 'checked' : '' ?>
+                                                        disabled>
+                                                    <label for="soft-drink-non-history">Soft Drink :
+                                                        <span>{{ $appointment->facility_detail->soft_drink ?? '0' }}</label>
 
-                                                                                <input type="checkbox" id="tea-non-history"
-                                                                                    name="tea-non-history"
-                                                                                    <?= $appointment->facility_detail != null && $appointment->facility_detail->teh > 0 ? 'checked' : '' ?>
-                                                                                    disabled>
-                                                                                <label for="tea-non-history">Tea :
-                                                                                    <span>{{ $appointment->facility_detail->teh ?? '0' }}</label>
+                                                    <input type="checkbox" id="mineral-water-non-history"
+                                                        name="mineral-water-non-history"
+                                                        <?= $appointment->facility_detail != null && $appointment->facility_detail->air_mineral > 0 ? 'checked' : '' ?>
+                                                        disabled>
+                                                    <label for="mineral-water-non-history">Mineral Water :
+                                                        <span>{{ $appointment->facility_detail->air_mineral ?? '0' }}</label>
+                                                    <input type="checkbox" id="helm-non-history" name="helm-non-history"
+                                                        <?= $appointment->facility_detail != null && $appointment->facility_detail->helm > 0 ? 'checked' : '' ?>
+                                                        disabled>
+                                                    <label for="helm-non-history">Helm :
+                                                        <span>{{ $appointment->facility_detail->helm ?? '0' }}</label>
 
-                                                                                <input type="checkbox" id="soft-drink-non-history"
-                                                                                    name="soft-drink-non-history"
-                                                                                    <?= $appointment->facility_detail != null && $appointment->facility_detail->soft_drink > 0 ? 'checked' : '' ?>
-                                                                                    disabled>
-                                                                                <label for="soft-drink-non-history">Soft Drink :
-                                                                                    <span>{{ $appointment->facility_detail->soft_drink ?? '0' }}</label>
+                                                    <input type="checkbox" id="handuk-non-history"
+                                                        name="handuk-non-history"
+                                                        <?= $appointment->facility_detail != null && $appointment->facility_detail->handuk > 0 ? 'checked' : '' ?>
+                                                        disabled>
 
-                                                                                <input type="checkbox" id="mineral-water-non-history"
-                                                                                    name="mineral-water-non-history"
-                                                                                    <?= $appointment->facility_detail != null && $appointment->facility_detail->air_mineral > 0 ? 'checked' : '' ?>
-                                                                                    disabled>
-                                                                                <label for="mineral-water-non-history">Mineral Water :
-                                                                                    <span>{{ $appointment->facility_detail->air_mineral ?? '0' }}</label>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="tab-pane" role="tabpanel" id="step3-non-history">
-                                                                <h4 class="text-center">Plant Tour</h4>
-                                                                <div class="container ml-5 mt-5">
-                                                                    <div class="row">
-                                                                        <div class="col-md-10">
-                                                                            <div class="boxes">
-                                                                                <input type="checkbox" id="helm-non-history"
-                                                                                    name="helm-non-history"
-                                                                                    <?= $appointment->facility_detail != null && $appointment->facility_detail->helm > 0 ? 'checked' : '' ?>
-                                                                                    disabled>
-                                                                                <label for="helm-non-history">Helm :
-                                                                                    <span>{{ $appointment->facility_detail->helm ?? '0' }}</label>
+                                                    <label for="handuk-non-history">Handuk :
+                                                        <span>{{ $appointment->facility_detail->handuk ?? '0' }}</label>
 
-                                                                                <input type="checkbox" id="handuk-non-history"
-                                                                                    name="handuk-non-history"
-                                                                                    <?= $appointment->facility_detail != null && $appointment->facility_detail->handuk > 0 ? 'checked' : '' ?>
-                                                                                    disabled>
-
-                                                                                <label for="handuk-non-history">Handuk :
-                                                                                    <span>{{ $appointment->facility_detail->handuk ?? '0' }}</label>
-
-                                                                                <input type="checkbox" id="speaker-non-history"
-                                                                                    name="speaker-non-history"
-                                                                                    <?= $appointment->facility_detail != null && $appointment->facility_detail->speaker > 0 ? 'checked' : '' ?>
-                                                                                    disabled>
-                                                                                <label for="speaker-non-history">Speaker :
-                                                                                    <span>{{ $appointment->facility_detail->speaker ?? '0' }}</label>
+                                                    <input type="checkbox" id="speaker-non-history"
+                                                        name="speaker-non-history"
+                                                        <?= $appointment->facility_detail != null && $appointment->facility_detail->speaker > 0 ? 'checked' : '' ?>
+                                                        disabled>
+                                                    <label for="speaker-non-history">Speaker :
+                                                        <span>{{ $appointment->facility_detail->speaker ?? '0' }}</label>
 
 
-                                                                                <input type="checkbox"
-                                                                                    id="speaker-wireless-non-history"
-                                                                                    name="speaker-wireless-non-history"
-                                                                                    <?= $appointment->facility_detail != null && $appointment->facility_detail->speaker_wireless > 0 ? 'checked' : '' ?>
-                                                                                    disabled>
-                                                                                <label for="speaker-wireless-non-history">Speaker
-                                                                                    Wireless :
-                                                                                    <span>{{ $appointment->facility_detail->speaker_wireless ?? '0' }}</label>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="tab-pane" role="tabpanel" id="step4-non-history">
-                                                                <h4 class="text-center">Parkir</h4>
-                                                                <div class="container ml-5 mt-5">
-                                                                    <div class="row">
-                                                                        <div class="col-md-10">
-                                                                            <div class="boxes">
-                                                                                <input type="checkbox" id="motor-non-history"
-                                                                                    name="motor-non-history"
-                                                                                    <?= $appointment->facility_detail != null && $appointment->facility_detail->motor > 0 ? 'checked' : '' ?>
-                                                                                    disabled>
-                                                                                <label for="motor-non-history">Motor :
-                                                                                    <span>{{ $appointment->facility_detail->motor ?? '0' }}</label>
+                                                    <input type="checkbox" id="speaker-wireless-non-history"
+                                                        name="speaker-wireless-non-history"
+                                                        <?= $appointment->facility_detail != null && $appointment->facility_detail->speaker_wireless > 0 ? 'checked' : '' ?>
+                                                        disabled>
+                                                    <label for="speaker-wireless-non-history">Speaker
+                                                        Wireless :
+                                                        <span>{{ $appointment->facility_detail->speaker_wireless ?? '0' }}</label>
+                                                    <input type="checkbox" id="motor-non-history"
+                                                        name="motor-non-history"
+                                                        <?= $appointment->facility_detail != null && $appointment->facility_detail->motor > 0 ? 'checked' : '' ?>
+                                                        disabled>
+                                                    <label for="motor-non-history">Motor :
+                                                        <span>{{ $appointment->facility_detail->motor ?? '0' }}</label>
 
 
-                                                                                <input type="checkbox" id="mobil-non-history"
-                                                                                    name="mobil-non-history"
-                                                                                    <?= $appointment->facility_detail != null && $appointment->facility_detail->mobil > 0 ? 'checked' : '' ?>
-                                                                                    disabled>
-                                                                                <label for="mobil-non-history">Mobil :
-                                                                                    <span>{{ $appointment->facility_detail->mobil ?? '0' }}</label>
+                                                    <input type="checkbox" id="mobil-non-history"
+                                                        name="mobil-non-history"
+                                                        <?= $appointment->facility_detail != null && $appointment->facility_detail->mobil > 0 ? 'checked' : '' ?>
+                                                        disabled>
+                                                    <label for="mobil-non-history">Mobil :
+                                                        <span>{{ $appointment->facility_detail->mobil ?? '0' }}</label>
 
 
 
-                                                                                <input type="checkbox" id="mini-bus-non-history"
-                                                                                    name="mini-bus-non-history"
-                                                                                    <?= $appointment->facility_detail != null && $appointment->facility_detail->mini_bus > 0 ? 'checked' : '' ?>
-                                                                                    disabled>
-                                                                                <label for="mini-bus-non-history">Mini Bus :
-                                                                                    <span>{{ $appointment->facility_detail->mini_bus ?? '0' }}</label>
+                                                    <input type="checkbox" id="mini-bus-non-history"
+                                                        name="mini-bus-non-history"
+                                                        <?= $appointment->facility_detail != null && $appointment->facility_detail->mini_bus > 0 ? 'checked' : '' ?>
+                                                        disabled>
+                                                    <label for="mini-bus-non-history">Mini Bus :
+                                                        <span>{{ $appointment->facility_detail->mini_bus ?? '0' }}</label>
 
-                                                                                <input type="checkbox" id="bus-non-history"
-                                                                                    name="bus-non-history"
-                                                                                    <?= $appointment->facility_detail != null && $appointment->facility_detail->bus > 0 ? 'checked' : '' ?>
-                                                                                    disabled>
-                                                                                <label for="bus-non-history">Bus :
-                                                                                    <span>{{ $appointment->facility_detail->bus ?? '0' }}</label>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                    <input type="checkbox" id="bus-non-history" name="bus-non-history"
+                                                        <?= $appointment->facility_detail != null && $appointment->facility_detail->bus > 0 ? 'checked' : '' ?>
+                                                        disabled>
+                                                    <label for="bus-non-history">Bus :
+                                                        <span>{{ $appointment->facility_detail->bus ?? '0' }}</label>
                                                 </div>
 
                                             </div>
                                             <div class="mx-4 mt-2">
                                                 <div>Other :</div>
-                                                <div>{{ $appointment->facility_detail != null  ? $appointment->facility_detail->other : '' }}</div>
+                                                <div>
+                                                    {{ $appointment->facility_detail != null ? $appointment->facility_detail->other : '' }}
+                                                </div>
                                             </div>
                                             <div class="text-center mt-5">
                                                 <a class="btn btn-primary py-3"
-                                                    href="{{ asset('uploads/doc/' . $appointment->doc) }}" download="">
+                                                    href="{{ asset('uploads/doc/' . $appointment->doc) }}"
+                                                    download="">
                                                     <i class="mdi mdi-cloud-check pr-2"></i>Download Document
                                                 </a>
                                             </div>
@@ -411,10 +347,147 @@
 
             $('#allTicket').DataTable({
                 order: [
-                    [ 0, "desc" ]
+                    [0, "desc"]
                 ],
                 "lengthChange": false
             });
+
+        });
+
+        const dry_food = document.getElementById('dry-food-non');
+        const wet_food = document.getElementById('wet-food-non');
+        const lunch = document.getElementById('lunch-non');
+        const candy = document.getElementById('candy-non');
+        const coffee = document.getElementById('coffee-non');
+        const tea = document.getElementById('tea-non');
+        const mineral_water = document.getElementById('mineral-water-non');
+        const soft_drink = document.getElementById('soft-drink-non');
+        const helm = document.getElementById('helm-non');
+        const handuk = document.getElementById('handuk-non');
+        const speaker = document.getElementById('speaker-non');
+        const speaker_wireless = document.getElementById('speaker-wireless-non');
+        const motor = document.getElementById('motor-non');
+        const mobil = document.getElementById('mobil-non');
+        const mini_bus = document.getElementById('mini-bus-non');
+        const bus = document.getElementById('bus-non');
+        // const checkbox = document.getElementById('dry-food-non');
+        // const checkbox = document.getElementById('dry-food-non');
+
+        // food
+        $('#dry-food-non-quantity').hide();
+        $('#wet-food-non-quantity').hide();
+        $('#lunch-non-quantity').hide();
+        $('#candy-non-quantity').hide();
+        $("input[type='checkbox']").on("change", function() {
+            if (this.checked) {
+                if (this == dry_food) {
+                    $('#dry-food-non-quantity').show();
+                } else if (this == wet_food) {
+                    $('#wet-food-non-quantity').show();
+                } else if (this == lunch) {
+                    $('#lunch-non-quantity').show();
+                } else if (this == candy) {
+                    $('#candy-non-quantity').show();
+                }
+            } else {
+                if (this == dry_food) {
+                    $('#dry-food-non-quantity').hide();
+                } else if (this == wet_food) {
+                    $('#wet-food-non-quantity').hide();
+                } else if (this == lunch) {
+                    $('#lunch-non-quantity').hide();
+                } else if (this == candy) {
+                    $('#candy-non-quantity').hide();
+                }
+            }
+        });
+
+        // drink
+        $('#coffee-non-quantity').hide();
+        $('#tea-non-quantity').hide();
+        $('#soft-drink-non-quantity').hide();
+        $('#mineral-water-non-quantity').hide();
+        $("input[type='checkbox']").on("change", function() {
+            if (this.checked) {
+                if (this == coffee) {
+                    $('#coffee-non-quantity').show();
+                } else if (this == tea) {
+                    $('#tea-non-quantity').show();
+                } else if (this == soft_drink) {
+                    $('#soft-drink-non-quantity').show();
+                } else if (this == mineral_water) {
+                    $('#mineral-water-non-quantity').show();
+                }
+            } else {
+                if (this == coffee) {
+                    $('#coffee-non-quantity').hide();
+                } else if (this == tea) {
+                    $('#tea-non-quantity').hide();
+                } else if (this == soft_drink) {
+                    $('#soft-drink-non-quantity').hide();
+                } else if (this == mineral_water) {
+                    $('#mineral-water-non-quantity').hide();
+                }
+            }
+        });
+
+        // Plant tour
+        $('#helm-non-quantity').hide();
+        $('#handuk-non-quantity').hide();
+        $('#speaker-non-quantity').hide();
+        $('#speaker-wireless-non-quantity').hide();
+        $("input[type='checkbox']").on("change", function() {
+            if (this.checked) {
+                if (this == helm) {
+                    $('#helm-non-quantity').show();
+                } else if (this == handuk) {
+                    $('#handuk-non-quantity').show();
+                } else if (this == speaker) {
+                    $('#speaker-non-quantity').show();
+                } else if (this == speaker_wireless) {
+                    $('#speaker-wireless-non-quantity').show();
+                }
+            } else {
+                if (this == helm) {
+                    $('#helm-non-quantity').hide();
+                } else if (this == handuk) {
+                    $('#handuk-non-quantity').hide();
+                } else if (this == speaker) {
+                    $('#speaker-non-quantity').hide();
+                } else if (this == speaker_wireless) {
+                    $('#speaker-wireless-non-quantity').hide();
+                }
+            }
+        });
+
+        // Parkir
+        $('#motor-non-quantity').hide();
+        $('#mobil-non-quantity').hide();
+        $('#mini-bus-non-quantity').hide();
+        $('#bus-non-quantity').hide();
+        $("input[type='checkbox']").on("change", function() {
+        if (this.checked) {
+            if (this == motor) {
+                $('#motor-non-quantity').show();
+            } else if (this == mobil) {
+                $('#mobil-non-quantity').show();
+            } else if (this == mini_bus) {
+                $('#mini-bus-non-quantity').show();
+            } else if (this == bus) {
+                $('#bus-non-quantity').show();
+            }
+        } else {
+            if (this == motor) {
+                $('#motor-non-quantity').hide();
+            } else if (this == mobil) {
+                $('#mobil-non-quantity').hide();
+            } else if (this == mini_bus) {
+                $('#mini-bus-non-quantity').hide();
+            } else if (this == bus) {
+                $('#bus-non-quantity').hide();
+            }
+        }
+        });
 
         });
     </script>

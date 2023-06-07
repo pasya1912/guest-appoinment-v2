@@ -64,7 +64,16 @@
                         </div>
                         <div class="col-md-8">
                             <input type="time" name="time" id="time" class="form-control mt-1"/>
-                            <small id="emailHelp" class="form-text text-muted">Select time</small>
+                            <small class="form-text text-muted">Select time</small>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-4">
+                            <label for="inputEmail3" class="col-form-label">Select Out Time <small class="text-muted pl-0">/ Pilih Waktu Keluar</small></label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="time" name="time_end" id="time_end" class="form-control mt-1"/>
+                            <small id="time_end" class="form-text text-muted">Select time</small>
                         </div>
                     </div>
 
@@ -77,17 +86,6 @@
                             <small id="emailHelp" class="form-text text-muted">Number of guests arriving</small>
                         </div>
                     </div>
-
-{{--                     <div class="form-group row">
-                        <div class="col-md-4">
-                            <label for="inputEmail3" class="col-form-label">Select Room <small class="text-muted pl-0">/ Pilih Ruangan / 部屋を選択</small></label>
-                        </div>
-                        <div class="col-md-8">
-                            <select class="form-control mt-1" id="room" name="room">
-                                <option value="null" selected>-- Select Room --</option>
-                            </select>
-                        </div>
-                    </div> --}}
 
                     <div class="form-group row">
                         <div class="col-md-4">
@@ -200,22 +198,22 @@
         });
     });
 
-/*     $('#date').change(function(){
-        $.ajax({
-            url: '/get-room',
-            type: 'GET',
-            data: {
-                date : $(this).val()
-            },
-            success: function(room) {
-                console.log(room);
-                $('#room').empty();
-                $('#room').append(`<option value='null'>-- Select Room --</option>`);
-                $.each(room, function(key, value) {
-                    $('#room').append(`<option value='${value.id}'> ${value.name}</option>`);
-                });
-            }
-        });
-    }); */
+    $('#time').change(function(){
+        var time = $(this).val();
+        console.log(time);
+        //set minimum time_end based on time value
+        $('#time_end').attr('min', time);
+
+    });
+
+    $('#time_end').change(function(){
+        var time = $(this).val();
+        console.log(time);
+        //set minimum time_end based on time value
+        $('#time').attr('max', time);
+
+    });
+
+
 </script>
 @endpush
