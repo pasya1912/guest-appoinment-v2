@@ -40,6 +40,7 @@ class AppointmentController extends Controller
             'purpose-4' => 'required_without_all:purpose-1,purpose-2,purpose-3',
             'date' => 'required|date|after_or_equal:'.date('Y-m-d'),
             'time' => 'required',
+            'time_end' => 'required',
             'jumlahTamu' => 'required',
             'pic_id' => 'required',
             'pic_dept' => 'required'
@@ -89,6 +90,7 @@ class AppointmentController extends Controller
             'purpose' => $purpose,
             'date' => $request->date,
             'time' => $request->time,
+            'time_end' => $request->time_end,
             'guest' => $request->jumlahTamu,
             'pic_id' => $request->pic_id,
             'pic_dept' => $request->pic_dept,
@@ -105,13 +107,6 @@ class AppointmentController extends Controller
             'status' => 'out',
         ]);
 
-        // create rooms detail data immedietly
-/*         RoomDetail::create([
-            'appointment_id' => $appointment->id,
-            'room_id' => $request->room,
-            'booking_date' => $request->date,
-            'booking_time' => $request->time
-        ]); */
         DB::commit();
         }
         catch(\Exception $e)

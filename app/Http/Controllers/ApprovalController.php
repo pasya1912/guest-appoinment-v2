@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\ApprovalHistory;
 //use db
 use Illuminate\Support\Facades\DB;
+use App\Department;
 use App\User;
 use App\Checkin;
 use App\FacilityDetail;
@@ -82,24 +83,38 @@ class ApprovalController extends Controller
 
     public function ticketApproval(Request $request, Appointment $ticket)
     {
+        //validate request
         $user = User::select('occupation')->where('id', $ticket->pic_id)->first();
-        if ($request->room) {
+        $appointment = Appointment::where('id', $ticket->id)->first();
+        if (isset($request->room)) {
 
             try {
-                $rd = RoomDetail::where('appointment_id', $ticket->id)->first();
+                //find room detail with date time between booking time and booking end time
+                $roomDetail = RoomDetail::where('room_id', $request->room)
+                    ->where('booking_date', $ticket->date)
+                    ->whereBetween('booking_time', [$request->time, $ticket->time_end])
+                    ->orWhereBetween('booking_time_end', [$ticket->time, $ticket->time_end])->first();
+
+                if (isset($roomDetail) && $roomDetail->appointment->pic_approval == "approved" && $roomDetail->appointment->dh_approval == 'approved') {
+
+                    return redirect()->back()->with('error', 'Ruangan ini sudah di booking oleh '.Department::where('id', $roomDetail->appointment->pic_dept)->first()->name.' untuk tanggal ' . $ticket->date . ' pada jam ' . $roomDetail->booking_time . ' sampai ' . $roomDetail->booking_time_end . '');
+                }
+
                 $appt = Appointment::where('id', $ticket->id)->first();
                 DB::beginTransaction();
                 RoomDetail::updateOrCreate([
                     'appointment_id' => $appt->id
                 ], [
-                    'room_id' => $request->room,
-                    'booking_date' => $appt->date,
-                    'booking_time' => $appt->time,
-                ]);
+                        'room_id' => $request->room,
+                        'booking_date' => $appt->date,
+                        'booking_time' => $request->time,
+                        'booking_time_end' => $request->time_end
+                    ]);
                 DB::commit();
             } catch (\Exception $e) {
                 DB::rollback();
-                return redirect()->back()->with('error', 'Something went wrong');
+                dd($e);
+                return redirect()->back()->with('error', $e->getMessage());
             }
         }
         // if the pic of the ticket is spv down and the auth user is spv (the pic itself) then show the facility button modal
@@ -134,7 +149,7 @@ class ApprovalController extends Controller
                 // create or update approval history
                 ApprovalHistory::create([
                     'signed_by' => auth()->user()->id,
-                    'appointment_id' =>  $ticket->id,
+                    'appointment_id' => $ticket->id,
                     'status' => 'PIC approved'
                 ]);
 
@@ -146,18 +161,64 @@ class ApprovalController extends Controller
 
             // if the pic of ticket is spv down (1) and the auth user is manager up, then show the approval button modal and only update the dh_approval because the pic_approval already approved, because the ticket is appear when already approved by the pic , when the ticket not approved yet by the pic, the ticket should not appear in the list
         } elseif ($user->occupation == 1 && auth()->user()->occupation == 2) {
+            DB::beginTransaction();
+            try{
             Appointment::where('id', $ticket->id)->update([
                 'dh_approval' => 'approved'
             ]);
 
             // create or update approval history
-            ApprovalHistory::where('appointment_id', $ticket->id)->update([
-                'signed_by' => auth()->user()->id,
-                'status' => 'Dept Head approved'
-            ]);
+            ApprovalHistory::updateOrCreate([
+                'appointment_id' => $ticket->id
+            ], [
+                    'signed_by' => auth()->user()->id,
+                    'status' => 'Dept Head approved'
+                ]);
+            }catch(\Exception $e){
+                DB::rollback();
+                dd($e);
+            }
+
+            if (isset($appointment->room_detail)) {
+                try{
+                    $rd = RoomDetail::leftJoin('appointments', 'room_details.appointment_id', '=', 'appointments.id')
+                    ->where('booking_date', $ticket->date)
+                    ->where('appointments.dh_approval', 'pending')
+                    ->where(function ($query) use ($appointment) {
+                        $query->where(function ($query) use ($appointment) {
+                            $query->whereBetween('booking_time', [$appointment->room_detail->booking_time, $appointment->room_detail->booking_time_end]);
+                        })
+                        ->orWhere(function ($query) use ($appointment) {
+                            $query->whereBetween('booking_time_end', [$appointment->room_detail->booking_time, $appointment->room_detail->booking_time_end]);
+                        });
+                    })
+                    ->get();
+                foreach ($rd as $r) {
+                    Appointment::where('id', $r->appointment_id)->update([
+                        'dh_approval' => 'rejected'
+                    ]);
+                    ApprovalHistory::updateOrCreate([
+                        'appointment_id' => $r->appointment_id
+                    ], [
+                            'signed_by' => auth()->user()->id,
+                            'status' => 'Waktu ruangan bentrok'
+                        ]);
+
+                    //delete corresponding room detail if the room detail is exist
+                    RoomDetail::where('appointment_id', $r->appointment_id)->delete();
+                }
+                DB::commit();
+                }catch(\Exception $e){
+                    DB::rollback();
+                    return redirect()->back()->with('error', $e->getMessage());
+                }
+            }
+            //update dh_approval to rejected if room detail is not empty
+
             // if the pic of the ticket is manager up and the auth user is manager (the pic itself) then show the facility button modal
             // and update both pic and dh approval
         } elseif ($user->occupation == 2 && auth()->user()->occupation == 2) {
+
             Appointment::where('id', $ticket->id)->update([
                 'pic_approval' => 'approved',
                 'dh_approval' => 'approved'
@@ -189,17 +250,56 @@ class ApprovalController extends Controller
 
                 ApprovalHistory::create([
                     'signed_by' => auth()->user()->id,
-                    'appointment_id' =>  $ticket->id,
+                    'appointment_id' => $ticket->id,
                     'status' => 'Dept Head approved'
                 ]);
+                if (isset($appointment->room_detail)) {
+                    try{
+                        $rd = RoomDetail::leftJoin('appointments', 'room_details.appointment_id', '=', 'appointments.id')
+                        ->where('booking_date', $ticket->date)
+                        ->where('appointments.dh_approval', 'pending')
+                        ->where(function ($query) use ($appointment) {
+                            $query->where(function ($query) use ($appointment) {
+                                $query->whereBetween('booking_time', [$appointment->room_detail->booking_time, $appointment->room_detail->booking_time_end]);
+                            })
+                            ->orWhere(function ($query) use ($appointment) {
+                                $query->whereBetween('booking_time_end', [$appointment->room_detail->booking_time, $appointment->room_detail->booking_time_end]);
+                            });
+                        })
+                        ->get();
+                    foreach ($rd as $r) {
+                        Appointment::where('id', $r->appointment_id)->update([
+                            'dh_approval' => 'rejected'
+                        ]);
+                        ApprovalHistory::updateOrCreate([
+                            'appointment_id' => $r->appointment_id
+                        ], [
+                                'signed_by' => auth()->user()->id,
+                                'status' => 'Waktu ruangan bentrok'
+                            ]);
+
+                        //delete corresponding room detail if the room detail is exist
+                        RoomDetail::where('appointment_id', $r->appointment_id)->delete();
+                    }
+                    DB::commit();
+                    }catch(\Exception $e){
+                        DB::rollback();
+                        return redirect()->back()->with('error', $e->getMessage());
+                    }
+                }
                 DB::commit();
             } catch (\Exception $e) {
                 DB::rollback();
                 return redirect()->back()->with('error', 'Something went wrong');
             }
         }
-
-        return redirect()->back()->with('approved', 'Ticket has been approved!');
+        //check occupancy
+        if(auth()->user()->occupation <2){
+            return redirect()->back()->with('approved', 'Ticket has been approved, please wait for the dept head approval!');
+        }else
+        {
+            return redirect()->back()->with('approved', 'Ticket has been approved!');
+        }
     }
 
     public function ticketRejection(Request $request, Appointment $ticket)
@@ -212,7 +312,7 @@ class ApprovalController extends Controller
         if ($user->occupation == 1 && auth()->user()->occupation == 1) {
             ApprovalHistory::create([
                 'signed_by' => auth()->user()->id,
-                'appointment_id' =>  $ticket->id,
+                'appointment_id' => $ticket->id,
                 'note' => $request->note,
                 'status' => 'PIC rejected'
             ]);

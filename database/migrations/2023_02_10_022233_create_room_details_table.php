@@ -21,6 +21,7 @@ class CreateRoomDetailsTable extends Migration
             $table->foreign('room_id')->references('id')->on('rooms');
             $table->date('booking_date');
             $table->time('booking_time');
+            $table->time('booking_time_end');
             $table->timestamps();
         });
     }

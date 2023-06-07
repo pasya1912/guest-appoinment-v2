@@ -107,6 +107,10 @@
                                                 <span class="font-weight-bold">{{ $appointments->time }}</span>
                                             </div>
                                             <div class="d-flex justify-content-between">
+                                                <span class="text-muted">Visit Time Out</span>
+                                                <span class="font-weight-bold">{{ $appointments->time_end }}</span>
+                                            </div>
+                                            <div class="d-flex justify-content-between">
                                                 <span class="text-muted">Total Visitor</span>
                                                 <span class="font-weight-bold">{{ $appointments->guest }}</span>
                                             </div>

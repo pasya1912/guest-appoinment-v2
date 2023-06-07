@@ -23,6 +23,7 @@ class CreateAppointmentsTable extends Migration
             $table->string('purpose');
             $table->date('date');
             $table->time('time');
+            $table->time('time_end');
             $table->string('guest');
             $table->bigInteger('pic_dept');
             $table->string('doc');

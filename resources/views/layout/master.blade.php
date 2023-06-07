@@ -58,6 +58,20 @@
   {!! Html::script('assets/js/settings.js') !!}
   {!! Html::script('assets/js/todolist.js') !!}
   <!-- end common js -->
+@if ($errors->any())
+
+<script>
+    @foreach ($errors->all() as $error)
+    alert('{{ $error }}');
+    @endforeach
+</script>
+//check flash message "error"
+@endif
+@if (session()->has('error'))
+<script>
+    alert('{{ session()->get('error') }}');
+</script>
+@endif
 
   @stack('custom-scripts')
 </body>

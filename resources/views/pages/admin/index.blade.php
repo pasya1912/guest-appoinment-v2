@@ -163,10 +163,28 @@
                                                 <span class="font-weight-bold">{{ $appointment->time }}</span>
                                             </div>
                                             <div class="d-flex justify-content-between">
+                                                <span class="text-muted">Visit Time Out</span>
+                                                <span class="font-weight-bold">{{ $appointment->time_end }}</span>
+                                            </div>
+                                            <div class="d-flex justify-content-between">
                                                 <span class="text-muted">Total Visitor</span>
                                                 <span class="font-weight-bold">{{ $appointment->guest }}</span>
                                             </div>
-
+                                            <div class="d-flex justify-content-between">
+                                                <span class="text-muted">Assigned Room</span>
+                                                <span
+                                                    class="font-weight-bold">{{ isset($appointment->room_detail) ? $appointment->room_detail->room->name : '-' }}</span>
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <span class="text-muted">Room Time</span>
+                                                <span
+                                                    class="font-weight-bold">{{ isset($appointment->room_detail) ? $appointment->room_detail->booking_time : '-' }}</span>
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <span class="text-muted">Room Time Out</span>
+                                                <span
+                                                    class="font-weight-bold">{{ isset($appointment->room_detail) ? $appointment->room_detail->booking_time_end : '-' }}</span>
+                                            </div>
                                             <div class="mb-3">
                                                 <hr class="new1">
                                             </div>
@@ -181,208 +199,111 @@
                                         </div>
                                         <hr />
                                         <span class="mx-4 my-1 font-weight-bold h4">Facility</span>
-                                        <div class="row d-flex justify-content-center my-5">
+                                        <div class="mx-4 row d-flex justify-content-center my-5">
 
                                             <div class="col-md-12">
-                                                <div class="wizard">
-                                                    <div class="wizard-inner">
-                                                        <div class="connecting-line"></div>
-                                                        <ul class="nav nav-tabs pr-3" role="tablist">
-                                                            <li role="presentation" class="active">
-                                                                <a href="#step1-non" data-toggle="tab"
-                                                                    aria-controls="step1-non" role="tab"
-                                                                    aria-expanded="true"><span class="round-tab">1 </span>
-                                                                    <i class="pl-4">Makanan</i></a>
-                                                            </li>
-                                                            <li role="presentation" class="disabled">
-                                                                <a href="#step2-non" data-toggle="tab"
-                                                                    aria-controls="step2-non" role="tab"
-                                                                    aria-expanded="false"><span class="round-tab">2</span>
-                                                                    <i class="pl-4">Minuman</i></a>
-                                                            </li>
-                                                            <li role="presentation" class="disabled">
-                                                                <a href="#step3-non" data-toggle="tab"
-                                                                    aria-controls="step3-non" role="tab"><span
-                                                                        class="round-tab">3</span> <i class="pl-4">Plan
-                                                                        Tour</i></a>
-                                                            </li>
-                                                            <li role="presentation" class="disabled">
-                                                                <a href="#step4-non" data-toggle="tab"
-                                                                    aria-controls="step4-non" role="tab"><span
-                                                                        class="round-tab">4</span> <i
-                                                                        class="pl-4">Parkir</i></a>
-                                                            </li>
+                                                <input type="checkbox" id="dry-food-non" name="dry-food-non"
+                                                    <?= $appointment->facility_detail != null && $appointment->facility_detail->snack_kering > 0 ? 'checked' : '' ?>
+                                                    disabled>
 
-                                                        </ul>
-                                                    </div>
-                                                    <div class="tab-content" id="main_form">
-                                                        <div class="tab-pane active" role="tabpanel" id="step1-non">
-                                                            <h4 class="text-center">Makanan</h4>
-                                                            <div class="container ml-5 mt-5">
-                                                                <div class="row">
-                                                                    <div class="col-md-10">
-                                                                        <div class="boxes">
-                                                                            <input type="checkbox" id="dry-food-non"
-                                                                                name="dry-food-non"
-                                                                                <?= $appointment->facility_detail != null && $appointment->facility_detail->snack_kering > 0 ? 'checked' : '' ?>
-                                                                                disabled>
-
-                                                                            <label for="dry-food-non">Snack Kering :
-                                                                                <span>{{ $appointment->facility_detail->snack_kering ?? '0' }}</label>
+                                                <label for="dry-food-non">Snack Kering :
+                                                    <span>{{ $appointment->facility_detail->snack_kering ?? '0' }}</label>
 
 
-                                                                            <input type="checkbox" id="wet-food-non"
-                                                                                name="wet-food-non"
-                                                                                <?= $appointment->facility_detail != null && $appointment->facility_detail->snack_basah > 0 ? 'checked' : '' ?>
-                                                                                disabled>
-                                                                            <label for="wet-food-non">Snack Basah:
-                                                                                <span>{{ $appointment->facility_detail->snack_basah ?? '0' }}</label>
+                                                <input type="checkbox" id="wet-food-non" name="wet-food-non"
+                                                    <?= $appointment->facility_detail != null && $appointment->facility_detail->snack_basah > 0 ? 'checked' : '' ?>
+                                                    disabled>
+                                                <label for="wet-food-non">Snack Basah:
+                                                    <span>{{ $appointment->facility_detail->snack_basah ?? '0' }}</label>
 
-                                                                            <input type="checkbox" id="lunch-non"
-                                                                                name="lunch-non"
-                                                                                <?= $appointment->facility_detail != null && $appointment->facility_detail->makan_siang > 0 ? 'checked' : '' ?>
-                                                                                disabled>
-                                                                            <label for="lunch-non">Makan Siang :
-                                                                                <span>{{ $appointment->facility_detail->makan_siang ?? '0' }}</label>
+                                                <input type="checkbox" id="lunch-non" name="lunch-non"
+                                                    <?= $appointment->facility_detail != null && $appointment->facility_detail->makan_siang > 0 ? 'checked' : '' ?>
+                                                    disabled>
+                                                <label for="lunch-non">Makan Siang :
+                                                    <span>{{ $appointment->facility_detail->makan_siang ?? '0' }}</label>
 
-                                                                            <input type="checkbox" id="candy-non"
-                                                                                name="candy-non"
-                                                                                <?= $appointment->facility_detail != null && $appointment->facility_detail->permen > 0 ? 'checked' : '' ?>
-                                                                                disabled>
-                                                                            <label for="candy-non">Permen :
-                                                                                <span>{{ $appointment->facility_detail->permen ?? '0' }}</label>
+                                                <input type="checkbox" id="candy-non" name="candy-non"
+                                                    <?= $appointment->facility_detail != null && $appointment->facility_detail->permen > 0 ? 'checked' : '' ?>
+                                                    disabled>
+                                                <label for="candy-non">Permen :
+                                                    <span>{{ $appointment->facility_detail->permen ?? '0' }}</label>
+                                                <input type="checkbox" id="coffee-non" name="coffee-non"
+                                                    <?= $appointment->facility_detail != null && $appointment->facility_detail->kopi > 0 ? 'checked' : '' ?>
+                                                    disabled>
+                                                <label for="coffee-non">Coffee :
+                                                    <span>{{ $appointment->facility_detail->kopi ?? '0' }}</label>
 
+                                                <input type="checkbox" id="tea-non" name="tea-non"
+                                                    <?= $appointment->facility_detail != null && $appointment->facility_detail->teh > 0 ? 'checked' : '' ?>
+                                                    disabled>
+                                                <label for="tea-non">Tea :
+                                                    <span>{{ $appointment->facility_detail->teh ?? '0' }}</label>
 
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane" role="tabpanel" id="step2-non">
-                                                            <h4 class="text-center">Minuman</h4>
-                                                            <div class="container ml-5 mt-5">
-                                                                <div class="row">
-                                                                    <div class="col-md-10">
-                                                                        <div class="boxes">
-                                                                            <input type="checkbox" id="coffee-non"
-                                                                                name="coffee-non"
-                                                                                <?= $appointment->facility_detail != null && $appointment->facility_detail->kopi > 0 ? 'checked' : '' ?>
-                                                                                disabled>
-                                                                            <label for="coffee-non">Coffee :
-                                                                                <span>{{ $appointment->facility_detail->kopi ?? '0' }}</label>
+                                                <input type="checkbox" id="soft-drink-non" name="soft-drink-non"
+                                                    <?= $appointment->facility_detail != null && $appointment->facility_detail->soft_drink > 0 ? 'checked' : '' ?>
+                                                    disabled>
+                                                <label for="soft-drink-non">Soft Drink :
+                                                    <span>{{ $appointment->facility_detail->soft_drink ?? '0' }}</label>
 
-                                                                            <input type="checkbox" id="tea-non"
-                                                                                name="tea-non"
-                                                                                <?= $appointment->facility_detail != null && $appointment->facility_detail->teh > 0 ? 'checked' : '' ?>
-                                                                                disabled>
-                                                                            <label for="tea-non">Tea :
-                                                                                <span>{{ $appointment->facility_detail->teh ?? '0' }}</label>
+                                                <input type="checkbox" id="mineral-water-non" name="mineral-water-non"
+                                                    <?= $appointment->facility_detail != null && $appointment->facility_detail->air_mineral > 0 ? 'checked' : '' ?>
+                                                    disabled>
+                                                <label for="mineral-water-non">Mineral Water :
+                                                    <span>{{ $appointment->facility_detail->air_mineral ?? '0' }}</label>
+                                                <input type="checkbox" id="helm-non" name="helm-non"
+                                                    <?= $appointment->facility_detail != null && $appointment->facility_detail->helm > 0 ? 'checked' : '' ?>
+                                                    disabled>
+                                                <label for="helm-non">Helm :
+                                                    <span>{{ $appointment->facility_detail->helm ?? '0' }}</label>
 
-                                                                            <input type="checkbox" id="soft-drink-non"
-                                                                                name="soft-drink-non"
-                                                                                <?= $appointment->facility_detail != null && $appointment->facility_detail->soft_drink > 0 ? 'checked' : '' ?>
-                                                                                disabled>
-                                                                            <label for="soft-drink-non">Soft Drink :
-                                                                                <span>{{ $appointment->facility_detail->soft_drink ?? '0' }}</label>
+                                                <input type="checkbox" id="handuk-non" name="handuk-non"
+                                                    <?= $appointment->facility_detail != null && $appointment->facility_detail->handuk > 0 ? 'checked' : '' ?>
+                                                    disabled>
 
-                                                                            <input type="checkbox" id="mineral-water-non"
-                                                                                name="mineral-water-non"
-                                                                                <?= $appointment->facility_detail != null && $appointment->facility_detail->air_mineral > 0 ? 'checked' : '' ?>
-                                                                                disabled>
-                                                                            <label for="mineral-water-non">Mineral Water :
-                                                                                <span>{{ $appointment->facility_detail->air_mineral ?? '0' }}</label>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane" role="tabpanel" id="step3-non">
-                                                            <h4 class="text-center">Plant Tour</h4>
-                                                            <div class="container ml-5 mt-5">
-                                                                <div class="row">
-                                                                    <div class="col-md-10">
-                                                                        <div class="boxes">
-                                                                            <input type="checkbox" id="helm-non"
-                                                                                name="helm-non"
-                                                                                <?= $appointment->facility_detail != null && $appointment->facility_detail->helm > 0 ? 'checked' : '' ?>
-                                                                                disabled>
-                                                                            <label for="helm-non">Helm :
-                                                                                <span>{{ $appointment->facility_detail->helm ?? '0' }}</label>
+                                                <label for="handuk-non">Handuk :
+                                                    <span>{{ $appointment->facility_detail->handuk ?? '0' }}</label>
 
-                                                                            <input type="checkbox" id="handuk-non"
-                                                                                name="handuk-non"
-                                                                                <?= $appointment->facility_detail != null && $appointment->facility_detail->handuk > 0 ? 'checked' : '' ?>
-                                                                                disabled>
-
-                                                                            <label for="handuk-non">Handuk :
-                                                                                <span>{{ $appointment->facility_detail->handuk ?? '0' }}</label>
-
-                                                                            <input type="checkbox" id="speaker-non"
-                                                                                name="speaker-non"
-                                                                                <?= $appointment->facility_detail != null && $appointment->facility_detail->speaker > 0 ? 'checked' : '' ?>
-                                                                                disabled>
-                                                                            <label for="speaker-non">Speaker :
-                                                                                <span>{{ $appointment->facility_detail->speaker ?? '0' }}</label>
+                                                <input type="checkbox" id="speaker-non" name="speaker-non"
+                                                    <?= $appointment->facility_detail != null && $appointment->facility_detail->speaker > 0 ? 'checked' : '' ?>
+                                                    disabled>
+                                                <label for="speaker-non">Speaker :
+                                                    <span>{{ $appointment->facility_detail->speaker ?? '0' }}</label>
 
 
-                                                                            <input type="checkbox"
-                                                                                id="speaker-wireless-non"
-                                                                                name="speaker-wireless-non"
-                                                                                <?= $appointment->facility_detail != null && $appointment->facility_detail->speaker_wireless > 0 ? 'checked' : '' ?>
-                                                                                disabled>
-                                                                            <label for="speaker-wireless-non">Speaker
-                                                                                Wireless :
-                                                                                <span>{{ $appointment->facility_detail->speaker_wireless ?? '0' }}</label>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane" role="tabpanel" id="step4-non">
-                                                            <h4 class="text-center">Parkir</h4>
-                                                            <div class="container ml-5 mt-5">
-                                                                <div class="row">
-                                                                    <div class="col-md-10">
-                                                                        <div class="boxes">
-                                                                            <input type="checkbox" id="motor-non"
-                                                                                name="motor-non"
-                                                                                <?= $appointment->facility_detail != null && $appointment->facility_detail->motor > 0 ? 'checked' : '' ?>
-                                                                                disabled>
-                                                                            <label for="motor-non">Motor :
-                                                                                <span>{{ $appointment->facility_detail->motor ?? '0' }}</label>
+                                                <input type="checkbox" id="speaker-wireless-non"
+                                                    name="speaker-wireless-non"
+                                                    <?= $appointment->facility_detail != null && $appointment->facility_detail->speaker_wireless > 0 ? 'checked' : '' ?>
+                                                    disabled>
+                                                <label for="speaker-wireless-non">Speaker
+                                                    Wireless :
+                                                    <span>{{ $appointment->facility_detail->speaker_wireless ?? '0' }}</label>
+                                                <input type="checkbox" id="motor-non" name="motor-non"
+                                                    <?= $appointment->facility_detail != null && $appointment->facility_detail->motor > 0 ? 'checked' : '' ?>
+                                                    disabled>
+                                                <label for="motor-non">Motor :
+                                                    <span>{{ $appointment->facility_detail->motor ?? '0' }}</label>
 
 
-                                                                            <input type="checkbox" id="mobil-non"
-                                                                                name="mobil-non"
-                                                                                <?= $appointment->facility_detail != null && $appointment->facility_detail->mobil > 0 ? 'checked' : '' ?>
-                                                                                disabled>
-                                                                            <label for="mobil-non">Mobil :
-                                                                                <span>{{ $appointment->facility_detail->mobil ?? '0' }}</label>
+                                                <input type="checkbox" id="mobil-non" name="mobil-non"
+                                                    <?= $appointment->facility_detail != null && $appointment->facility_detail->mobil > 0 ? 'checked' : '' ?>
+                                                    disabled>
+                                                <label for="mobil-non">Mobil :
+                                                    <span>{{ $appointment->facility_detail->mobil ?? '0' }}</label>
 
 
 
-                                                                            <input type="checkbox" id="mini-bus-non"
-                                                                                name="mini-bus-non"
-                                                                                <?= $appointment->facility_detail != null && $appointment->facility_detail->mini_bus > 0 ? 'checked' : '' ?>
-                                                                                disabled>
-                                                                            <label for="mini-bus-non">Mini Bus :
-                                                                                <span>{{ $appointment->facility_detail->mini_bus ?? '0' }}</label>
+                                                <input type="checkbox" id="mini-bus-non" name="mini-bus-non"
+                                                    <?= $appointment->facility_detail != null && $appointment->facility_detail->mini_bus > 0 ? 'checked' : '' ?>
+                                                    disabled>
+                                                <label for="mini-bus-non">Mini Bus :
+                                                    <span>{{ $appointment->facility_detail->mini_bus ?? '0' }}</label>
 
-                                                                            <input type="checkbox" id="bus-non"
-                                                                                name="bus-non"
-                                                                                <?= $appointment->facility_detail != null && $appointment->facility_detail->bus > 0 ? 'checked' : '' ?>
-                                                                                disabled>
-                                                                            <label for="bus-non">Bus :
-                                                                                <span>{{ $appointment->facility_detail->bus ?? '0' }}</label>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                <input type="checkbox" id="bus-non" name="bus-non"
+                                                    <?= $appointment->facility_detail != null && $appointment->facility_detail->bus > 0 ? 'checked' : '' ?>
+                                                    disabled>
+                                                <label for="bus-non">Bus :
+                                                    <span>{{ $appointment->facility_detail->bus ?? '0' }}</label>
                                             </div>
-
                                         </div>
                                         <div class="mx-4 mt-2">
                                             <div>Other :</div>
@@ -396,398 +317,260 @@
                                                 <i class="mdi mdi-cloud-check pr-2"></i>Download Document
                                             </a>
                                         </div>
-
-
-
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    @endforeach
-                    <!-- Modal Ends -->
-
-                    <!-- Modal -->
-                    {{-- Approval Modal --}}
-                    @foreach ($appointments as $appointment)
-                        <div class="modal fade auto-off" id="approveModal-{{ $appointment->id }}" tabindex="-1"
-                            role="dialog" aria-labelledby="approveModal-{{ $appointment->id }}" aria-hidden="true">
-                            <div class="modal-dialog animated zoomInDown modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">Approval confirmation</h5>
-                                        <button type="button px-4" class="close" data-dismiss="modal"
-                                            aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p>Are you sure want to <strong>approve</strong> this ticket?</p>
-                                    </div>
-                                    <form action="/approval/approve/{{ $appointment->id }}" method="post"
-                                        class="d-inline">
-                                        {{ csrf_field() }}
-                                        <div class="modal-footer">
-                                            <button type="submit" class="btn btn-primary">Confirm</button>
-                                            <button type="button" class="btn btn-secondary"
-                                                data-dismiss="modal">Cancel</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                    <!-- Modal Ends -->
-
-                    <!-- Modal -->
-                    {{-- Facility Modal --}}
-                    @foreach ($appointments as $appointment)
-                        <div class="modal fade auto-off" id="facilityModal-{{ $appointment->id }}" tabindex="-1"
-                            role="dialog" aria-hidden="true" aria-labelledby="facilityModal-{{ $appointment->id }}">
-                            <div class="modal-dialog animated zoomInDown modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">Facility Needs</h5>
-                                        <button type="button px-4" class="close" data-dismiss="modal"
-                                            aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-
-                                    <form method="POST" action="/approval/approve/{{ $appointment->id }}"
-                                        class="login-box">
-                                        <h6 class="mx-3 text-sm text-muted">Facility is not necessary, only if needed</h6>
-                                        {{ csrf_field() }}
-                                        @if ($appointment->facility_eligble)
-                                            <div class="row d-flex justify-content-center my-5">
-                                                <div class="col-md-12">
-                                                    <div class="wizard">
-                                                        <div class="wizard-inner">
-                                                            <div class="connecting-line"></div>
-                                                            <ul class="nav nav-tabs pr-3" role="tablist">
-                                                                <li role="presentation" class="active">
-                                                                    <a href="#step1" data-toggle="tab"
-                                                                        aria-controls="step1" role="tab"
-                                                                        aria-expanded="true"><span class="round-tab">1
-                                                                        </span> <i class="pl-4">Makanan</i></a>
-                                                                </li>
-                                                                <li role="presentation" class="disabled">
-                                                                    <a href="#step2" data-toggle="tab"
-                                                                        aria-controls="step2" role="tab"
-                                                                        aria-expanded="false"><span
-                                                                            class="round-tab">2</span> <i
-                                                                            class="pl-4">Minuman</i></a>
-                                                                </li>
-                                                                <li role="presentation" class="disabled">
-                                                                    <a href="#step3" data-toggle="tab"
-                                                                        aria-controls="step3" role="tab"><span
-                                                                            class="round-tab">3</span> <i
-                                                                            class="pl-4">Plan Tour</i></a>
-                                                                </li>
-                                                                <li role="presentation" class="disabled">
-                                                                    <a href="#step4" data-toggle="tab"
-                                                                        aria-controls="step4" role="tab"><span
-                                                                            class="round-tab">4</span> <i
-                                                                            class="pl-4">Parkir</i></a>
-                                                                </li>
-
-                                                            </ul>
-                                                        </div>
-                                                        <div class="tab-content" id="main_form">
-                                                            <div class="tab-pane active" role="tabpanel" id="step1">
-                                                                <h4 class="text-center">Makanan</h4>
-                                                                <div class="container ml-5 mt-5">
-                                                                    <div class="row">
-                                                                        <div class="col-md-10">
-                                                                            <div class="boxes">
-                                                                                <input type="checkbox" id="dry-food"
-                                                                                    name="dry-food">
-                                                                                <label for="dry-food">Snack Kering</label>
-
-                                                                                <input type="number"
-                                                                                    class="form-control mb-3"
-                                                                                    id="dry-food-quantity"
-                                                                                    name="dry-food-quantity"
-                                                                                    placeholder="Quantity..."
-                                                                                    min="1">
-
-                                                                                <input type="checkbox" id="wet-food"
-                                                                                    name="wet-food">
-                                                                                <label for="wet-food">Snack Basah</label>
-
-                                                                                <input type="number"
-                                                                                    class="form-control mb-3"
-                                                                                    id="wet-food-quantity"
-                                                                                    name="wet-food-quantity"
-                                                                                    placeholder="Quantity..."
-                                                                                    min="1">
-
-                                                                                <input type="checkbox" id="lunch"
-                                                                                    name="lunch">
-                                                                                <label for="lunch">Makan Siang</label>
-
-                                                                                <input type="number"
-                                                                                    class="form-control mb-3"
-                                                                                    id="lunch-quantity"
-                                                                                    name="lunch-quantity"
-                                                                                    placeholder="Quantity..."
-                                                                                    min="1">
-
-                                                                                <input type="checkbox" id="candy"
-                                                                                    name="candy">
-                                                                                <label for="candy">Permen</label>
-
-                                                                                <input type="number"
-                                                                                    class="form-control mb-3"
-                                                                                    id="candy-quantity"
-                                                                                    name="candy-quantity"
-                                                                                    placeholder="Quantity..."
-                                                                                    min="1">
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="tab-pane" role="tabpanel" id="step2">
-                                                                <h4 class="text-center">Minuman</h4>
-                                                                <div class="container ml-5 mt-5">
-                                                                    <div class="row">
-                                                                        <div class="col-md-10">
-                                                                            <div class="boxes">
-                                                                                <input type="checkbox" id="coffee"
-                                                                                    name="coffee">
-                                                                                <label for="coffee">Coffee</label>
-
-                                                                                <input type="number"
-                                                                                    class="form-control mb-3"
-                                                                                    id="coffee-quantity"
-                                                                                    name="coffee-quantity"
-                                                                                    placeholder="Quantity..."
-                                                                                    min="1">
-
-                                                                                <input type="checkbox" id="tea"
-                                                                                    name="tea">
-                                                                                <label for="tea">Tea</label>
-
-                                                                                <input type="number"
-                                                                                    class="form-control mb-3"
-                                                                                    id="tea-quantity" name="tea-quantity"
-                                                                                    placeholder="Quantity..."
-                                                                                    min="1">
-
-                                                                                <input type="checkbox" id="soft-drink"
-                                                                                    name="soft-drink">
-                                                                                <label for="soft-drink">Soft Drink</label>
-
-                                                                                <input type="number"
-                                                                                    class="form-control mb-3"
-                                                                                    id="soft-drink-quantity"
-                                                                                    name="soft-drink-quantity"
-                                                                                    placeholder="Quantity..."
-                                                                                    min="1">
-
-                                                                                <input type="checkbox" id="mineral-water"
-                                                                                    name="mineral-water">
-                                                                                <label for="mineral-water">Mineral
-                                                                                    Water</label>
-
-                                                                                <input type="number"
-                                                                                    class="form-control mb-3"
-                                                                                    id="mineral-water-quantity"
-                                                                                    name="mineral-water-quantity"
-                                                                                    placeholder="Quantity..."
-                                                                                    min="1">
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="tab-pane" role="tabpanel" id="step3">
-                                                                <h4 class="text-center">Plant Tour</h4>
-                                                                <div class="container ml-5 mt-5">
-                                                                    <div class="row">
-                                                                        <div class="col-md-10">
-                                                                            <div class="boxes">
-                                                                                <input type="checkbox" id="helm"
-                                                                                    name="helm">
-                                                                                <label for="helm">Helm</label>
-
-                                                                                <input type="number"
-                                                                                    class="form-control mb-3"
-                                                                                    id="helm-quantity"
-                                                                                    name="helm-quantity"
-                                                                                    placeholder="Quantity..."
-                                                                                    min="1">
-
-                                                                                <input type="checkbox" id="handuk"
-                                                                                    name="handuk">
-                                                                                <label for="handuk">Handuk</label>
-
-                                                                                <input type="number"
-                                                                                    class="form-control mb-3"
-                                                                                    id="handuk-quantity"
-                                                                                    name="handuk-quantity"
-                                                                                    placeholder="Quantity..."
-                                                                                    min="1">
-
-                                                                                <input type="checkbox" id="speaker"
-                                                                                    name="speaker">
-                                                                                <label for="speaker">Speaker</label>
-
-                                                                                <input type="number"
-                                                                                    class="form-control mb-3"
-                                                                                    id="speaker-quantity"
-                                                                                    name="speaker-quantity"
-                                                                                    placeholder="Quantity..."
-                                                                                    min="1">
-
-                                                                                <input type="checkbox"
-                                                                                    id="speaker-wireless"
-                                                                                    name="speaker-wireless">
-                                                                                <label for="speaker-wireless">Wireless
-                                                                                    Speaker</label>
-
-                                                                                <input type="number"
-                                                                                    class="form-control mb-3"
-                                                                                    id="speaker-wireless-quantity"
-                                                                                    name="speaker-wireless-quantity"
-                                                                                    placeholder="Quantity..."
-                                                                                    min="1">
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="tab-pane" role="tabpanel" id="step4">
-                                                                <h4 class="text-center">Parkir</h4>
-                                                                <div class="container ml-5 mt-5">
-                                                                    <div class="row">
-                                                                        <div class="col-md-10">
-                                                                            <div class="boxes">
-                                                                                <input type="checkbox" id="motor"
-                                                                                    name="motor">
-                                                                                <label for="motor">Motor</label>
-
-                                                                                <input type="number"
-                                                                                    class="form-control mb-3"
-                                                                                    id="motor-quantity"
-                                                                                    name="motor-quantity"
-                                                                                    placeholder="Quantity..."
-                                                                                    min="1">
-
-                                                                                <input type="checkbox" id="mobil"
-                                                                                    name="mobil">
-                                                                                <label for="mobil">mobil</label>
-
-                                                                                <input type="number"
-                                                                                    class="form-control mb-3"
-                                                                                    id="mobil-quantity"
-                                                                                    name="mobil-quantity"
-                                                                                    placeholder="Quantity..."
-                                                                                    min="1">
-
-                                                                                <input type="checkbox" id="mini-bus"
-                                                                                    name="mini-bus">
-                                                                                <label for="mini-bus">Mini Bus</label>
-
-                                                                                <input type="number"
-                                                                                    class="form-control mb-3"
-                                                                                    id="mini-bus-quantity"
-                                                                                    name="mini-bus-quantity"
-                                                                                    placeholder="Quantity..."
-                                                                                    min="1">
-
-                                                                                <input type="checkbox" id="bus"
-                                                                                    name="bus">
-                                                                                <label for="bus">Bus</label>
-
-                                                                                <input type="number"
-                                                                                    class="form-control mb-3"
-                                                                                    id="bus-quantity" name="bus-quantity"
-                                                                                    placeholder="Quantity..."
-                                                                                    min="1">
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="mx-4 mt-2">
-                                                <div>Other :</div>
-                                                <div>
-                                                    <textarea name="other-value" class="form-control" rows="3">{{ $appointment->facility_detail != null ? $appointment->facility_detail->other : '  ' }}</textarea>
-                                                </div>
-                                            </div>
-                                        @else
-                                            <div class="row d-flex justify-content-center my-5">
-                                                <p class="badge badge-secondary">Facility only allowed on Appointment H-2
-                                                </p>
-                                            </div>
-                                        @endif
-                                        <div class="container">
-                                            <div class="form-group row">
-                                                <div class="col-md-4">
-                                                    <label for="inputEmail3" class="col-form-label">Select Room <small
-                                                            class="text-muted pl-0">/ Pilih Ruangan / 部屋を選択</small></label>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <select class="form-control mt-1" id="room-{{$appointment->id}}" name="room">
-                                                        <option value="null" selected>-- Select Room --</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="submit" class="btn btn-primary">Submit & Approve</button>
-                                            <button type="button" class="btn btn-secondary"
-                                                data-dismiss="modal">Cancel</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                    <!-- Modal Ends -->
-
-                    <!-- Modal -->
-                    {{-- rejection Modal --}}
-                    @foreach ($appointments as $appointment)
-                        <div class="modal fade auto-off" id="rejectModal-{{ $appointment->id }}" tabindex="-1"
-                            role="dialog" aria-labelledby="demoModal-{{ $appointment->id }}" aria-hidden="true">
-                            <div class="modal-dialog animated zoomInDown modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">Rejection confirmation</h5>
-                                        <button type="button px-4" class="close" data-dismiss="modal"
-                                            aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <form action="/approval/reject/{{ $appointment->id }}" method="post"
-                                        class="d-inline">
-                                        {{ csrf_field() }}
-                                        <div class="modal-body">
-                                            <p>Are you sure want to <strong>reject</strong> this ticket?</p>
-                                            <input type="text" class="form-control mt-2" id="nama"
-                                                name="note" placeholder="Insert Reason or note...">
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="submit" class="btn btn-primary">Confirm</button>
-                                            <button type="button" class="btn btn-secondary"
-                                                data-dismiss="modal">Cancel</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                    <!-- Modal Ends -->
                 </div>
             </div>
 
         </div>
+
+
+
+    </div>
+    </div>
+    </div>
+    </div>
+    @endforeach
+    <!-- Modal Ends -->
+
+    <!-- Modal -->
+    {{-- Approval Modal --}}
+    @foreach ($appointments as $appointment)
+        <div class="modal fade auto-off" id="approveModal-{{ $appointment->id }}" tabindex="-1" role="dialog"
+            aria-labelledby="approveModal-{{ $appointment->id }}" aria-hidden="true">
+            <div class="modal-dialog animated zoomInDown modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Approval confirmation</h5>
+                        <button type="button px-4" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure want to <strong>approve</strong> this ticket?</p>
+                    </div>
+                    <form action="/approval/approve/{{ $appointment->id }}" method="post" class="d-inline">
+                        {{ csrf_field() }}
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Confirm</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    @endforeach
+    <!-- Modal Ends -->
+
+    <!-- Modal -->
+    {{-- Facility Modal --}}
+    @foreach ($appointments as $appointment)
+        <div class="modal fade auto-off" id="facilityModal-{{ $appointment->id }}" tabindex="-1" role="dialog"
+            aria-hidden="true" aria-labelledby="facilityModal-{{ $appointment->id }}">
+            <div class="modal-dialog animated zoomInDown modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Facility Needs</h5>
+                        <button type="button px-4" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <form method="POST" action="/approval/approve/{{ $appointment->id }}" class="login-box">
+                        <h6 class="mx-3 text-sm text-muted">Facility is not necessary, only if needed</h6>
+                        {{ csrf_field() }}
+                        @if ($appointment->facility_eligble)
+                            <div class="mx-4 row d-flex justify-content-center my-5">
+                                <div class="col-md-12">
+                                    <input type="checkbox" id="dry-food" name="dry-food">
+                                    <label for="dry-food">Snack Kering</label>
+
+                                    <input type="number" class="form-control mb-3" id="dry-food-quantity"
+                                        name="dry-food-quantity" placeholder="Quantity..." min="1">
+
+                                    <input type="checkbox" id="wet-food" name="wet-food">
+                                    <label for="wet-food">Snack Basah</label>
+
+                                    <input type="number" class="form-control mb-3" id="wet-food-quantity"
+                                        name="wet-food-quantity" placeholder="Quantity..." min="1">
+
+                                    <input type="checkbox" id="lunch" name="lunch">
+                                    <label for="lunch">Makan Siang</label>
+
+                                    <input type="number" class="form-control mb-3" id="lunch-quantity"
+                                        name="lunch-quantity" placeholder="Quantity..." min="1">
+
+                                    <input type="checkbox" id="candy" name="candy">
+                                    <label for="candy">Permen</label>
+
+                                    <input type="number" class="form-control mb-3" id="candy-quantity"
+                                        name="candy-quantity" placeholder="Quantity..." min="1">
+                                    <input type="checkbox" id="coffee" name="coffee">
+                                    <label for="coffee">Coffee</label>
+
+                                    <input type="number" class="form-control mb-3" id="coffee-quantity"
+                                        name="coffee-quantity" placeholder="Quantity..." min="1">
+
+                                    <input type="checkbox" id="tea" name="tea">
+                                    <label for="tea">Tea</label>
+
+                                    <input type="number" class="form-control mb-3" id="tea-quantity"
+                                        name="tea-quantity" placeholder="Quantity..." min="1">
+
+                                    <input type="checkbox" id="soft-drink" name="soft-drink">
+                                    <label for="soft-drink">Soft Drink</label>
+
+                                    <input type="number" class="form-control mb-3" id="soft-drink-quantity"
+                                        name="soft-drink-quantity" placeholder="Quantity..." min="1">
+
+                                    <input type="checkbox" id="mineral-water" name="mineral-water">
+                                    <label for="mineral-water">Mineral
+                                        Water</label>
+
+                                    <input type="number" class="form-control mb-3" id="mineral-water-quantity"
+                                        name="mineral-water-quantity" placeholder="Quantity..." min="1">
+                                    <input type="checkbox" id="helm" name="helm">
+                                    <label for="helm">Helm</label>
+
+                                    <input type="number" class="form-control mb-3" id="helm-quantity"
+                                        name="helm-quantity" placeholder="Quantity..." min="1">
+
+                                    <input type="checkbox" id="handuk" name="handuk">
+                                    <label for="handuk">Handuk</label>
+
+                                    <input type="number" class="form-control mb-3" id="handuk-quantity"
+                                        name="handuk-quantity" placeholder="Quantity..." min="1">
+
+                                    <input type="checkbox" id="speaker" name="speaker">
+                                    <label for="speaker">Speaker</label>
+
+                                    <input type="number" class="form-control mb-3" id="speaker-quantity"
+                                        name="speaker-quantity" placeholder="Quantity..." min="1">
+
+                                    <input type="checkbox" id="speaker-wireless" name="speaker-wireless">
+                                    <label for="speaker-wireless">Wireless
+                                        Speaker</label>
+
+                                    <input type="number" class="form-control mb-3" id="speaker-wireless-quantity"
+                                        name="speaker-wireless-quantity" placeholder="Quantity..." min="1">
+                                    <input type="checkbox" id="motor" name="motor">
+                                    <label for="motor">Motor</label>
+
+                                    <input type="number" class="form-control mb-3" id="motor-quantity"
+                                        name="motor-quantity" placeholder="Quantity..." min="1">
+
+                                    <input type="checkbox" id="mobil" name="mobil">
+                                    <label for="mobil">mobil</label>
+
+                                    <input type="number" class="form-control mb-3" id="mobil-quantity"
+                                        name="mobil-quantity" placeholder="Quantity..." min="1">
+
+                                    <input type="checkbox" id="mini-bus" name="mini-bus">
+                                    <label for="mini-bus">Mini Bus</label>
+
+                                    <input type="number" class="form-control mb-3" id="mini-bus-quantity"
+                                        name="mini-bus-quantity" placeholder="Quantity..." min="1">
+
+                                    <input type="checkbox" id="bus" name="bus">
+                                    <label for="bus">Bus</label>
+
+                                    <input type="number" class="form-control mb-3" id="bus-quantity"
+                                        name="bus-quantity" placeholder="Quantity..." min="1">
+                                </div>
+                            </div>
+                            <div class="mx-4 mt-2">
+                                <div>Other :</div>
+                                <div>
+                                    <textarea name="other-value" class="form-control" rows="3">{{ $appointment->facility_detail != null ? $appointment->facility_detail->other : '  ' }}</textarea>
+                                </div>
+                            </div>
+                        @else
+                            <div class="row d-flex justify-content-center my-5">
+                                <p class="badge badge-secondary">Facility only allowed on Appointment H-2
+                                </p>
+                            </div>
+                        @endif
+                        <div class="container">
+                            <div class="form-group row">
+                                <div class="col-md-4">
+                                    <label for="inputEmail3" class="col-form-label">Select Room <small
+                                            class="text-muted pl-0">/ Pilih Ruangan / 部屋を選択</small></label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select class="form-control mt-1" id="room-{{ $appointment->id }}" name="room"
+                                        >
+                                        <option value="" selected disabled>-- Select Room --</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="inputEmail3" class="col-form-label">Select Time <small
+                                            class="text-muted pl-0">/ Pilih Waktu / 時間を選択</small></label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="time" name="time" id="time" class="form-control mt-1"
+                                        min="{{ $appointment->time }}" max="{{ $appointment->time_end }}" />
+                                    <small class="form-text text-muted">Select time</small>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="inputEmail3" class="col-form-label">Select Time Out<small
+                                            class="text-muted pl-0">/ Pilih Waktu Keluar /
+                                            時間を選択</small></label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="time" name="time_end" id="time_end" class="form-control mt-1"
+                                        min="{{ $appointment->time }}" max="{{ $appointment->time_end }}" />
+                                    <small class="form-text text-muted">Select time</small>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Submit & Approve</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    @endforeach
+    <!-- Modal Ends -->
+
+    <!-- Modal -->
+    {{-- rejection Modal --}}
+    @foreach ($appointments as $appointment)
+        <div class="modal fade auto-off" id="rejectModal-{{ $appointment->id }}" tabindex="-1" role="dialog"
+            aria-labelledby="demoModal-{{ $appointment->id }}" aria-hidden="true">
+            <div class="modal-dialog animated zoomInDown modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Rejection confirmation</h5>
+                        <button type="button px-4" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="/approval/reject/{{ $appointment->id }}" method="post" class="d-inline">
+                        {{ csrf_field() }}
+                        <div class="modal-body">
+                            <p>Are you sure want to <strong>reject</strong> this ticket?</p>
+                            <input type="text" class="form-control mt-2" id="nama" name="note"
+                                placeholder="Insert Reason or note...">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Confirm</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    @endforeach
+    <!-- Modal Ends -->
+    </div>
+    </div>
+
+    </div>
     </div>
 
 @endsection
